@@ -1,0 +1,43 @@
+appVersion: '0.1'
+kind: playbook
+id: source-profile
+packId: portfolio-coach
+version: '1.0.0'
+description: Datastore inventory and quality profile for a confirmed analysis period.
+playbookReportId: SourceProfile
+inputs:
+  evaluation:
+    type: boolean
+    default: true
+    description: Include evaluation overlay (insights and exit interview)
+  analysisPeriodStart:
+    type: date
+    description: Analysis period start (YYYYMMDD)
+  analysisPeriodEnd:
+    type: date
+    description: Analysis period end (YYYYMMDD)
+requires:
+  - workflow: ../../layer0-workflows/datastore-merge-and-validate
+  - workflow: ../../layer0-workflows/structured-input-discovery
+uses:
+  - skill: ../../layer1-skills/datastore-inventory
+overlays:
+  - id: source-profile-evaluation
+    path: ../../layer2-overlays/source-profile-evaluation.md
+    kind: evaluation
+    when: evaluation == true
+gates:
+  - id: datastore-merge-complete
+    after: datastore-merge-and-validate
+    description: Session attachments merged; canonical datastore validated
+  - id: inputs-resolved
+    after: structured-input-discovery
+    description: Playbook inputs resolved or confirmed with defaults
+  - id: output-written
+    after: outputs
+    description: Primary report written per output contract
+outputs:
+  primary:
+    type: report
+    pathTemplate: '{userDatastore}/reports/{timestamp}-SourceProfile-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/Report.md'
+    contract: contracts/report-artifact-contract.md

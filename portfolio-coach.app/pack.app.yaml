@@ -1,0 +1,21 @@
+appVersion: '0.1'
+kind: pack
+packId: portfolio-coach
+name: PortfolioCoach
+version: '1.0.0'
+description: Domain reference instance — source profile playbook for datastore inventory and quality review.
+license: TBD
+compatibility:
+  agentSkills: '>=1.0'
+inputs:
+  userDatastore:
+    type: datastore
+    required: true
+    description: User-controlled storage per contracts/user-datastore-layout.md
+    layoutContract: contracts/user-datastore-layout.md
+  agentWorkspace:
+    type: workspace
+    required: true
+    description: Agent-controlled temp and intermediate execution artifacts
+playbooks:
+  - source-profile
