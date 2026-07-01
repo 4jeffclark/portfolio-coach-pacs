@@ -2,7 +2,7 @@
 name: datastore-inventory
 compatibility: Requires Python 3.11+ when running bundled scripts
 outputCompleteness: scaffold
-description: Inventory and profile the bound user datastore for coverage, quality, and activity ranges. Use during source-profile playbook core output.
+description: Inventory the bound user datastore for coverage, quality, and activity ranges. Core output for datastore-inventory playbook.
 metadata:
   packId: portfolio-coach
   layer: '1'
@@ -38,7 +38,7 @@ python scripts/run.py --datastore "$USER_DATASTORE" --workspace "$AGENT_WORKSPAC
 python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WORKSPACE
 ```
 
-Pass `--workspace` as the platform's per-run subdirectory when available (`runs/<timestamp>-SourceProfile/`).
+Pass `--workspace` as the platform's per-run subdirectory when available (`runs/<timestamp>-DatastoreInventory/`).
 
 ## References
 
@@ -51,4 +51,4 @@ Pass `--workspace` as the platform's per-run subdirectory when available (`runs/
 
 ## Used by
 
-- `layer3-playbooks/source-profile`
+- `layer3-playbooks/datastore-inventory`

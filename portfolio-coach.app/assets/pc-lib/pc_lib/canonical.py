@@ -5,14 +5,17 @@ from __future__ import annotations
 import csv
 import hashlib
 from dataclasses import dataclass, field
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any, Iterable
 
 
 STANDARD_CANONICAL = Path("data") / "canonical"
 STANDARD_RAW = Path("data") / "raw" / "etrade"
+STANDARD_KNOWLEDGE = Path("data") / "knowledge"
 LEGACY_CANONICAL = Path("canonical")
 LEGACY_RAW = Path("raw") / "etrade"
+LEGACY_KNOWLEDGE = Path("knowledge")
 
 # Domain date columns per canonical table (see contracts/datastore-contract.md).
 CANONICAL_DATE_COLUMNS: dict[str, list[str]] = {
@@ -35,7 +38,18 @@ class ResolvedLayout:
     name: str  # "standard" | "legacy"
     canonical: Path
     raw_etrade: Path
+    knowledge: Path
     warnings: list[str] = field(default_factory=list)
+
+
+@dataclass
+class PeriodWindows:
+    analysis_period_start: str
+    analysis_period_end: str
+    lookback_start: str
+    lookback_end: str
+    follow_through_start: str
+    follow_through_end: str
 
 
 def _path_has_content(path: Path) -> bool:
@@ -72,15 +86,35 @@ def resolve_layout(datastore: Path) -> ResolvedLayout:
         warnings.append(
             "Both standard (data/) and legacy (root) layouts detected; using standard paths."
         )
+    standard_knowledge = root / STANDARD_KNOWLEDGE
+    legacy_knowledge = root / LEGACY_KNOWLEDGE
+    has_standard_knowledge = _path_has_content(standard_knowledge)
+    has_legacy_knowledge = _path_has_content(legacy_knowledge)
+
+    if has_standard and has_legacy:
+        pass  # warning already recorded above
+    if has_standard_knowledge and has_legacy_knowledge:
+        warnings.append(
+            "Both standard (data/knowledge/) and legacy (knowledge/) detected; using standard knowledge path."
+        )
+
     if has_standard:
-        return ResolvedLayout("standard", standard_canon, standard_raw, warnings)
+        knowledge = standard_knowledge
+        if has_legacy_knowledge and not has_standard_knowledge:
+            knowledge = legacy_knowledge
+            warnings.append(
+                "Standard data layout with legacy knowledge/ at root; using legacy knowledge path."
+            )
+        return ResolvedLayout("standard", standard_canon, standard_raw, knowledge, warnings)
     if has_legacy:
         warnings.append(
             "Legacy layout (canonical/ and raw/etrade/ at datastore root) in use. "
             "Prefer migrating to data/canonical/ and data/raw/etrade/ per user-datastore-layout.md."
         )
-        return ResolvedLayout("legacy", legacy_canon, legacy_raw, warnings)
-    return ResolvedLayout("standard", standard_canon, standard_raw, warnings)
+        knowledge = legacy_knowledge if has_legacy_knowledge else standard_knowledge
+        return ResolvedLayout("legacy", legacy_canon, legacy_raw, knowledge, warnings)
+    knowledge = standard_knowledge if has_standard_knowledge else legacy_knowledge
+    return ResolvedLayout("standard", standard_canon, standard_raw, knowledge, warnings)
 
 
 def validate_layout(datastore: Path) -> ResolvedLayout:
@@ -107,6 +141,53 @@ def canonical_dir(datastore: Path) -> Path:
 
 def raw_dir(datastore: Path) -> Path:
     return resolve_layout(datastore).raw_etrade
+
+
+def knowledge_dir(datastore: Path) -> Path:
+    return resolve_layout(datastore).knowledge
+
+
+def knowledge_subdir(datastore: Path, *parts: str) -> Path:
+    return knowledge_dir(datastore).joinpath(*parts)
+
+
+def load_knowledge_csv(datastore: Path, *parts: str) -> list[dict[str, str]]:
+    return read_csv(knowledge_subdir(datastore, *parts))
+
+
+def _parse_ymd(ymd: str | None) -> date | None:
+    if not ymd:
+        return None
+    s = ymd.replace("-", "")[:8]
+    if len(s) != 8 or not s.isdigit():
+        return None
+    return date(int(s[0:4]), int(s[4:6]), int(s[6:8]))
+
+
+def _format_ymd(d: date) -> str:
+    return d.strftime("%Y%m%d")
+
+
+def default_period_windows(analysis_start_ymd: str, analysis_end_ymd: str) -> PeriodWindows:
+    """Compute lookback and follow-through defaults per period-scope-confirmation workflow."""
+    start = _parse_ymd(analysis_start_ymd)
+    end = _parse_ymd(analysis_end_ymd)
+    if not start or not end:
+        return PeriodWindows(
+            analysis_start_ymd, analysis_end_ymd, "", "", "", ""
+        )
+    lookback_start = start - timedelta(days=28)
+    lookback_end = start - timedelta(days=1)
+    follow_start = end + timedelta(days=1)
+    follow_end = end + timedelta(days=7)
+    return PeriodWindows(
+        analysis_period_start=_format_ymd(start),
+        analysis_period_end=_format_ymd(end),
+        lookback_start=_format_ymd(lookback_start),
+        lookback_end=_format_ymd(lookback_end),
+        follow_through_start=_format_ymd(follow_start),
+        follow_through_end=_format_ymd(follow_end),
+    )
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:

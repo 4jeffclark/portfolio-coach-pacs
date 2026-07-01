@@ -1,0 +1,100 @@
+appVersion: '0.1'
+kind: playbook
+id: portfolio-composition-review
+packId: portfolio-coach
+version: '1.0.0'
+description: Portfolio composition and change review with configurable rollup lens.
+playbookReportId: PortfolioCompositionReview
+defaultResolution:
+  period: requireExplicit
+inputs:
+  evaluation:
+    type: boolean
+    default: true
+    description: Metrics-only vs full evaluation overlay
+  rollupLens:
+    type: enum
+    values: [standards, theme, thesis]
+    default: theme
+    description: Primary composition rollup axis
+  compositionReview:
+    type: boolean
+    default: true
+    description: Holdings, theme, thesis, and liquidity mapping plus weights
+  rebalancingReview:
+    type: boolean
+    default: false
+    description: Rebalancing enrichment overlay
+  riskReview:
+    type: boolean
+    default: false
+    description: Risk enrichment overlay
+  analysisPeriodStart:
+    type: date
+    description: Analysis period start (YYYYMMDD)
+  analysisPeriodEnd:
+    type: date
+    description: Analysis period end (YYYYMMDD)
+requires:
+  - workflow: ../../layer0-workflows/datastore-merge-and-validate
+  - workflow: ../../layer0-workflows/structured-input-discovery
+  - workflow: ../../layer0-workflows/period-scope-confirmation
+uses:
+  - skill: ../../layer1-skills/holdings-standards-map
+  - skill: ../../layer1-skills/holdings-map-confirmation
+  - skill: ../../layer1-skills/theme-map-inference
+  - skill: ../../layer1-skills/theme-map-confirmation
+  - skill: ../../layer1-skills/thesis-registry-inference
+  - skill: ../../layer1-skills/thesis-registry-confirmation
+  - skill: ../../layer1-skills/portfolio-holdings-state
+  - skill: ../../layer1-skills/period-weight-reconstruction
+  - skill: ../../layer1-skills/portfolio-weights-table
+  - skill: ../../layer1-skills/thesis-health
+  - skill: ../../layer1-skills/portfolio-period-flows
+  - skill: ../../layer1-skills/portfolio-evolution
+  - skill: ../../layer1-skills/portfolio-liquidity-analysis
+  - skill: ../../layer1-skills/portfolio-concentration-resilience
+  - skill: ../../layer1-skills/market-environment
+overlays:
+  - id: portfolio-composition-evaluation
+    path: ../../layer2-overlays/portfolio-composition-evaluation.md
+    kind: evaluation
+    when: evaluation == true
+  - id: rebalancing-review
+    path: ../../layer2-overlays/rebalancing-review.md
+    kind: enrichment
+    when: rebalancingReview == true
+  - id: risk-review
+    path: ../../layer2-overlays/risk-review.md
+    kind: enrichment
+    when: riskReview == true
+gates:
+  - id: datastore-merge-complete
+    after: datastore-merge-and-validate
+    description: Canonical validated
+  - id: inputs-resolved
+    after: structured-input-discovery
+    description: Playbook inputs and rollupLens resolved
+  - id: period-confirmed
+    after: period-scope-confirmation
+    description: Analysis period and snapshot plan confirmed
+  - id: holdings-map-confirmed
+    description: HoldingsMap confirmed per holdings-taxonomy contract
+  - id: theme-map-confirmed
+    when: rollupLens in [theme, thesis]
+    description: Theme map confirmed when theme or thesis lens
+  - id: thesis-registry-confirmed
+    when: rollupLens == thesis
+    description: Thesis registry confirmed when thesis lens
+  - id: entry-interview
+    after: portfolio-composition-evaluation
+    when: evaluation == true
+    description: Evaluation entry interview complete
+  - id: output-written
+    after: outputs
+    description: Primary report written per output contract
+outputs:
+  primary:
+    type: report
+    pathTemplate: '{userDatastore}/reports/{timestamp}-PortfolioCompositionReview-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/Report.md'
+    contract: contracts/portfolio-composition-review-report-artifact-contract.md

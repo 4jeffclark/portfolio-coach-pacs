@@ -2,8 +2,10 @@ appVersion: '0.1'
 kind: pack
 packId: portfolio-coach
 name: PortfolioCoach
-version: '1.0.0'
-description: Domain reference instance — source profile playbook; CSV/scaffold inventory with agent-authored narrative.
+version: '4.0.0'
+description: >-
+  E*TRADE portfolio analysis pack — six member playbooks with composable overlays.
+  Scaffold skills; agent-authored narrative per APP.
 license: TBD
 compatibility:
   agentSkills: '>=1.0'
@@ -18,4 +20,9 @@ inputs:
     required: true
     description: Agent-controlled temp and intermediate execution artifacts
 playbooks:
-  - source-profile
+  - datastore-inventory
+  - datastore-ingest
+  - market-regime-review
+  - portfolio-composition-review
+  - trading-activity-review
+  - symbol-trade-review

@@ -2,7 +2,7 @@
 name: exit-interview
 compatibility: Requires Python 3.11+ when running bundled scripts
 outputCompleteness: scaffold
-description: Conduct exit interview questions for source-profile evaluation overlay; write ExitInterview.md.
+description: Conduct exit interview questions for evaluation overlays; write ExitInterview.md.
 metadata:
   packId: portfolio-coach
   layer: '1'
@@ -32,7 +32,7 @@ python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WOR
 
 ## References
 
-- `layer2-overlays/source-profile-evaluation.md`
+- Evaluation overlays under `layer2-overlays/*-evaluation.md`
 
 ## Outputs
 
@@ -40,4 +40,4 @@ python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WOR
 
 ## Used by
 
-- `layer3-playbooks/source-profile` (evaluation overlay only)
+- Evaluation overlays on member playbooks

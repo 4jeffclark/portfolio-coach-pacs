@@ -19,6 +19,10 @@ class SkillArgs:
     period_end: str | None = None
     symbol: str | None = None
     thematic: bool | None = None
+    rollup_lens: str | None = None
+    review_focus: str | None = None
+    event_type: str | None = None
+    market_depth: str | None = None
     input_dir: Path | None = None
     evaluation: bool = False
 
@@ -47,6 +51,22 @@ def build_parser(skill_id: str) -> argparse.ArgumentParser:
         choices=("true", "false"),
         help="thematic rollup lens for aggregate skills",
     )
+    p.add_argument(
+        "--rollup-lens",
+        choices=("standards", "theme", "thesis"),
+        help="aggregate rollup lens",
+    )
+    p.add_argument(
+        "--review-focus",
+        choices=("lifecycle", "stale", "event"),
+        help="symbol-trade review focus",
+    )
+    p.add_argument("--event-type", help="event qualifier for event focus (e.g. IPO)")
+    p.add_argument(
+        "--market-depth",
+        choices=("summary", "full"),
+        help="market-environment depth",
+    )
     p.add_argument("--input-dir", type=Path, help="directory with upstream skill CSV outputs")
     p.add_argument(
         "--evaluation",
@@ -67,6 +87,10 @@ def parse_args(skill_id: str, argv: list[str] | None = None) -> SkillArgs:
         period_end=ns.period_end,
         symbol=ns.symbol,
         thematic=thematic,
+        rollup_lens=ns.rollup_lens,
+        review_focus=ns.review_focus,
+        event_type=ns.event_type,
+        market_depth=ns.market_depth,
         input_dir=ns.input_dir.expanduser().resolve() if ns.input_dir else None,
         evaluation=ns.evaluation == "true",
     )

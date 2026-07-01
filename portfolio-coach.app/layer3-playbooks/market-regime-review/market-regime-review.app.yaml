@@ -1,0 +1,54 @@
+appVersion: '0.1'
+kind: playbook
+id: market-regime-review
+packId: portfolio-coach
+version: '1.0.0'
+description: Market regime analyst for a confirmed period and optional portfolio linkage.
+playbookReportId: MarketRegimeReview
+defaultResolution:
+  period: requireExplicit
+inputs:
+  evaluation:
+    type: boolean
+    default: true
+    description: Include evaluation overlay (regime judgment and exit interview)
+  marketDepth:
+    type: enum
+    values: [summary, full]
+    default: full
+    description: summary=abbreviated memo; full=standalone MarketRegimeReview report
+  analysisPeriodStart:
+    type: date
+    description: Analysis period start (YYYYMMDD)
+  analysisPeriodEnd:
+    type: date
+    description: Analysis period end (YYYYMMDD)
+requires:
+  - workflow: ../../layer0-workflows/datastore-merge-and-validate
+  - workflow: ../../layer0-workflows/structured-input-discovery
+  - workflow: ../../layer0-workflows/period-scope-confirmation
+uses:
+  - skill: ../../layer1-skills/market-environment
+overlays:
+  - id: market-regime-evaluation
+    path: ../../layer2-overlays/market-regime-evaluation.md
+    kind: evaluation
+    when: evaluation == true
+gates:
+  - id: datastore-merge-complete
+    after: datastore-merge-and-validate
+    description: Canonical validated
+  - id: inputs-resolved
+    after: structured-input-discovery
+    description: Playbook inputs resolved
+  - id: period-confirmed
+    after: period-scope-confirmation
+    description: Analysis period and windows confirmed
+  - id: output-written
+    after: outputs
+    description: Primary report written per output contract
+outputs:
+  primary:
+    type: report
+    pathTemplate: '{userDatastore}/reports/{timestamp}-MarketRegimeReview-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/Report.md'
+    contract: contracts/market-regime-review-report-artifact-contract.md

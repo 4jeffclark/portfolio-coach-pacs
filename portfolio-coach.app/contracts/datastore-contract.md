@@ -2,7 +2,7 @@
 
 This document defines the persistent input data store for PortfolioCoach.
 
-PortfolioCoach is a prompt/spec/artifact factory. This contract is the source of truth for datastore behavior. Execution agents may use any available tooling to satisfy the contract, but the repository does not require or provide executable ingestion tooling.
+PortfolioCoach is a prompt/spec/artifact factory. This contract is the source of truth for datastore behavior. The `datastore-ingest` skill provides executable staging and rebuild tooling; agents may also satisfy merge rules manually when needed.
 
 ## Purpose
 

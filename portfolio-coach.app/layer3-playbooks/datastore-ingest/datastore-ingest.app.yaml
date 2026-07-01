@@ -1,0 +1,36 @@
+appVersion: '0.1'
+kind: playbook
+id: datastore-ingest
+packId: portfolio-coach
+version: '1.0.0'
+description: Ingest session exports, validate canonical state, and record merge outcomes.
+playbookReportId: DatastoreIngest
+defaultResolution:
+  period: fullAvailableRange
+inputs:
+  analysisPeriodStart:
+    type: date
+    description: Analysis period start (YYYYMMDD) for report folder naming
+  analysisPeriodEnd:
+    type: date
+    description: Analysis period end (YYYYMMDD) for report folder naming
+requires:
+  - workflow: ../../layer0-workflows/datastore-merge-and-validate
+  - workflow: ../../layer0-workflows/structured-input-discovery
+uses:
+  - skill: ../../layer1-skills/datastore-ingest
+gates:
+  - id: datastore-merge-complete
+    after: datastore-merge-and-validate
+    description: Attachments handled and canonical validated
+  - id: inputs-resolved
+    after: structured-input-discovery
+    description: Playbook inputs resolved or confirmed with defaults
+  - id: output-written
+    after: outputs
+    description: Primary report written per output contract
+outputs:
+  primary:
+    type: report
+    pathTemplate: '{userDatastore}/reports/{timestamp}-DatastoreIngest-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/Report.md'
+    contract: contracts/datastore-ingest-report-artifact-contract.md
