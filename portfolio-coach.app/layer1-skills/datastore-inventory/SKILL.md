@@ -38,7 +38,7 @@ python scripts/run.py --datastore "$USER_DATASTORE" --workspace "$AGENT_WORKSPAC
 python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WORKSPACE
 ```
 
-Pass `--workspace` as the platform's per-run subdirectory when available (`runs/<timestamp>-DatastoreInventory/`).
+Pass `--workspace` as the active ephemeral directory for this run (execution agent chooses when `{agentWorkspace}` is not supplied).
 
 ## References
 

@@ -27,7 +27,7 @@ When both exist, standard wins. `validate_layout()` fails fast with a clear erro
 
 ## Workspace
 
-Skills write under `{agentWorkspace}/<skill-id>/`. The platform should pass the active per-run subdirectory as `--workspace` when available (see APP `app-execution.md`).
+Skills write under `{agentWorkspace}/<skill-id>/`. Pass the active ephemeral workspace directory as `--workspace`. When the user does not supply `{agentWorkspace}`, the execution agent chooses the path and removes it after post-run verification (see APP `app-execution.md`).
 
 ## Date columns
 
