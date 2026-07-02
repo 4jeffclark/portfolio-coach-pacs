@@ -20,6 +20,12 @@ def _read_raw_rows(path: Path) -> tuple[str, list[list[str]]]:
     return lines[0][0] if lines[0] else "", lines[1:]
 
 
+def _account_id_from_portfolio_title(title_line: str) -> str:
+    """Extract account id from single-account exports: 'Account 499153345 Positions, ...'."""
+    m = re.search(r"Account\s+(\d+)\s+Positions", title_line, re.I)
+    return m.group(1) if m else ""
+
+
 def _parse_order_description(desc: str) -> dict[str, str]:
     side = ""
     position_effect = ""
@@ -363,7 +369,7 @@ def _parse_portfolio_file(path: Path, source_hash: str, stored_path: str) -> lis
         return []
     exported_at, tz = parse_export_title(title)
     out: list[dict[str, str]] = []
-    current_account_id = ""
+    current_account_id = _account_id_from_portfolio_title(title)
     current_masked = ""
     current_label = ""
     for row in rows[1:]:
@@ -544,9 +550,32 @@ def rebuild_canonical(datastore: Path, layout: ResolvedLayout) -> dict[str, Any]
             row["AccountId"] = label_to_account[row["AccountLabel"]]
             meta = id_to_label.get(row["AccountId"], {})
             row["MaskedAccount"] = meta.get("MaskedAccount", masked_account_from_label(row["AccountLabel"]))
+    for acct in all_accounts.values():
+        aid = acct.get("AccountId", "")
+        if aid and aid not in id_to_label:
+            id_to_label[aid] = {
+                "MaskedAccount": acct.get("MaskedAccount", ""),
+                "AccountLabel": acct.get("AccountLabel", ""),
+            }
+
     for row in all_positions:
         if not row.get("AccountId") and row.get("AccountLabel") in label_to_account:
             row["AccountId"] = label_to_account[row["AccountLabel"]]
+        aid = row.get("AccountId", "")
+        if aid:
+            meta = id_to_label.get(aid, {})
+            if not row.get("AccountLabel"):
+                row["AccountLabel"] = meta.get("AccountLabel", "")
+            if not row.get("MaskedAccount"):
+                row["MaskedAccount"] = meta.get("MaskedAccount", "")
+            if not row.get("AccountLabel") or not row.get("MaskedAccount"):
+                acct = all_accounts.get(aid) or next(
+                    (a for a in all_accounts.values() if a.get("AccountId") == aid),
+                    None,
+                )
+                if acct:
+                    row["AccountLabel"] = row.get("AccountLabel") or acct.get("AccountLabel", "")
+                    row["MaskedAccount"] = row.get("MaskedAccount") or acct.get("MaskedAccount", "")
 
     write_csv(
         canon / "orders.csv",
