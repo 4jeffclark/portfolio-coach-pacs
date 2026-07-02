@@ -36,5 +36,6 @@ Skills write under `{agentWorkspace}/<skill-id>/`. Pass the active ephemeral wor
 ## E*TRADE ingest and rebuild
 
 - `pc_lib.etrade_ingest` — classify and stage `inputs/` attachments into `raw/etrade/`
-- `pc_lib.etrade_rebuild` — rebuild canonical CSV tables from all raw exports
+- `pc_lib.etrade_rebuild` — rebuild canonical CSV tables from all raw exports (including derived cash tables)
+- `pc_lib.derived_cash` — rebuild `cash_activity_daily.csv`, `cash_balance_estimated.csv`, and `income_events.csv`
 - `datastore-ingest` skill — orchestrates staging, rebuild, and validation for the ingest playbook

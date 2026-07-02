@@ -23,10 +23,19 @@ CANONICAL_DATE_COLUMNS: dict[str, list[str]] = {
     "account_history.csv": ["ActivityDate", "ActivityDateTime"],
     "balances.csv": ["AsOfLocal"],
     "cash.csv": ["AsOfLocal"],
+    "cash_activity_daily.csv": ["Date"],
+    "cash_balance_estimated.csv": ["Date"],
+    "income_events.csv": ["ActivityDate", "ActivityDateTime"],
     "orders.csv": ["Date"],
     "positions_lot_level.csv": ["AsOfLocal", "DateAcquired"],
     "ingestion_manifest.csv": ["MinDate", "MaxDate"],
 }
+
+DERIVED_CANONICAL_TABLES = (
+    "cash_activity_daily.csv",
+    "cash_balance_estimated.csv",
+    "income_events.csv",
+)
 
 
 class DatastoreLayoutError(Exception):

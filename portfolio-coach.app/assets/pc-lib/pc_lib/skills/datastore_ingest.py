@@ -52,7 +52,8 @@ def run(args: SkillArgs) -> SkillResult:
     rebuild_stats = rebuild_canonical(args.datastore, layout)
     messages.append(
         f"Rebuilt canonical tables at {rebuild_stats['rebuiltAtLocal']}: "
-        f"{rebuild_stats['orderRows']} orders, {rebuild_stats['historyRows']} history rows."
+        f"{rebuild_stats['orderRows']} orders, {rebuild_stats['historyRows']} history rows, "
+        f"{rebuild_stats.get('cashActivityDailyRows', 0)} cash-activity rows."
     )
 
     orders = load_canonical(args.datastore, "orders.csv")
@@ -81,6 +82,9 @@ def run(args: SkillArgs) -> SkillResult:
         "orderRows": str(rebuild_stats["orderRows"]),
         "historyRows": str(rebuild_stats["historyRows"]),
         "manifestRows": str(rebuild_stats["manifestRows"]),
+        "cashActivityDailyRows": str(rebuild_stats.get("cashActivityDailyRows", 0)),
+        "cashBalanceEstimatedRows": str(rebuild_stats.get("cashBalanceEstimatedRows", 0)),
+        "incomeEventRows": str(rebuild_stats.get("incomeEventRows", 0)),
         "ordersDedupViolations": str(orders_dedup),
         "accountHistoryDedupViolations": str(history_dedup),
         "validationPass": str(orders_dedup == 0 and history_dedup == 0),

@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from pc_lib.canonical import ResolvedLayout, read_csv, write_csv
+from pc_lib.derived_cash import rebuild_derived_cash_tables
 from pc_lib.etrade_ingest import RAW_SUBFOLDERS, full_file_sha256, masked_account_from_label, parse_export_title
 
 
@@ -624,6 +625,8 @@ def rebuild_canonical(datastore: Path, layout: ResolvedLayout) -> dict[str, Any]
         manifest_rows,
     )
 
+    derived_stats = rebuild_derived_cash_tables(canon, merged_history, all_cash)
+
     return {
         "rebuiltAtLocal": rebuilt_at,
         "orderRows": len(merged_orders),
@@ -632,4 +635,5 @@ def rebuild_canonical(datastore: Path, layout: ResolvedLayout) -> dict[str, Any]
         "balanceRows": len(all_balances),
         "positionRows": len(all_positions),
         "manifestRows": len(manifest_rows),
+        **derived_stats,
     }
