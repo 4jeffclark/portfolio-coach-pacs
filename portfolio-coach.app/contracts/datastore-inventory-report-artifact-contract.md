@@ -31,6 +31,7 @@ Example:
 | `DataStoreInventory.csv` | Datastore inventory tables (from core skill) |
 | `AccountCoverage.csv` | Account coverage profile |
 | `Metrics.csv` | Summary metrics |
+| `RawManifestDrift.csv` | Manifest vs on-disk raw drift rows (empty when aligned) |
 | `ReportSectionFragments.json` | Scaffold section text from core skill (agent merges into Report.md) |
 
 When `evaluation: true`, also include evaluation artifacts per the overlay and skill outputs (`ExitInterview.md`, `DatastoreInventoryScorecard.md`).
@@ -43,7 +44,7 @@ Minimum sections:
 2. **Account coverage** — section2 fragment + `AccountCoverage.csv`
 3. **Activity coverage** — section3 fragment; agent may extend from canonical tables
 4. **Cash and income history** — section4 fragment; label confidence layers in narrative
-5. **Derived data quality** — section5 fragment + `Metrics.csv`
+5. **Derived data quality** — section5 fragment + `Metrics.csv`; include manifest drift summary and `RawManifestDrift.csv` when drift is detected
 6. **Appendix: Inputs Resolved** — final resolved playbook inputs
 7. **Evaluation** — present only when `evaluation: true` (overlay)
 

@@ -11,8 +11,9 @@ metadata:
 ## Procedure
 
 1. Run `scripts/run.py` with `--datastore` and `--workspace`
-2. Read `DataStoreInventory.csv`, `AccountCoverage.csv`, `Metrics.csv`, and `ReportSectionFragments.json`
+2. Read `DataStoreInventory.csv`, `AccountCoverage.csv`, `Metrics.csv`, `RawManifestDrift.csv`, and `ReportSectionFragments.json`
 3. Merge section fragments into `Report.md` per report contract; extend narrative from canonical tables where fragments are scaffold text
+4. When `manifestDriftDetected` is true in `Metrics.csv`, surface drift rows from `RawManifestDrift.csv` in sections 1 and 5
 
 ### Report sections (agent merges fragments + CSVs)
 
@@ -46,7 +47,7 @@ Pass `--workspace` as the active ephemeral directory for this run (execution age
 
 ## Outputs
 
-- `DataStoreInventory.csv`, `AccountCoverage.csv`, `Metrics.csv`
+- `DataStoreInventory.csv`, `AccountCoverage.csv`, `Metrics.csv`, `RawManifestDrift.csv`
 - `ReportSectionFragments.json` — scaffold text for report sections 1–5
 
 ## Used by
