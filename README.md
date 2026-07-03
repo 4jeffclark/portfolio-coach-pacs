@@ -9,7 +9,7 @@ Published **APP distribution repo** for PortfolioCoach.
 | Topic | Rule |
 | --- | --- |
 | **Playbook** | Kebab-case manifest `id` under `layer3-playbooks/<id>/` |
-| **Report folder** | `{timestamp}-{PascalCasePlaybook}-{period}/` under `{userDatastore}/reports/` — derived from playbook name only; overlays extend the same report |
+| **Report folder** | `{timestamp}-{PascalCasePlaybook}-{period}/` under `{userDatastore}/reports/` — contains one delivered file `{timestamp}-{PascalCasePlaybook}-{period}.md`; overlays extend the same report |
 | **Overlay** | Layer-2 augmentation; `—` = core run only. Multiple overlays may compose on one run |
 | **Knowledge domains** | Documentation grouping only — not in manifests or schema |
 

@@ -96,5 +96,5 @@ gates:
 outputs:
   primary:
     type: report
-    pathTemplate: '{userDatastore}/reports/{timestamp}-PortfolioCompositionReview-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/Report.md'
+    pathTemplate: '{userDatastore}/reports/{timestamp}-PortfolioCompositionReview-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/{timestamp}-PortfolioCompositionReview-{{analysisPeriodStart}}-{{analysisPeriodEnd}}.md'
     contract: contracts/portfolio-composition-review-report-artifact-contract.md

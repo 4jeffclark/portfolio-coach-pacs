@@ -1,30 +1,39 @@
 # Portfolio composition review report artifact contract
 
+See [`report-delivery-contract.md`](report-delivery-contract.md) for delivery rules.
+
 ## Report folder pattern
 
 ```text
-{userDatastore}/reports/<GenerationTimestamp>-PortfolioCompositionReview-<AnalysisStart>-<AnalysisEnd>/
+{userDatastore}/reports/<ReportBasename>/
 ```
 
-## Required artifacts
+| Token | Format |
+| --- | --- |
+| `ReportBasename` | `<GenerationTimestamp>-PortfolioCompositionReview-<AnalysisStart>-<AnalysisEnd>` |
+
+## Delivered artifact
 
 | File | Role |
 | --- | --- |
-| `Report.md` | Portfolio composition and change narrative |
-| `HoldingsMap.csv` | Confirmed holdings classifications |
-| `Metrics.csv` | Summary metrics |
-| `LiquidityBreakdown.csv` | Liquidity slice breakdown |
+| `<ReportBasename>.md` | Portfolio composition and change narrative |
 
-Lens-specific artifacts per [`holdings-taxonomy.md`](holdings-taxonomy.md):
+## Assembly inputs (workspace only)
 
-- `rollupLens: theme` — `ThemeRegistry.csv`, `ThemeMap.csv`
-- `rollupLens: thesis` — above plus `ThesisRegistry.csv`, `ThesisAssignment.csv`
+Merge into the delivered file:
 
-Primary weights table artifact from `portfolio-weights-table` skill (filename TBD at implementation).
+- `HoldingsMap.csv`, `Metrics.csv`, `LiquidityBreakdown.csv`
+- Lens-specific CSVs per [`holdings-taxonomy.md`](holdings-taxonomy.md):
+  - `rollupLens: theme` — `ThemeRegistry.csv`, `ThemeMap.csv`
+  - `rollupLens: thesis` — above plus `ThesisRegistry.csv`, `ThesisAssignment.csv`
+- Primary weights table from `portfolio-weights-table` skill
+- Skill `ReportSectionFragments.json` outputs from composition skills
+- When `evaluation: true`: entry interview, exit interview, and scorecard scaffold content
+- When `rebalancingReview: true` or `riskReview: true`: overlay enrichment fragments
 
-When `evaluation: true`, include `Interview.md`, `ExitInterview.md`, and evaluation scorecard sections.
+## Delivered report — minimum sections
 
-When `rebalancingReview: true` or `riskReview: true`, include overlay enrichment sections per overlay contracts.
+Embed all quantitative tables from assembly CSVs. Include composition narrative, weights, flows, thesis health, evolution, liquidity, concentration, embedded market context, overlay sections when enabled, and evaluation/interview appendices when `evaluation: true`.
 
 ## Post-run verification
 

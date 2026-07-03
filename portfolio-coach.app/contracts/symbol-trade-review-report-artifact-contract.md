@@ -1,19 +1,33 @@
 # Symbol trade review report artifact contract
 
+See [`report-delivery-contract.md`](report-delivery-contract.md) for delivery rules.
+
 ## Report folder pattern
 
 ```text
-{userDatastore}/reports/<GenerationTimestamp>-SymbolTradeReview-<AnalysisStart>-<AnalysisEnd>/
+{userDatastore}/reports/<ReportBasename>/
 ```
 
-## Required artifacts
+| Token | Format |
+| --- | --- |
+| `ReportBasename` | `<GenerationTimestamp>-SymbolTradeReview-<AnalysisStart>-<AnalysisEnd>` |
+
+## Delivered artifact
 
 | File | Role |
 | --- | --- |
-| `Report.md` | Symbol-scoped trade/position decision review |
-| `Metrics.csv` | Symbol analysis metrics |
+| `<ReportBasename>.md` | Symbol-scoped trade/position decision review |
 
-When `evaluation: true`, also include `Interview.md`, `ExitInterview.md`, trade scorecard, and verdict sections.
+## Assembly inputs (workspace only)
+
+Merge into the delivered file:
+
+- `Metrics.csv` and skill fragments from symbol analysis, stale hygiene, event context, and `market-environment` as applicable
+- When `evaluation: true`: entry interview, exit interview, trade scorecard, and verdict scaffold content
+
+## Delivered report — minimum sections
+
+Symbol forensic timeline or hygiene/event findings per `reviewFocus`, embedded market context, resolved `targetSymbol` in header metadata, evaluation/interview appendices when `evaluation: true`.
 
 ## Post-run verification
 

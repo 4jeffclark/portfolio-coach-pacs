@@ -12,7 +12,7 @@ metadata:
 
 1. Run `scripts/run.py` with `--datastore` and `--workspace`
 2. Read `MergeLog.csv`, `Metrics.csv`, and `ReportSectionFragments.json`
-3. Merge section fragments into `Report.md` per `contracts/datastore-ingest-report-artifact-contract.md`
+3. Merge all scaffold output into the delivered report file per `contracts/report-delivery-contract.md` and `contracts/datastore-ingest-report-artifact-contract.md`
 
 ## Scripts
 
@@ -25,6 +25,8 @@ python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WOR
 - `contracts/datastore-contract.md` — merge and rebuild rules
 
 ## Outputs
+
+Assembly-only under `{agentWorkspace}` (embed in delivered report):
 
 - `MergeLog.csv` — staging outcomes for `inputs/` attachments
 - `Metrics.csv` — rebuild and validation summary

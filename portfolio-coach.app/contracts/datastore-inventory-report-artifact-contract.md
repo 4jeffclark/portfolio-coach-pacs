@@ -1,54 +1,51 @@
 # Datastore inventory report artifact contract
 
+See [`report-delivery-contract.md`](report-delivery-contract.md) for delivery rules.
+
 ## Report folder pattern
 
 ```text
-{userDatastore}/reports/<GenerationTimestamp>-DatastoreInventory-<AnalysisStart>-<AnalysisEnd>/
+{userDatastore}/reports/<ReportBasename>/
 ```
 
 | Token | Format |
 | --- | --- |
-| `GenerationTimestamp` | `YYYYMMDD-HHMMSS` (wall-clock at folder creation) |
-| `PlaybookReportId` | `DatastoreInventory` |
+| `ReportBasename` | `<GenerationTimestamp>-DatastoreInventory-<AnalysisStart>-<AnalysisEnd>` |
+| `GenerationTimestamp` | `YYYYMMDD-HHMMSS` |
 | `AnalysisStart` / `AnalysisEnd` | `YYYYMMDD` |
 
-Example:
+Example folder and delivered file:
 
 ```text
 {userDatastore}/reports/20260623-143052-DatastoreInventory-20260501-20260531/
+  20260623-143052-DatastoreInventory-20260501-20260531.md
 ```
 
-### Timestamp rules
-
-- Use actual generation time — no placeholders.
-- Never overwrite an existing folder; create a new timestamp if the path exists.
-
-## Required artifacts
+## Delivered artifact
 
 | File | Role |
 | --- | --- |
-| `Report.md` | Self-contained human-readable run output |
-| `DataStoreInventory.csv` | Datastore inventory tables (from core skill) |
-| `AccountCoverage.csv` | Account coverage profile |
-| `Metrics.csv` | Summary metrics |
-| `RawManifestDrift.csv` | Manifest vs on-disk raw drift rows (empty when aligned) |
-| `ReportSectionFragments.json` | Scaffold section text from core skill (agent merges into Report.md) |
+| `<ReportBasename>.md` | Self-contained human-readable run output |
 
-When `evaluation: true`, also include evaluation artifacts per the overlay and skill outputs (`ExitInterview.md`, `DatastoreInventoryScorecard.md`).
+## Assembly inputs (workspace only)
 
-## Report.md
+Merge into the delivered file; do not copy to the report folder:
 
-Minimum sections:
+- `DataStoreInventory.csv`, `AccountCoverage.csv`, `Metrics.csv`, `RawManifestDrift.csv`
+- `ReportSectionFragments.json`
+- When `evaluation: true`: scorecard and exit-interview scaffold content from evaluation skills
 
-1. **Datastore inventory** — merge `ReportSectionFragments.json` section1 and CSV quantification from `datastore-inventory` skill
-2. **Account coverage** — section2 fragment + `AccountCoverage.csv`
-3. **Activity coverage** — section3 fragment; agent may extend from canonical tables
-4. **Cash and income history** — section4 fragment; label confidence layers in narrative
-5. **Derived data quality** — section5 fragment + `Metrics.csv`; include manifest drift summary and `RawManifestDrift.csv` when drift is detected
+## Delivered report — minimum sections
+
+1. **Datastore inventory** — fragment section1 + inventory quantification (embed key `DataStoreInventory.csv` rows)
+2. **Account coverage** — fragment section2 + per-account table (embed `AccountCoverage.csv`)
+3. **Activity coverage** — fragment section3; extend from canonical tables
+4. **Cash and income history** — fragment section4; label confidence layers
+5. **Derived data quality** — fragment section5 + metrics; manifest drift summary and drift rows when detected (embed `RawManifestDrift.csv` when non-empty)
 6. **Appendix: Inputs Resolved** — final resolved playbook inputs
-7. **Evaluation** — present only when `evaluation: true` (overlay)
+7. **Evaluation** — when `evaluation: true`; include scorecard and exit-interview content formerly in separate markdown files
 
-Core skill outputs are **scaffold** (`outputCompleteness: scaffold`); the agent synthesizes narrative using fragments, CSVs, and canonical queries.
+Core skill outputs are **scaffold**; the agent synthesizes narrative using fragments, embedded tables, and canonical queries.
 
 ## Post-run verification
 

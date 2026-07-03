@@ -65,7 +65,7 @@ Required when `rollupLens` is `thesis`. Durable targets under `{userDatastore}/k
 
 ### `MappingDiscovery.md`
 
-Unified working copy for user confirmation during input discovery. Embed operative content in `Report.md` Appendix.
+Unified working copy for user confirmation during input discovery. Embed operative content in the delivered report file Appendix.
 
 ## Skill responsibilities
 

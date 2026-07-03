@@ -72,7 +72,7 @@ Full schemas for `policies/`, `market/`, `reports/ReportRegistry.csv`, and `anal
 - confirmed theme registry and theme map
 - confirmed thesis registry and assignments
 
-**Keep report-local by default:** `Report.md`, interviews, period-specific `Metrics.csv`, exposure tables, scorecards.
+**Keep report-local by default:** the delivered report file, interview content embedded therein, and period-specific quantification formerly in CSV/scorecard assembly artifacts.
 
 ## Playbook roles
 

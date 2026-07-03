@@ -50,5 +50,5 @@ gates:
 outputs:
   primary:
     type: report
-    pathTemplate: '{userDatastore}/reports/{timestamp}-MarketRegimeReview-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/Report.md'
+    pathTemplate: '{userDatastore}/reports/{timestamp}-MarketRegimeReview-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/{timestamp}-MarketRegimeReview-{{analysisPeriodStart}}-{{analysisPeriodEnd}}.md'
     contract: contracts/market-regime-review-report-artifact-contract.md

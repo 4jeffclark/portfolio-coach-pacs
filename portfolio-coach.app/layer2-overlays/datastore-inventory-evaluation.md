@@ -18,8 +18,8 @@ When `evaluation: true` on `datastore-inventory`:
 
 1. Run `datastore-inventory-insights` per its `SKILL.md`
 2. Run `exit-interview` per its `SKILL.md`
-3. Merge evaluation sections into `Report.md`
-4. **Unattended runs:** use agent preliminary observations in `ExitInterview.md` when the user is not present; defer live Q&A
+3. Merge evaluation sections into the delivered report file
+4. **Unattended runs:** use agent preliminary observations in the delivered report exit-interview section when the user is not present; defer live Q&A
 
 ## Used skills
 
