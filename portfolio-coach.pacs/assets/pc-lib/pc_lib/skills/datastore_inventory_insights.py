@@ -44,6 +44,8 @@ def run(args: SkillArgs) -> SkillResult:
         f"- Canonical tables indexed: **{len(canon)}**",
         f"- Orders date range: {orders.get('DateMin', 'n/a')} → {orders.get('DateMax', 'n/a')}",
         f"- Validation pass (dedup keys): **{met_rows.get('validationPass', 'unknown')}**",
+        f"- Position snapshots: **{met_rows.get('positionSnapshotCount', '0')}** "
+        f"({met_rows.get('positionSnapshotDateMin', 'n/a')} → {met_rows.get('positionSnapshotDateMax', 'n/a')})",
         "",
         "## Export readiness",
         "",
@@ -58,6 +60,17 @@ def run(args: SkillArgs) -> SkillResult:
             lines.append(f"  - … and {len(gaps) - 5} more (see AccountCoverage.csv)")
     else:
         lines.append("- No account-level coverage gaps flagged in AccountCoverage.csv")
+
+    if met_rows.get("positionSnapshotSparseWarn") == "True":
+        lines.extend(
+            [
+                "",
+                "## Position snapshot readiness",
+                "",
+                "- **Warning:** fewer than two position snapshots in canonical data. "
+                "Composition and regime reviews may rely on earliest-snapshot fallback for period-start weights.",
+            ]
+        )
 
     lines.extend(
         [

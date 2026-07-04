@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from datetime import datetime
 from typing import Any
@@ -49,7 +50,25 @@ def filled_orders(
 
 
 def order_side(row: dict[str, str]) -> str:
-    return (row.get("Side") or "").strip().lower()
+    """Return buy/sell from Side column or infer from Description."""
+    side = (row.get("Side") or "").strip().lower()
+    if side in ("buy", "sell"):
+        return side
+    desc = (row.get("Description") or "").strip()
+    if not desc:
+        return ""
+    m = re.match(r"^(Buy|Sell)\b", desc, re.I)
+    if m:
+        return m.group(1).lower()
+    return ""
+
+
+def infer_order_side_from_description(desc: str) -> str:
+    """Parse Buy/Sell from E*TRADE order description when Side column is empty."""
+    if not desc:
+        return ""
+    m = re.match(r"^(Buy|Sell)\b", desc.strip(), re.I)
+    return m.group(1).title() if m else ""
 
 
 def fill_notional(row: dict[str, str]) -> float:
@@ -324,6 +343,10 @@ def _parse_asof(row: dict[str, str]) -> str:
     return (row.get("AsOfLocal") or "")[:10].replace("/", "-")
 
 
+def snapshot_dates(positions: list[dict[str, str]]) -> list[str]:
+    return sorted({_parse_asof(r) for r in positions if _parse_asof(r)})
+
+
 def earliest_snapshot_date(positions: list[dict[str, str]]) -> str:
     dates = sorted({_parse_asof(r) for r in positions if _parse_asof(r)})
     return dates[0] if dates else ""
@@ -444,20 +467,50 @@ def hhi(weight_pcts: list[float]) -> float:
     return round(sum((w / 100) ** 2 for w in weight_pcts), 4)
 
 
-def stale_position_facts(positions: list[dict[str, str]], symbol: str) -> dict[str, Any]:
+def stale_position_facts(
+    positions: list[dict[str, str]],
+    symbol: str,
+    period_end_ymd: str | None = None,
+) -> dict[str, Any]:
+    """Hygiene facts for a symbol at the latest snapshot on/before period end."""
+    from pc_lib.canonical import ymd_to_iso
+
     sym = symbol.upper()
-    rows = [r for r in positions if (r.get("Symbol") or "").upper() == sym]
-    if not rows:
-        return {"symbol": sym, "position_rows": 0}
-    total_mv = sum(parse_float(r.get("MarketValue")) for r in rows)
-    total_cost = sum(parse_float(r.get("CostBasis")) * parse_float(r.get("Quantity")) for r in rows)
-    total_gain = sum(parse_float(r.get("OpenNetGain")) for r in rows)
-    acquired = [r.get("DateAcquired") or "" for r in rows if r.get("DateAcquired")]
+    as_of = ymd_to_iso(period_end_ymd) if period_end_ymd else None
+    snap = latest_snapshot_date(positions, as_of) if as_of else latest_snapshot_date(positions, None)
+    if not snap:
+        return {"symbol": sym, "position_rows": 0, "snapshot_date": ""}
+    snap_rows = positions_at_snapshot(positions, snap)
+    summary_rows = [
+        r for r in snap_rows
+        if is_position_summary_row(r) and (r.get("Symbol") or position_symbol(r)).upper() == sym
+    ]
+    if not summary_rows:
+        summary_rows = [r for r in snap_rows if (r.get("Symbol") or "").upper() == sym and is_position_summary_row(r)]
+    mv_map = symbol_market_values(snap_rows)
+    total_mv = mv_map.get(sym, 0.0)
+    total_cost = sum(parse_float(r.get("CostBasis")) * parse_float(r.get("Quantity")) for r in summary_rows)
+    total_gain = sum(parse_float(r.get("OpenNetGain")) for r in summary_rows)
+    acquired = [r.get("DateAcquired") or "" for r in summary_rows if r.get("DateAcquired")]
+    earliest = min(acquired) if acquired else ""
+    days_held = -1
+    stale_flag = False
+    if earliest and snap:
+        try:
+            acq = datetime.strptime(earliest.replace("/", "-")[:10], "%m-%d-%Y")
+            snap_d = datetime.strptime(snap[:10], "%Y-%m-%d")
+            days_held = (snap_d - acq).days
+            stale_flag = days_held >= 90
+        except ValueError:
+            pass
     return {
         "symbol": sym,
-        "position_rows": len(rows),
+        "snapshot_date": snap,
+        "position_rows": len(summary_rows),
         "total_market_value": round(total_mv, 2),
         "aggregate_open_gain": round(total_gain, 2),
-        "earliest_acquired": min(acquired) if acquired else "",
+        "earliest_acquired": earliest,
+        "days_held_at_snapshot": days_held,
+        "stalePositionFlag": stale_flag,
         "return_vs_cost_pct": round((total_mv - total_cost) / total_cost * 100, 2) if total_cost else 0,
     }

@@ -33,28 +33,46 @@ def _account_id_from_portfolio_title(title_line: str) -> str:
     return m.group(1) if m else ""
 
 
+def infer_order_side_from_description(desc: str) -> str:
+    if not desc:
+        return ""
+    m = re.match(r"^(Buy|Sell)\b", desc.strip(), re.I)
+    return m.group(1).title() if m else ""
+
+
 def _parse_order_description(desc: str) -> dict[str, str]:
-    side = ""
+    side = infer_order_side_from_description(desc)
     position_effect = ""
     quantity = ""
     order_type = ""
     order_price = ""
     m = re.match(
-        r"(Buy|Sell)\s+([\d,]+)\s+Shares?\s+@\s+(.+?)\s+(Market|Limit)(?:\s+GTC)?\s+to\s+(Open|Close)",
+        r"(Buy|Sell)\s+([\d,]+)\s+Shares?\s+@\s+(.+?)\s+(Market|Limit)(?:\s+(?:GTC|EXT|CLO))*\s+to\s+(Open|Close)",
         desc,
         re.I,
     )
     if m:
-        side = m.group(1).title()
+        side = side or m.group(1).title()
         quantity = m.group(2).replace(",", "")
         order_price = m.group(3).strip()
+        if order_price.lower() == "market":
+            order_price = "Market"
         order_type = m.group(4).title()
         position_effect = m.group(5).title()
+    else:
+        m2 = re.match(
+            r"(Buy|Sell)\s+([\d,]+)\s+Shares?\s+@\s+(Market|Limit)\s+to\s+(Open|Close)",
+            desc,
+            re.I,
+        )
+        if m2:
+            side = side or m2.group(1).title()
+            quantity = m2.group(2).replace(",", "")
+            order_type = m2.group(3).title()
+            order_price = "Market"
+            position_effect = m2.group(4).title()
     fill_qty = ""
     fill_price = ""
-    fm = re.search(r"([\d,]+)\s+@\s+([\d.]+)", desc)
-    if fm and "Shares" not in desc.split("@")[-1]:
-        pass
     return {
         "Side": side,
         "PositionEffect": position_effect,

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from pc_lib.analytics import snapshot_dates
 from pc_lib.canonical import (
     DERIVED_CANONICAL_TABLES,
     DatastoreLayoutError,
@@ -194,7 +195,14 @@ def _build_section_fragments(
         ),
         "section3_activity_coverage": (
             "Activity coverage derived from canonical orders and account_history tables. "
-            f"Orders date range (canonical): {orders_row.get('DateMin', 'n/a')} → {orders_row.get('DateMax', 'n/a')}."
+            f"Orders date range (canonical): {orders_row.get('DateMin', 'n/a')} → {orders_row.get('DateMax', 'n/a')}. "
+            f"Position snapshots: {metrics.get('positionSnapshotCount', '0')} "
+            f"({metrics.get('positionSnapshotDateMin', 'n/a')} → {metrics.get('positionSnapshotDateMax', 'n/a')})."
+            + (
+                " **Warning:** fewer than two position snapshots — period weight reconstruction may use earliest-snapshot fallback."
+                if metrics.get("positionSnapshotSparseWarn") == "True"
+                else ""
+            )
         ),
         "section4_cash_income": section4,
         "section5_data_quality": section5,
@@ -277,6 +285,12 @@ def run(args: SkillArgs) -> SkillResult:
     history = load_canonical(args.datastore, "account_history.csv")
     balances = load_canonical(args.datastore, "balances.csv")
     positions = load_canonical(args.datastore, "positions_lot_level.csv")
+    pos_snaps = snapshot_dates(positions)
+    pos_snap_count = len(pos_snaps)
+    pos_snap_min = pos_snaps[0] if pos_snaps else ""
+    pos_snap_max = pos_snaps[-1] if pos_snaps else ""
+    pos_snap_sparse = pos_snap_count < 2
+
     accounts = load_canonical(args.datastore, "accounts.csv")
 
     coverage_rows: list[dict[str, str]] = []
@@ -345,6 +359,10 @@ def run(args: SkillArgs) -> SkillResult:
         "accountHistoryDedupViolations": str(history_dedup),
         "validationPass": str(orders_dedup == 0 and history_dedup == 0),
         "accountCount": str(len(accounts)),
+        "positionSnapshotCount": str(pos_snap_count),
+        "positionSnapshotDateMin": pos_snap_min,
+        "positionSnapshotDateMax": pos_snap_max,
+        "positionSnapshotSparseWarn": str(pos_snap_sparse),
     }
     for row in derived_inventory_rows:
         metric_key = row["Name"].replace(".csv", "Rows")

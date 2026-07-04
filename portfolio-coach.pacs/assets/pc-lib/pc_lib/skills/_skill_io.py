@@ -69,6 +69,38 @@ def write_fragments(path: Path, fragments: dict[str, str]) -> Path:
     return path
 
 
+ROLLUP_LENS_FILENAME = "RollupLens.txt"
+
+
+def write_rollup_lens(workspace: Path, lens: str) -> None:
+    """Persist resolved rollup lens for downstream skills in the composition chain."""
+    text = lens.strip() + "\n"
+    workspace.mkdir(parents=True, exist_ok=True)
+    (workspace / ROLLUP_LENS_FILENAME).write_text(text, encoding="utf-8")
+    weights_dir = work_dir(workspace, "portfolio-weights-table")
+    weights_dir.mkdir(parents=True, exist_ok=True)
+    (weights_dir / ROLLUP_LENS_FILENAME).write_text(text, encoding="utf-8")
+
+
+def resolve_rollup_lens(args: SkillArgs) -> str:
+    """Resolve rollup lens from CLI flag, workspace RollupLens.txt, or thematic default."""
+    if args.rollup_lens:
+        return args.rollup_lens.strip()
+    for path in (
+        args.workspace / ROLLUP_LENS_FILENAME,
+        work_dir(args.workspace, "portfolio-weights-table") / ROLLUP_LENS_FILENAME,
+    ):
+        if path.is_file():
+            text = path.read_text(encoding="utf-8").strip()
+            if text:
+                return text
+    if args.thematic is True:
+        return "theme"
+    if args.thematic is False:
+        return "standards"
+    return "theme"
+
+
 def write_mapping_discovery(path: Path, title: str, lines: list[str]) -> Path:
     body = ["# Mapping Discovery", "", f"## {title}", ""] + lines + [""]
     path.write_text("\n".join(body), encoding="utf-8")

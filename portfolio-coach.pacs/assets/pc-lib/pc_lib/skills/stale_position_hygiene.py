@@ -14,16 +14,19 @@ def run(args: SkillArgs) -> SkillResult:
     out = skill_out(args, "stale-position-hygiene")
     sym = args.symbol.upper()
     positions = load_canonical(args.datastore, "positions_lot_level.csv")
-    facts = stale_position_facts(positions, sym)
+    facts = stale_position_facts(positions, sym, args.period_end)
     facts["analysis_period_start"] = args.period_start or ""
     facts["analysis_period_end"] = args.period_end or ""
     met_path = write_metrics(out / "Metrics.csv", facts)
+    stale_note = " (stalePositionFlag=true)" if facts.get("stalePositionFlag") else ""
     frag_path = write_fragments(
         out / "ReportSectionFragments.json",
         {
             "stale_position_review": (
-                f"Stale hygiene facts for {sym}: MV ${facts.get('total_market_value', 0):,.2f}, "
-                f"earliest acquired {facts.get('earliest_acquired', 'n/a')}. "
+                f"Stale hygiene facts for {sym} at snapshot {facts.get('snapshot_date', 'n/a')}: "
+                f"MV ${facts.get('total_market_value', 0):,.2f}, "
+                f"earliest acquired {facts.get('earliest_acquired', 'n/a')}, "
+                f"days held {facts.get('days_held_at_snapshot', 'n/a')}{stale_note}. "
                 "Agent documents thesis drift and stale-risk rules."
             )
         },

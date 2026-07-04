@@ -7,14 +7,14 @@ from collections import defaultdict
 from pc_lib.analytics import fill_notional, filled_orders, order_side
 from pc_lib.canonical import load_canonical, read_csv, write_csv
 from pc_lib.cli import SkillArgs, SkillResult
-from pc_lib.skills._skill_io import skill_out, write_fragments
+from pc_lib.skills._skill_io import resolve_rollup_lens, skill_out, write_fragments
 
 
 def run(args: SkillArgs) -> SkillResult:
     out = skill_out(args, "portfolio-period-flows")
     orders = load_canonical(args.datastore, "orders.csv")
     period = filled_orders(orders, args.period_start, args.period_end)
-    lens = args.rollup_lens or "theme"
+    lens = resolve_rollup_lens(args)
     hmap = read_csv((args.workspace / "holdings-map-confirmation") / "HoldingsMap.csv")
     sector_by_sym = {(r.get("Symbol") or "").upper(): r.get("GICSSector") or "Unclassified" for r in hmap}
     if lens == "theme":

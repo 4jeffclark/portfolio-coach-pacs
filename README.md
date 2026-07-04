@@ -2,7 +2,7 @@
 
 Published **PACS distribution repo** for PortfolioCoach.
 
-**Status:** The tables below are the **pack catalog**. Playbook manifests and overlays align to this document as of v4.0.4.
+**Status:** The tables below are the **pack catalog**. Playbook manifests and overlays align to this document as of v4.0.5.
 
 ### Conventions
 
