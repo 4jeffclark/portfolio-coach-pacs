@@ -6,7 +6,15 @@ from collections import defaultdict
 from datetime import datetime
 from typing import Any
 
-from pc_lib.canonical import in_period, parse_float, position_symbol, symbols_from_positions
+from pc_lib.canonical import (
+    in_period,
+    is_lot_detail_position_raw,
+    is_position_summary_row,
+    is_valid_ticker_symbol,
+    parse_float,
+    position_symbol,
+    symbols_from_positions,
+)
 
 
 def _order_date(row: dict[str, str]) -> str:
@@ -332,11 +340,46 @@ def positions_at_snapshot(positions: list[dict[str, str]], snapshot_date: str) -
     return [r for r in positions if _parse_asof(r) == snapshot_date]
 
 
+def count_position_row_types(positions: list[dict[str, str]]) -> dict[str, int]:
+    counts = {"summary": 0, "lot_detail": 0, "other": 0}
+    for row in positions:
+        raw = (row.get("PositionRaw") or "").strip()
+        if is_position_summary_row(row):
+            counts["summary"] += 1
+        elif raw and is_lot_detail_position_raw(raw):
+            counts["lot_detail"] += 1
+        else:
+            counts["other"] += 1
+    return counts
+
+
+def count_numeric_exposure_symbols(end_mv: dict[str, float]) -> int:
+    return sum(1 for sym in end_mv if sym and not is_valid_ticker_symbol(sym))
+
+
+def snapshot_lag_days(snapshot_iso: str, period_end_ymd: str) -> int:
+    """Days from snapshot date to analysis period end (negative if snapshot is after end)."""
+    if not snapshot_iso or not period_end_ymd or len(period_end_ymd) < 8:
+        return -1
+    try:
+        snap = datetime.strptime(snapshot_iso[:10], "%Y-%m-%d").date()
+        end = datetime.strptime(
+            f"{period_end_ymd[:4]}-{period_end_ymd[4:6]}-{period_end_ymd[6:8]}",
+            "%Y-%m-%d",
+        ).date()
+        return (end - snap).days
+    except ValueError:
+        return -1
+
+
 def symbol_market_values(positions: list[dict[str, str]]) -> dict[str, float]:
+    """Aggregate MV by ticker from parent summary rows only (avoids lot-row double-count)."""
     mv: dict[str, float] = defaultdict(float)
     for row in positions:
+        if not is_position_summary_row(row):
+            continue
         sym = position_symbol(row)
-        if not sym:
+        if not sym or not is_valid_ticker_symbol(sym):
             continue
         mv[sym] += parse_float(row.get("MarketValue"))
     return dict(mv)

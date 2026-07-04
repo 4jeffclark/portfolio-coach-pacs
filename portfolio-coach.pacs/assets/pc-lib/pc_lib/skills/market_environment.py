@@ -4,10 +4,13 @@ from __future__ import annotations
 
 from pc_lib.analytics import (
     activity_metrics,
+    count_numeric_exposure_symbols,
+    count_position_row_types,
     filled_orders,
     latest_snapshot_date,
     mapping_universe,
     positions_at_snapshot,
+    snapshot_lag_days,
     symbol_market_values,
     symbol_period_notionals,
     top_symbols_by_notional,
@@ -25,8 +28,12 @@ PORTFOLIO_LINKAGE_FIELDS = [
     "PeriodBuyNotional",
     "PeriodSellNotional",
     "PeriodGrossNotional",
+    "GrossNotionalPctOfTurnover",
+    "ActivityToWeightRatio",
     "FilledOrderCount",
 ]
+
+SNAPSHOT_LAG_WARN_DAYS = 14
 
 
 def _portfolio_linkage_rows(
@@ -37,6 +44,7 @@ def _portfolio_linkage_rows(
     order_counts: dict[str, int],
     top_weight: list[tuple[str, float, float]],
     top_notional: list[tuple[str, float]],
+    gross_turnover: float,
     limit: int = 15,
 ) -> list[dict[str, str]]:
     ranked_syms: list[str] = []
@@ -56,6 +64,9 @@ def _portfolio_linkage_rows(
         mv = end_mv.get(sym, 0.0)
         weight_pct = (mv / end_total * 100) if end_total else 0.0
         sym_notional = notionals.get(sym, {})
+        gross_n = sym_notional.get("gross_notional", 0)
+        gross_pct = (gross_n / gross_turnover * 100) if gross_turnover else 0.0
+        activity_ratio = (gross_n / mv) if mv else ""
         rows.append(
             {
                 "Symbol": sym,
@@ -63,7 +74,9 @@ def _portfolio_linkage_rows(
                 "PeriodEndMarketValue": f"{mv:.2f}" if mv else "",
                 "PeriodBuyNotional": f"{sym_notional.get('buy_notional', 0):.2f}",
                 "PeriodSellNotional": f"{sym_notional.get('sell_notional', 0):.2f}",
-                "PeriodGrossNotional": f"{sym_notional.get('gross_notional', 0):.2f}",
+                "PeriodGrossNotional": f"{gross_n:.2f}",
+                "GrossNotionalPctOfTurnover": f"{gross_pct:.2f}" if gross_turnover else "",
+                "ActivityToWeightRatio": f"{activity_ratio:.2f}" if activity_ratio != "" else "",
                 "FilledOrderCount": str(order_counts.get(sym, 0)),
             }
         )
@@ -99,15 +112,22 @@ def run(args: SkillArgs) -> SkillResult:
     end_total = total_market_value(end_pos)
     start_total = total_market_value(start_pos)
 
+    row_types = count_position_row_types(end_pos)
+    numeric_symbol_count = count_numeric_exposure_symbols(end_mv)
+    snapshot_lag = snapshot_lag_days(end_snap, pe)
+    turnover_ratio = round(act["gross_turnover"] / end_total, 4) if end_total else 0.0
+
+    exposure_available = bool(end_snap and end_total and numeric_symbol_count == 0)
+    start_exposure_available = bool(start_snap and start_total)
+    exposure_quality_valid = numeric_symbol_count == 0 and bool(end_snap and end_total)
+    snapshot_lag_warn = snapshot_lag > SNAPSHOT_LAG_WARN_DAYS if snapshot_lag >= 0 else False
+
     top_weight = top_symbols_by_weight(end_mv, end_total, limit=10)
     top_notional = top_symbols_by_notional(notionals, limit=10)
     linkage_rows = _portfolio_linkage_rows(
-        symbols, end_mv, end_total, notionals, order_counts, top_weight, top_notional
+        symbols, end_mv, end_total, notionals, order_counts, top_weight, top_notional, act["gross_turnover"]
     )
     linkage_path = write_csv(out / "PortfolioLinkage.csv", PORTFOLIO_LINKAGE_FIELDS, linkage_rows)
-
-    exposure_available = bool(end_snap and end_total)
-    start_exposure_available = bool(start_snap and start_total)
 
     lines = [
         "# Market Research",
@@ -136,9 +156,17 @@ def run(args: SkillArgs) -> SkillResult:
             "",
         ]
     )
-    if exposure_available:
+    if not exposure_quality_valid:
         lines.append(
-            f"Period-end snapshot **{end_snap}**: total MV ${end_total:,.2f}. "
+            "_**DATA QUALITY — EXPOSURE TABLE INVALID** "
+            f"({numeric_symbol_count} numeric-only symbols; "
+            f"{row_types['lot_detail']} lot-detail rows in snapshot). "
+            "Do not coach on exposure until canonical positions are rebuilt._"
+        )
+    elif exposure_available:
+        lag_note = f" (lag {snapshot_lag} days vs period end)" if snapshot_lag_warn else ""
+        lines.append(
+            f"Period-end snapshot **{end_snap}**{lag_note}: total MV ${end_total:,.2f}. "
             "Embed top holdings by **PeriodEndWeightPct** from PortfolioLinkage.csv."
         )
     else:
@@ -148,7 +176,8 @@ def run(args: SkillArgs) -> SkillResult:
             "",
             f"Period activity: {act['filled_orders']} filled orders; "
             f"buy notional ${act['buy_notional']:,.2f}; sell notional ${act['sell_notional']:,.2f}; "
-            f"gross turnover ${act['gross_turnover']:,.2f}. "
+            f"gross turnover ${act['gross_turnover']:,.2f}; "
+            f"turnover/MV ratio {turnover_ratio:.2f}. "
             "Rank activity by **PeriodGrossNotional**, not FilledOrderCount.",
             "",
             "## Sources",
@@ -174,17 +203,56 @@ def run(args: SkillArgs) -> SkillResult:
         "periodBuyNotional": act["buy_notional"],
         "periodSellNotional": act["sell_notional"],
         "periodGrossTurnover": act["gross_turnover"],
+        "portfolioTurnoverRatio": turnover_ratio,
         "periodStartSnapshot": start_snap,
         "periodEndSnapshot": end_snap,
+        "periodEndSnapshotLagDays": snapshot_lag,
         "periodStartTotalMV": round(start_total, 2),
         "periodEndTotalMV": round(end_total, 2),
         "periodStartExposureAvailable": start_exposure_available,
         "periodEndExposureAvailable": exposure_available,
+        "exposureParentRowCount": row_types["summary"],
+        "exposureLotDetailRowCount": row_types["lot_detail"],
+        "exposureNumericSymbolCount": numeric_symbol_count,
+        "exposureQualityValid": exposure_quality_valid,
+        "snapshotLagWarn": snapshot_lag_warn,
     }
     met_path = write_metrics(out / "Metrics.csv", metrics)
 
     weight_summary = ", ".join(f"{sym} {pct:.1f}%" for sym, _, pct in top_weight[:5]) or "n/a"
     notional_summary = ", ".join(f"{sym} ${val:,.0f}" for sym, val in top_notional[:5]) or "n/a"
+
+    linkage_fragment = (
+        f"Universe: {len(symbols)} symbols. "
+        f"Period-end snapshot {end_snap or 'unavailable'} "
+        f"(${end_total:,.2f} total MV; lag {snapshot_lag} days). "
+        f"Top exposure by weight: {weight_summary}. "
+        f"Top period activity by gross notional: {notional_summary}. "
+        f"Period gross turnover ${act['gross_turnover']:,.2f}; turnover/MV {turnover_ratio:.2f}. "
+        "Embed PortfolioLinkage.csv in the delivered report. "
+        "Distinguish exposure (PeriodEndWeightPct), activity (PeriodGrossNotional), "
+        "and conviction. Use GrossNotionalPctOfTurnover and ActivityToWeightRatio for coaching. "
+        "Do not rank symbols by FilledOrderCount or describe "
+        "order-count share as conviction or capital concentration."
+    )
+    if not exposure_quality_valid:
+        linkage_fragment += (
+            " **DATA QUALITY — EXPOSURE TABLE INVALID** "
+            f"(exposureNumericSymbolCount={numeric_symbol_count}). "
+            "Do not deliver exposure tables or exposure-based coaching. "
+            "Attest post-run failed (data quality) or warn prominently."
+        )
+    elif snapshot_lag_warn:
+        linkage_fragment += (
+            f" Snapshot lag {snapshot_lag} days — note in period windows; "
+            "confirm user accepts lag or set analysisPeriodEnd to latest export date."
+        )
+    else:
+        linkage_fragment += (
+            " Defer full conviction and period weight delta analysis to portfolio-composition-review "
+            "when period-start weights are unavailable."
+        )
+
     frag_path = write_fragments(
         out / "ReportSectionFragments.json",
         {
@@ -192,26 +260,25 @@ def run(args: SkillArgs) -> SkillResult:
                 f"Market context scaffold for {len(symbols)} portfolio symbols. "
                 "Merge all workspace market-research content into the delivered report file."
             ),
-            "portfolio_linkage": (
-                f"Universe: {len(symbols)} symbols. "
-                f"Period-end snapshot {end_snap or 'unavailable'} "
-                f"(${end_total:,.2f} total MV). "
-                f"Top exposure by weight: {weight_summary}. "
-                f"Top period activity by gross notional: {notional_summary}. "
-                f"Period gross turnover ${act['gross_turnover']:,.2f}. "
-                "Embed PortfolioLinkage.csv in the delivered report. "
-                "Distinguish exposure (PeriodEndWeightPct), activity (PeriodGrossNotional), "
-                "and conviction. Do not rank symbols by FilledOrderCount or describe "
-                "order-count share as conviction or capital concentration. "
-                "Defer full conviction and period weight delta analysis to portfolio-composition-review "
-                "when period-start weights are unavailable."
-            ),
+            "portfolio_linkage": linkage_fragment,
         },
     )
+
+    status = "ok"
+    messages = ["Wrote market research scaffold, portfolio linkage, and metrics"]
+    if not exposure_quality_valid:
+        status = "warn"
+        messages.append(
+            f"Exposure quality invalid: {numeric_symbol_count} numeric-only symbols in exposure table"
+        )
+    elif snapshot_lag_warn:
+        status = "warn"
+        messages.append(f"Period-end snapshot lags analysis end by {snapshot_lag} days")
+
     return SkillResult(
         skill="market-environment",
-        status="ok",
+        status=status,
         artifacts=[str(mr_path), str(met_path), str(frag_path), str(linkage_path)],
         metrics=metrics,
-        messages=["Wrote market research scaffold, portfolio linkage, and metrics"],
+        messages=messages,
     )

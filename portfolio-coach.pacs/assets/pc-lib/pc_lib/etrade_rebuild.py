@@ -8,7 +8,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from pc_lib.canonical import ResolvedLayout, read_csv, write_csv
+from pc_lib.canonical import (
+    ResolvedLayout,
+    is_lot_detail_position_raw,
+    is_position_summary_row,
+    read_csv,
+    write_csv,
+)
 from pc_lib.derived_cash import rebuild_derived_cash_tables
 from pc_lib.etrade_ingest import RAW_SUBFOLDERS, full_file_sha256, masked_account_from_label, parse_export_title
 
@@ -381,10 +387,15 @@ def _parse_portfolio_file(path: Path, source_hash: str, stored_path: str) -> lis
         if not position_raw:
             continue
         if raw_position.startswith("    ") or raw_position.startswith("\t"):
+            stripped = position_raw.strip()
+            if is_lot_detail_position_raw(stripped):
+                continue
+            if not is_position_summary_row({"PositionRaw": stripped}):
+                continue
             sym = ""
-            sm = re.match(r"\s+([A-Z0-9.]+)\s+\+", position_raw)
+            sm = re.match(r"^([A-Z0-9._-]+)\s+\+", stripped)
             if sm:
-                sym = sm.group(1)
+                sym = sm.group(1).upper()
             qty = row[1].strip() if len(row) > 1 else ""
             out.append(
                 {

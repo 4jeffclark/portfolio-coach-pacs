@@ -54,6 +54,21 @@ Execution agents **must not**:
 
 When period-start weights are unavailable (`periodStartExposureAvailable: false`), state the gap; do not imply period weight change without `period-weight-reconstruction`.
 
+### Exposure data quality gate
+
+When `exposureQualityValid` is **false** in `Metrics.csv` (typically `exposureNumericSymbolCount > 0` from lot-detail rows misparsed as tickers):
+
+- Banner the delivered report: **`DATA QUALITY — EXPOSURE TABLE INVALID`**
+- **Do not** embed period-end exposure weight tables or exposure-based portfolio linkage narrative
+- **Do not** apply `market-regime-evaluation` coaching on exposure, concentration, or MV totals
+- Activity tables (gross notional) may still be embedded when order data is valid
+- Attest **`Post-run checklist: failed`** with failed item **`D3`** — do not claim pass
+
+When `snapshotLagWarn` is **true** (`periodEndSnapshotLagDays` > 14):
+
+- Document lag in period windows and Inputs Resolved
+- Recommend setting `analysisPeriodEnd` to the latest positions export date when user wants aligned exposure, or obtain user acknowledgment of stale snapshot
+
 ## Summary depth delivery
 
 When `marketDepth: summary`:
