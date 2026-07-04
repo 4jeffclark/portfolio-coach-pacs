@@ -6,7 +6,7 @@ from collections import defaultdict
 from datetime import datetime
 from typing import Any
 
-from pc_lib.canonical import in_period, parse_float, symbols_from_positions
+from pc_lib.canonical import in_period, parse_float, position_symbol, symbols_from_positions
 
 
 def _order_date(row: dict[str, str]) -> str:
@@ -50,6 +50,60 @@ def fill_notional(row: dict[str, str]) -> float:
     if qty and price:
         return qty * price
     return parse_float(row.get("Fill").split("@")[-1]) if "@" in (row.get("Fill") or "") else 0.0
+
+
+def symbol_period_notionals(orders: list[dict[str, str]]) -> dict[str, dict[str, float]]:
+    """Buy, sell, and gross notional per symbol for a pre-filtered filled-order list."""
+    totals: dict[str, dict[str, float]] = defaultdict(lambda: {"buy": 0.0, "sell": 0.0})
+    for row in orders:
+        if not _is_filled(row):
+            continue
+        sym = (row.get("Symbol") or "").upper()
+        if not sym:
+            continue
+        notional = fill_notional(row)
+        side = order_side(row)
+        if side == "buy":
+            totals[sym]["buy"] += notional
+        elif side == "sell":
+            totals[sym]["sell"] += notional
+    return {
+        sym: {
+            "buy_notional": round(vals["buy"], 2),
+            "sell_notional": round(vals["sell"], 2),
+            "gross_notional": round(vals["buy"] + vals["sell"], 2),
+        }
+        for sym, vals in totals.items()
+    }
+
+
+def top_symbols_by_weight(
+    end_mv: dict[str, float],
+    end_total: float,
+    limit: int = 10,
+) -> list[tuple[str, float, float]]:
+    """Return (symbol, market_value, weight_pct) sorted by weight descending."""
+    if not end_total:
+        return []
+    ranked = sorted(
+        ((sym, val, val / end_total * 100) for sym, val in end_mv.items() if val),
+        key=lambda row: row[2],
+        reverse=True,
+    )
+    return ranked[:limit]
+
+
+def top_symbols_by_notional(
+    notionals: dict[str, dict[str, float]],
+    limit: int = 10,
+) -> list[tuple[str, float]]:
+    """Return (symbol, gross_notional) sorted by period gross notional descending."""
+    ranked = sorted(
+        ((sym, vals["gross_notional"]) for sym, vals in notionals.items() if vals["gross_notional"]),
+        key=lambda row: row[1],
+        reverse=True,
+    )
+    return ranked[:limit]
 
 
 def activity_metrics(orders: list[dict[str, str]]) -> dict[str, Any]:
@@ -269,7 +323,7 @@ def latest_snapshot_date(positions: list[dict[str, str]], boundary_iso: str | No
     if not boundary_iso:
         return dates[-1]
     eligible = [d for d in dates if d <= boundary_iso[:10]]
-    return eligible[-1] if eligible else dates[-1]
+    return eligible[-1] if eligible else ""
 
 
 def positions_at_snapshot(positions: list[dict[str, str]], snapshot_date: str) -> list[dict[str, str]]:
@@ -281,7 +335,7 @@ def positions_at_snapshot(positions: list[dict[str, str]], snapshot_date: str) -
 def symbol_market_values(positions: list[dict[str, str]]) -> dict[str, float]:
     mv: dict[str, float] = defaultdict(float)
     for row in positions:
-        sym = (row.get("Symbol") or "").upper()
+        sym = position_symbol(row)
         if not sym:
             continue
         mv[sym] += parse_float(row.get("MarketValue"))

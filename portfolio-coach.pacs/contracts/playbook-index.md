@@ -30,3 +30,13 @@ Member playbooks and overlays are defined in the [repository README](../README.m
 | Trade lifecycle | `reviewFocus: lifecycle`, `targetSymbol: <ticker>` |
 | Stale position hygiene | `reviewFocus: stale`, `targetSymbol: <ticker>` |
 | Event-driven trade | `reviewFocus: event`, `eventType: <type>`, `targetSymbol: <ticker>` |
+
+### `market-regime-review`
+
+| Menu / intent | Key inputs |
+| --- | --- |
+| Full market regime memo (#4) | `marketDepth: full`, `evaluation: false` |
+| Brief market context (#5) | `marketDepth: summary`, `evaluation: false` |
+| Market regime + coaching (#6) | `marketDepth: full`, `evaluation: true` |
+
+Portfolio linkage ranks **exposure** by period-end weight % and **activity** by period gross notional from `market-environment` skill output. Do not use filled-order count as a conviction proxy.

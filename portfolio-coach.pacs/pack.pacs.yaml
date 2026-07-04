@@ -2,10 +2,11 @@ pacsVersion: '0.1'
 kind: pack
 packId: portfolio-coach
 name: PortfolioCoach
-version: '4.0.0'
+version: '4.0.1'
 description: >-
   E*TRADE portfolio analysis pack — six member playbooks with composable overlays.
-  Scaffold skills; agent-authored narrative per PACS.
+  Scaffold skills; agent-authored narrative per PACS. v4.0.1 enriches market-regime
+  portfolio linkage with exposure and notional metrics.
 license: TBD
 compatibility:
   agentSkills: '>=1.0'

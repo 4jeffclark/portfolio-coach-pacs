@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import re
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
@@ -283,11 +284,23 @@ def input_dir(args) -> Path:
     return args.input_dir if args.input_dir else work_dir(args.workspace, "_inputs")
 
 
+def position_symbol(row: dict[str, str]) -> str:
+    """Resolve ticker from Symbol column or PositionRaw (E*TRADE lot-level exports)."""
+    sym = (row.get("Symbol") or "").strip().upper()
+    if sym:
+        return sym
+    raw = (row.get("PositionRaw") or "").strip()
+    if not raw:
+        return ""
+    match = re.match(r"^([A-Z0-9._-]+)", raw)
+    return match.group(1).upper() if match else ""
+
+
 def symbols_from_positions(positions: list[dict[str, str]]) -> list[str]:
     seen: set[str] = set()
     out: list[str] = []
     for row in positions:
-        sym = (row.get("Symbol") or "").strip().upper()
+        sym = position_symbol(row)
         if not sym or sym in seen:
             continue
         if sym in ("PORTFOLIO ANALYSIS", "--"):

@@ -2,8 +2,11 @@ pacsVersion: '0.1'
 kind: playbook
 id: market-regime-review
 packId: portfolio-coach
-version: '1.0.0'
-description: Market regime analyst for a confirmed period and optional portfolio linkage.
+version: '1.1.0'
+description: >-
+  Market regime analyst for a confirmed period and portfolio linkage (exposure +
+  activity from market-environment). Menu presets — #4 full memo evaluation=false;
+  #5 summary evaluation=false; #6 full evaluation=true. See contracts/playbook-index.md.
 playbookReportId: MarketRegimeReview
 defaultResolution:
   period: requireExplicit
