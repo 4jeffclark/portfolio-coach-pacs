@@ -8,7 +8,7 @@ Skill scripts resolve this path:
 ../../assets/pc-lib
 ```
 
-(relative to `portfolio-coach.app/` instance root)
+(relative to `portfolio-coach.pacs/` instance root)
 
 ## Layout resolution
 
@@ -27,7 +27,7 @@ When both exist, standard wins. `validate_layout()` fails fast with a clear erro
 
 ## Workspace
 
-Skills write under `{agentWorkspace}/<skill-id>/`. Pass the active ephemeral workspace directory as `--workspace`. When the user does not supply `{agentWorkspace}`, the execution agent chooses the path and removes it after post-run verification (see APP `app-execution.md`).
+Skills write under `{agentWorkspace}/<skill-id>/`. Pass the active ephemeral workspace directory as `--workspace`. When the user does not supply `{agentWorkspace}`, the execution agent chooses the path and removes it after post-run verification (see PACS `pacs-execution.md`).
 
 ## Date columns
 

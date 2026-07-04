@@ -17,4 +17,4 @@ When `evaluation: true`, also include `Interview.md`, `ExitInterview.md`, and ac
 
 ## Post-run verification
 
-Self-verify per [APP post-run checklist](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/post-run-checklist.md).
+Self-verify per [PACS post-run checklist](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/post-run-checklist.md).

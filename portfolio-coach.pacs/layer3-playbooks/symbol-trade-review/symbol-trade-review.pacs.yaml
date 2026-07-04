@@ -1,0 +1,67 @@
+pacsVersion: '0.1'
+kind: playbook
+id: symbol-trade-review
+packId: portfolio-coach
+version: '1.0.0'
+description: Forensic symbol trade review with lifecycle, stale, or event focus.
+playbookReportId: SymbolTradeReview
+defaultResolution:
+  period: requireExplicit
+inputs:
+  evaluation:
+    type: boolean
+    default: true
+    description: Include evaluation overlay
+  reviewFocus:
+    type: enum
+    values: [lifecycle, stale, event]
+    default: lifecycle
+    description: lifecycle=trade forensic; stale=hygiene; event=event-driven (IPO, etc.)
+  eventType:
+    type: string
+    description: Optional qualifier when reviewFocus is event (e.g. IPO)
+  targetSymbol:
+    type: string
+    description: Symbol under review
+  analysisPeriodStart:
+    type: date
+    description: Analysis period start (YYYYMMDD)
+  analysisPeriodEnd:
+    type: date
+    description: Analysis period end (YYYYMMDD)
+requires:
+  - workflow: ../../layer0-workflows/datastore-merge-and-validate
+  - workflow: ../../layer0-workflows/structured-input-discovery
+  - workflow: ../../layer0-workflows/period-scope-confirmation
+uses:
+  - skill: ../../layer1-skills/symbol-trading-analysis
+  - skill: ../../layer1-skills/stale-position-hygiene
+  - skill: ../../layer1-skills/event-trade-context
+  - skill: ../../layer1-skills/market-environment
+overlays:
+  - id: symbol-trade-evaluation
+    path: ../../layer2-overlays/symbol-trade-evaluation.md
+    kind: evaluation
+    when: evaluation == true
+gates:
+  - id: datastore-merge-complete
+    after: datastore-merge-and-validate
+    description: Canonical validated
+  - id: inputs-resolved
+    after: structured-input-discovery
+    description: Playbook inputs resolved including targetSymbol
+  - id: period-confirmed
+    after: period-scope-confirmation
+    description: Analysis period confirmed
+  - id: entry-interview
+    after: symbol-trade-evaluation
+    when: evaluation == true
+    description: Evaluation entry interview complete
+  - id: output-written
+    after: outputs
+    description: Primary report written per output contract
+outputs:
+  primary:
+    type: report
+    pathTemplate: '{userDatastore}/reports/{timestamp}-SymbolTradeReview-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/Report.md'
+    contract: contracts/symbol-trade-review-report-artifact-contract.md

@@ -1,6 +1,6 @@
 # PortfolioCoach
 
-APP pack — **six member playbooks** with composable overlays. Catalog: [repository README](../README.md).
+PACS stack — **six member playbooks** with composable overlays. Catalog: [repository README](../README.md).
 
 ## Execution model
 

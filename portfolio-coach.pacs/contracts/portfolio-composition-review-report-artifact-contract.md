@@ -28,4 +28,4 @@ When `rebalancingReview: true` or `riskReview: true`, include overlay enrichment
 
 ## Post-run verification
 
-Self-verify per [APP post-run checklist](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/post-run-checklist.md).
+Self-verify per [PACS post-run checklist](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/post-run-checklist.md).

@@ -1,6 +1,6 @@
-# PortfolioCoach APP
+# PortfolioCoach PACS
 
-Published **APP distribution repo** for PortfolioCoach.
+Published **PACS distribution repo** for PortfolioCoach.
 
 **Status:** The tables below are the **pack catalog**. Playbook manifests and overlays align to this document as of v4.0.0.
 
@@ -13,7 +13,7 @@ Published **APP distribution repo** for PortfolioCoach.
 | **Overlay** | Layer-2 augmentation; `—` = core run only. Multiple overlays may compose on one run |
 | **Knowledge domains** | Documentation grouping only — not in manifests or schema |
 
-Pack entry: [`portfolio-coach.app/pack.app.yaml`](portfolio-coach.app/pack.app.yaml).
+Pack entry: [`portfolio-coach.pacs/pack.pacs.yaml`](portfolio-coach.pacs/pack.pacs.yaml).
 
 ---
 
@@ -79,11 +79,15 @@ Core + any subset of overlays may run together (e.g. evaluation + rebalancing). 
 ```text
 portfolio-coach-app/
   README.md
-  portfolio-coach.app/
+  portfolio-coach.pacs/
 ```
 
-## APP standard
+## PACS standard
 
-Read from [agent-playbook-pack](https://github.com/4jeffclark/agent-playbook-pack): authoring → execution → post-run checklist.
+Read in order from the [PACS Standards Workbench](https://github.com/4jeffclark/agent-playbook-pack):
+
+1. [Authoring standard](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/pacs-authoring.md)
+2. [Execution guide](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/pacs-execution.md)
+3. [Post-run checklist](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/post-run-checklist.md)
 
 Persistent data and reports belong under `{userDatastore}`, not in this behavior repo.

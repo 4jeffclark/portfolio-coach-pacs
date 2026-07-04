@@ -1,4 +1,4 @@
-appVersion: '0.1'
+pacsVersion: '0.1'
 kind: playbook
 id: portfolio-composition-review
 packId: portfolio-coach
