@@ -1,27 +1,34 @@
 # Datastore ingest report artifact contract
 
+See [`report-delivery-contract.md`](report-delivery-contract.md) for delivery rules.
+
 ## Report folder pattern
 
 ```text
-{userDatastore}/reports/<GenerationTimestamp>-DatastoreIngest-<AnalysisStart>-<AnalysisEnd>/
+{userDatastore}/reports/<ReportBasename>/
 ```
 
-## Required artifacts
+| Token | Format |
+| --- | --- |
+| `ReportBasename` | `<GenerationTimestamp>-DatastoreIngest-<AnalysisStart>-<AnalysisEnd>` |
+
+## Delivered artifact
 
 | File | Role |
 | --- | --- |
-| `Report.md` | Ingest and validation summary |
-| `MergeLog.csv` | Per-file staging outcomes |
-| `Metrics.csv` | Rebuild and validation metrics |
-| `ReportSectionFragments.json` | Scaffold section text for agent merge |
+| `<ReportBasename>.md` | Ingest and validation summary |
 
-## Report.md
+## Assembly inputs (workspace only)
 
-Minimum sections:
+Merge into the delivered file:
+
+- `MergeLog.csv`, `Metrics.csv`, `ReportSectionFragments.json`
+
+## Delivered report — minimum sections
 
 1. **Datastore layout** — resolved layout and path warnings
-2. **Session attachments** — files copied from `inputs/` when present
-3. **Canonical validation** — readability and validation outcomes
+2. **Session attachments** — per-file staging outcomes (embed `MergeLog.csv`)
+3. **Canonical validation** — readability and validation outcomes (embed `Metrics.csv` flags)
 4. **Available date range** — summary for downstream playbooks
 5. **Appendix: Inputs Resolved** — final resolved playbook inputs
 

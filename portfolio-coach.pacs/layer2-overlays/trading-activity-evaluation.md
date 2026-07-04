@@ -15,7 +15,7 @@ When `evaluation == true` on `trading-activity-review`:
 1. Run `evaluation-entry-interview` after `trading-activity-analysis`
 2. Agent synthesizes activity scorecard
 3. Run `exit-interview`
-4. Merge into `Report.md`
+4. Merge into the delivered report file
 
 ## Used skills
 

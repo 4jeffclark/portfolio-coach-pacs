@@ -2,7 +2,7 @@
 name: exit-interview
 compatibility: Requires Python 3.11+ when running bundled scripts
 outputCompleteness: scaffold
-description: Conduct exit interview questions for evaluation overlays; write ExitInterview.md.
+description: Conduct exit interview questions for evaluation overlays; workspace scaffold for merge into delivered report.
 metadata:
   packId: portfolio-coach
   layer: '1'
@@ -11,8 +11,8 @@ metadata:
 ## Procedure
 
 1. Run `scripts/run.py` with `--evaluation true` when the evaluation overlay is active
-2. **User present:** record verbatim Q&A in `ExitInterview.md` and embed in `Report.md` Appendix E
-3. **Unattended (fire-and-forget):** record agent preliminary observations under the Unattended execution heading; mark `User responses: deferred` in Inputs Resolved appendix — do not leave prompts unanswered
+2. **User present:** record verbatim Q&A and embed in the delivered report file (Appendix: Exit Interview)
+3. **Unattended (fire-and-forget):** record agent preliminary observations under the Unattended execution heading in the delivered report; mark `User responses: deferred` in Inputs Resolved appendix — do not leave prompts unanswered
 
 ## Scripts
 
@@ -36,7 +36,7 @@ python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WOR
 
 ## Outputs
 
-- `ExitInterview.md` — template with unattended-execution guidance; agent fills responses or observations
+- `ExitInterview.md` — **assembly-only** workspace template; merge content into the delivered report file (not a separate delivery artifact)
 
 ## Used by
 

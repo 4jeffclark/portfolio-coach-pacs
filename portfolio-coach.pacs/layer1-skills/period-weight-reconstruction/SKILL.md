@@ -14,7 +14,7 @@ metadata:
 
 1. Run `scripts/run.py` with `--datastore` and `--workspace` (plus playbook-specific flags)
 2. Read skill output CSVs and `ReportSectionFragments.json`
-3. Merge fragments into `Report.md` per report contract; extend narrative where scaffold
+3. Merge all scaffold output into the delivered report file per `contracts/report-delivery-contract.md` and the playbook output contract; extend narrative where scaffold
 
 ## Scripts
 

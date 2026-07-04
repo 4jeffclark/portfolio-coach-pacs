@@ -58,7 +58,7 @@ def run(args: SkillArgs) -> SkillResult:
         status="ok",
         artifacts=[str(path)],
         messages=[
-            "Prepared evaluation entry interview template; embed in Report.md Appendix "
+            "Prepared evaluation entry interview template; embed in delivered report Appendix "
             "before report generation when evaluation overlay is active"
         ],
     )

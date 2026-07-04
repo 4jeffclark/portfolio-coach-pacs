@@ -4,7 +4,13 @@ PACS stack — **six member playbooks** with composable overlays. Catalog: [repo
 
 ## Execution model
 
-Scaffold skills write CSVs and `ReportSectionFragments.json` under `{agentWorkspace}`. Agents merge into `Report.md` under `{userDatastore}/reports/{timestamp}-{PlaybookReportId}-{start}-{end}/`.
+Scaffold skills write CSVs and `ReportSectionFragments.json` under `{agentWorkspace}`. Agents merge all content into a single delivered report file:
+
+```text
+{userDatastore}/reports/{timestamp}-{PlaybookReportId}-{params}/{timestamp}-{PlaybookReportId}-{params}.md
+```
+
+See [`contracts/report-delivery-contract.md`](contracts/report-delivery-contract.md).
 
 ## Try it
 

@@ -32,5 +32,5 @@ gates:
 outputs:
   primary:
     type: report
-    pathTemplate: '{userDatastore}/reports/{timestamp}-DatastoreIngest-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/Report.md'
+    pathTemplate: '{userDatastore}/reports/{timestamp}-DatastoreIngest-{{analysisPeriodStart}}-{{analysisPeriodEnd}}/{timestamp}-DatastoreIngest-{{analysisPeriodStart}}-{{analysisPeriodEnd}}.md'
     contract: contracts/datastore-ingest-report-artifact-contract.md

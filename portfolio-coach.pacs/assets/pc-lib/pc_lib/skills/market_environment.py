@@ -66,7 +66,7 @@ def run(args: SkillArgs) -> SkillResult:
         {
             "market_context": (
                 f"Market context scaffold for {len(symbols)} portfolio symbols. "
-                "Merge `MarketResearch.md` narrative into Report market-context section."
+                "Merge all workspace market-research content into the delivered report file."
             )
         },
     )

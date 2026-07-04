@@ -15,7 +15,7 @@ When `evaluation == true` on `symbol-trade-review`:
 1. Run `evaluation-entry-interview` after core symbol analysis
 2. Agent synthesizes trade scorecard and verdict
 3. Run `exit-interview`
-4. Merge into `Report.md`
+4. Merge into the delivered report file
 
 ## Used skills
 

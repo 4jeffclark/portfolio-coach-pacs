@@ -21,6 +21,88 @@ from pc_lib.canonical import (
 )
 from pc_lib.cli import SkillArgs, SkillResult
 
+RAW_SUBFOLDERS = ("account_history", "balances", "orders", "portfolio_lot_level")
+
+
+def _normalize_stored_path(path: str) -> str:
+    return path.replace("\\", "/").strip().lstrip("./")
+
+
+def _on_disk_raw_paths(datastore: Path, raw_root: Path) -> set[str]:
+    root = datastore.expanduser().resolve()
+    paths: set[str] = set()
+    for sub in RAW_SUBFOLDERS:
+        folder = raw_root / sub
+        if not folder.is_dir():
+            continue
+        for path in folder.iterdir():
+            if path.is_file():
+                paths.add(path.relative_to(root).as_posix())
+    return paths
+
+
+def _manifest_path_aliases(stored: str) -> set[str]:
+    normalized = _normalize_stored_path(stored)
+    if not normalized:
+        return set()
+    aliases = {normalized}
+    if normalized.startswith("data/raw/"):
+        aliases.add(normalized[len("data/") :])
+    elif normalized.startswith("raw/"):
+        aliases.add(f"data/{normalized}")
+    return aliases
+
+
+def _detect_manifest_drift(
+    datastore: Path,
+    raw_root: Path,
+    manifest_rows: list[dict[str, str]],
+) -> tuple[list[dict[str, str]], list[str]]:
+    on_disk = _on_disk_raw_paths(datastore, raw_root)
+    manifest_by_path: dict[str, dict[str, str]] = {}
+    manifest_aliases: set[str] = set()
+    for row in manifest_rows:
+        stored = _normalize_stored_path(row.get("RawStoredPath", ""))
+        if not stored:
+            continue
+        manifest_by_path[stored] = row
+        manifest_aliases.update(_manifest_path_aliases(stored))
+
+    drift_rows: list[dict[str, str]] = []
+    for stored, row in manifest_by_path.items():
+        if not _manifest_path_aliases(stored) & on_disk:
+            drift_rows.append(
+                {
+                    "DriftType": "manifest_missing_on_disk",
+                    "RawStoredPath": stored,
+                    "SourceHash": row.get("SourceHash", ""),
+                    "ExportType": row.get("ExportType", ""),
+                    "Details": "ingestion_manifest.csv references a raw file that is absent on disk",
+                }
+            )
+
+    for disk_path in sorted(on_disk):
+        if disk_path not in manifest_aliases:
+            drift_rows.append(
+                {
+                    "DriftType": "disk_not_in_manifest",
+                    "RawStoredPath": disk_path,
+                    "SourceHash": "",
+                    "ExportType": "",
+                    "Details": "raw file on disk is not listed in ingestion_manifest.csv",
+                }
+            )
+
+    messages: list[str] = []
+    if drift_rows:
+        missing = sum(1 for row in drift_rows if row["DriftType"] == "manifest_missing_on_disk")
+        extra = sum(1 for row in drift_rows if row["DriftType"] == "disk_not_in_manifest")
+        messages.append(
+            f"Manifest drift detected: {missing} manifest entry/entries missing on disk, "
+            f"{extra} on-disk file(s) not in manifest. See RawManifestDrift.csv."
+        )
+    return drift_rows, messages
+
 
 def _count_rows(rows: list[dict]) -> int:
     return len(rows)
@@ -80,11 +162,30 @@ def _build_section_fragments(
         + ("\n".join(derived_lines) if derived_lines else "- No derived tables present on disk.")
     )
 
+    manifest_rows = metrics.get("ingestionManifestRows", "0")
+    drift_note = ""
+    if metrics.get("manifestDriftDetected") == "True":
+        drift_note = (
+            f" **Manifest drift:** {metrics.get('manifestMissingOnDiskCount', '0')} manifest "
+            f"entry/entries missing on disk; {metrics.get('diskNotInManifestCount', '0')} on-disk "
+            "file(s) not in manifest. See `RawManifestDrift.csv`."
+        )
+
+    section5 = (
+        f"Layout resolved: {layout_name}. "
+        f"Order dedup key violations: {metrics.get('ordersDedupViolations', '0')}. "
+        f"Account history dedup violations: {metrics.get('accountHistoryDedupViolations', '0')}. "
+        f"Manifest rows: {manifest_rows}; on-disk raw files: {raw_count}. "
+        f"Manifest drift: {'detected' if metrics.get('manifestDriftDetected') == 'True' else 'none'}. "
+        "See `Metrics.csv` for summary flags."
+    )
+
     return {
         "section1_inventory": (
             f"Datastore layout: **{layout_name}**. "
             f"Indexed {raw_count} raw file(s), {canon_count} core canonical table(s), "
             f"and {derived_count} derived table(s). "
+            f"Ingestion manifest lists {manifest_rows} raw export(s).{drift_note} "
             f"See `DataStoreInventory.csv` for row counts, date ranges, and hashes."
         ),
         "section2_account_coverage": (
@@ -96,12 +197,7 @@ def _build_section_fragments(
             f"Orders date range (canonical): {orders_row.get('DateMin', 'n/a')} → {orders_row.get('DateMax', 'n/a')}."
         ),
         "section4_cash_income": section4,
-        "section5_data_quality": (
-            f"Layout resolved: {layout_name}. "
-            f"Order dedup key violations: {metrics.get('ordersDedupViolations', '0')}. "
-            f"Account history dedup violations: {metrics.get('accountHistoryDedupViolations', '0')}. "
-            "See `Metrics.csv` for summary flags."
-        ),
+        "section5_data_quality": section5,
     }
 
 
@@ -117,7 +213,7 @@ def run(args: SkillArgs) -> SkillResult:
     messages = list(layout.warnings)
 
     inventory_rows: list[dict[str, str]] = []
-    for sub in ("account_history", "balances", "orders", "portfolio_lot_level"):
+    for sub in RAW_SUBFOLDERS:
         folder = raw / sub
         if folder.is_dir():
             for f in sorted(folder.glob("*")):
@@ -229,14 +325,22 @@ def run(args: SkillArgs) -> SkillResult:
     )
     cash_path = canon / "cash.csv"
     manifest_rows = load_canonical(args.datastore, "ingestion_manifest.csv")
+    drift_rows, drift_messages = _detect_manifest_drift(args.datastore, raw, manifest_rows)
+    raw_file_count = len([r for r in inventory_rows if r["ArtifactType"] == "raw"])
+    missing_on_disk = sum(1 for row in drift_rows if row["DriftType"] == "manifest_missing_on_disk")
+    not_in_manifest = sum(1 for row in drift_rows if row["DriftType"] == "disk_not_in_manifest")
 
     metrics: dict[str, str] = {
         "canonicalTableCount": str(sum(1 for n in canonical_tables if (canon / n).is_file())),
         "derivedTableCount": str(sum(1 for n in DERIVED_CANONICAL_TABLES if (canon / n).is_file())),
-        "rawFileCount": str(len([r for r in inventory_rows if r["ArtifactType"] == "raw"])),
+        "rawFileCount": str(raw_file_count),
         "layoutResolved": layout.name,
         "cashTablePresent": str(cash_path.is_file()),
         "ingestionManifestRows": str(len(manifest_rows)),
+        "manifestDriftDetected": str(bool(drift_rows)),
+        "manifestMissingOnDiskCount": str(missing_on_disk),
+        "diskNotInManifestCount": str(not_in_manifest),
+        "manifestDriftPass": str(not drift_rows),
         "ordersDedupViolations": str(orders_dedup),
         "accountHistoryDedupViolations": str(history_dedup),
         "validationPass": str(orders_dedup == 0 and history_dedup == 0),
@@ -276,6 +380,11 @@ def run(args: SkillArgs) -> SkillResult:
         ["Metric", "Value"],
         [{"Metric": k, "Value": v} for k, v in metrics.items()],
     )
+    drift_path = write_csv(
+        out / "RawManifestDrift.csv",
+        ["DriftType", "RawStoredPath", "SourceHash", "ExportType", "Details"],
+        drift_rows,
+    )
 
     fragments = _build_section_fragments(layout.name, inventory_rows, coverage_rows, metrics, derived_inventory_rows)
     frag_path = out / "ReportSectionFragments.json"
@@ -284,7 +393,7 @@ def run(args: SkillArgs) -> SkillResult:
     return SkillResult(
         skill="datastore-inventory",
         status="ok",
-        artifacts=[str(inv_path), str(cov_path), str(met_path), str(frag_path)],
+        artifacts=[str(inv_path), str(cov_path), str(met_path), str(drift_path), str(frag_path)],
         metrics={k: v for k, v in metrics.items()},
-        messages=messages + ["Wrote datastore inventory artifacts and report section fragments"],
+        messages=messages + drift_messages + ["Wrote datastore inventory artifacts and report section fragments"],
     )

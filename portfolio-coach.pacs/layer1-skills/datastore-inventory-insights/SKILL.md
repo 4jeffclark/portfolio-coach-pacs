@@ -11,7 +11,7 @@ metadata:
 ## Procedure
 
 1. Run `scripts/run.py` after `datastore-inventory` completes
-2. Read `DatastoreInventoryScorecard.md` and merge into `Report.md` Evaluation section
+2. Read scorecard scaffold from workspace and merge into the delivered report file Evaluation section
 3. Add agent reflection on export gaps and coverage (scorecard provides quantitative baseline)
 
 ## Scripts
@@ -36,7 +36,7 @@ None.
 
 ## Outputs
 
-- `DatastoreInventoryScorecard.md` — quantitative baseline; agent extends reflection narrative
+- `DatastoreInventoryScorecard.md` — **assembly-only** quantitative baseline; merge into delivered report Evaluation section
 
 ## Used by
 

@@ -18,7 +18,7 @@ When `evaluation: true` on `market-regime-review`:
 
 1. Agent synthesizes regime interpretation judgment after `market-environment` core output
 2. Run `exit-interview` per its `SKILL.md`
-3. Merge evaluation sections into `Report.md`
+3. Merge evaluation sections into the delivered report file
 
 ## Used skills
 
