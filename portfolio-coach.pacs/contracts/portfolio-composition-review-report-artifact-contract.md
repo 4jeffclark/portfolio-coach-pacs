@@ -37,4 +37,4 @@ Embed all quantitative tables from assembly CSVs. Include composition narrative,
 
 ## Post-run verification
 
-Self-verify per [PACS post-run checklist](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/post-run-checklist.md).
+Self-verify per [PACS post-run checklist](https://github.com/4jeffclark/pacs-workbench/blob/main/standard/post-run-checklist.md).

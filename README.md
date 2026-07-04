@@ -77,17 +77,17 @@ Core + any subset of overlays may run together (e.g. evaluation + rebalancing). 
 ## Layout
 
 ```text
-portfolio-coach-app/
+portfolio-coach-pacs/
   README.md
   portfolio-coach.pacs/
 ```
 
 ## PACS standard
 
-Read in order from the [PACS Standards Workbench](https://github.com/4jeffclark/agent-playbook-pack):
+Read in order from the [PACS Standards Workbench](https://github.com/4jeffclark/pacs-workbench):
 
-1. [Authoring standard](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/pacs-authoring.md)
-2. [Execution guide](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/pacs-execution.md)
-3. [Post-run checklist](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/post-run-checklist.md)
+1. [Authoring standard](https://github.com/4jeffclark/pacs-workbench/blob/main/standard/pacs-authoring.md)
+2. [Execution guide](https://github.com/4jeffclark/pacs-workbench/blob/main/standard/pacs-execution.md)
+3. [Post-run checklist](https://github.com/4jeffclark/pacs-workbench/blob/main/standard/post-run-checklist.md)
 
 Persistent data and reports belong under `{userDatastore}`, not in this behavior repo.

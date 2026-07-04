@@ -67,4 +67,4 @@ Domains: `holdings/`, `themes/`, `theses/`, `policies/`, `market/`, `reports/`, 
 
 ## Post-run verification
 
-Self-verify report folders per [PACS post-run checklist](https://github.com/4jeffclark/agent-playbook-pack/blob/main/standard/post-run-checklist.md).
+Self-verify report folders per [PACS post-run checklist](https://github.com/4jeffclark/pacs-workbench/blob/main/standard/post-run-checklist.md).
