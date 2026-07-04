@@ -2,11 +2,12 @@ pacsVersion: '0.1'
 kind: playbook
 id: market-regime-review
 packId: portfolio-coach
-version: '1.2.0'
+version: '1.3.0'
 description: >-
   Market regime analyst for a confirmed period and portfolio linkage (exposure +
   activity from market-environment). Menu presets — #4 full memo evaluation=false;
-  #5 summary evaluation=false; #6 full evaluation=true. See contracts/playbook-index.md.
+  #5 summary evaluation=false; #6 full evaluation=true. v1.3.0: skill metrics appendix,
+  snapshot lag notice/warn thresholds, paired #4+#6 period alignment. See contracts/playbook-index.md.
 playbookReportId: MarketRegimeReview
 defaultResolution:
   period: requireExplicit

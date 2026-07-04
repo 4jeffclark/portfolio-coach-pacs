@@ -33,9 +33,10 @@ After `structured-input-discovery` resolves `analysisPeriodStart` and `analysisP
 1. **Present** — show analysis period and derived lookback/follow-through windows; mark each `confirmed`, `default`, or `pending`
 2. **Reconcile** — ask plain-language questions only when the user narrowed or contradicted defaults
 3. **Snapshot plan** — when exact holdings snapshots do not exist on period boundaries, note weight-reconstruction approach (see `period-weight-reconstruction` skill when shipped)
-4. **Snapshot lag** — compute `periodEndSnapshotLagDays` from skill output or holdings metadata. When lag exceeds 14 days, present the gap and either (a) confirm user accepts stale exposure, or (b) set `analysisPeriodEnd` to the latest positions export date (`YYYYMMDD`) for aligned exposure
+4. **Snapshot lag** — compute `periodEndSnapshotLagDays` from skill output or holdings metadata. When lag **≥ 14** days, set `snapshotLagWarn`. When lag is **1–13** days, set `snapshotLagNotice`. Present the gap and either (a) confirm user accepts stale exposure, or (b) set `analysisPeriodEnd` to the latest positions export date (`YYYYMMDD`) for aligned exposure
 5. **Export alignment** — prefer `analysisPeriodEnd` matching the latest `positions_lot_level` export date when the user wants period-end weights in portfolio linkage; document the choice in Inputs Resolved
-6. **Confirm** — embed final period block in report Appendix before clearing `period-confirmed` gate
+6. **Period labeling** — when `analysisPeriodEnd` is not a standard calendar boundary (e.g. `20260701`), use **Jan 1 – Jul 1, 2026** in the report title and period windows, not "H1 2026" alone
+7. **Confirm** — embed final period block in report Appendix before clearing `period-confirmed` gate
 
 Use `pc-lib` period helpers (`default_period_windows`) when computing defaults from YYYYMMDD bounds.
 

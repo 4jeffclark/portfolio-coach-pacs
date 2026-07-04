@@ -120,7 +120,8 @@ def run(args: SkillArgs) -> SkillResult:
     exposure_available = bool(end_snap and end_total and numeric_symbol_count == 0)
     start_exposure_available = bool(start_snap and start_total)
     exposure_quality_valid = numeric_symbol_count == 0 and bool(end_snap and end_total)
-    snapshot_lag_warn = snapshot_lag > SNAPSHOT_LAG_WARN_DAYS if snapshot_lag >= 0 else False
+    snapshot_lag_warn = snapshot_lag >= SNAPSHOT_LAG_WARN_DAYS if snapshot_lag >= 0 else False
+    snapshot_lag_notice = 0 < snapshot_lag < SNAPSHOT_LAG_WARN_DAYS if snapshot_lag >= 0 else False
 
     top_weight = top_symbols_by_weight(end_mv, end_total, limit=10)
     top_notional = top_symbols_by_notional(notionals, limit=10)
@@ -164,7 +165,12 @@ def run(args: SkillArgs) -> SkillResult:
             "Do not coach on exposure until canonical positions are rebuilt._"
         )
     elif exposure_available:
-        lag_note = f" (lag {snapshot_lag} days vs period end)" if snapshot_lag_warn else ""
+        if snapshot_lag_warn:
+            lag_note = f" (**snapshot lag {snapshot_lag} days** vs period end — consider aligning `analysisPeriodEnd` to latest export)"
+        elif snapshot_lag_notice:
+            lag_note = f" (snapshot lag {snapshot_lag} days vs period end)"
+        else:
+            lag_note = ""
         lines.append(
             f"Period-end snapshot **{end_snap}**{lag_note}: total MV ${end_total:,.2f}. "
             "Embed top holdings by **PeriodEndWeightPct** from PortfolioLinkage.csv."
@@ -216,6 +222,7 @@ def run(args: SkillArgs) -> SkillResult:
         "exposureNumericSymbolCount": numeric_symbol_count,
         "exposureQualityValid": exposure_quality_valid,
         "snapshotLagWarn": snapshot_lag_warn,
+        "snapshotLagNotice": snapshot_lag_notice,
     }
     met_path = write_metrics(out / "Metrics.csv", metrics)
 
@@ -244,8 +251,13 @@ def run(args: SkillArgs) -> SkillResult:
         )
     elif snapshot_lag_warn:
         linkage_fragment += (
-            f" Snapshot lag {snapshot_lag} days — note in period windows; "
+            f" Snapshot lag {snapshot_lag} days (warn) — note in period windows; "
             "confirm user accepts lag or set analysisPeriodEnd to latest export date."
+        )
+    elif snapshot_lag_notice:
+        linkage_fragment += (
+            f" Snapshot lag {snapshot_lag} days (notice) — exposure is valid but stale; "
+            "document in period windows; recommend latest export date for aligned weights."
         )
     else:
         linkage_fragment += (
@@ -261,6 +273,13 @@ def run(args: SkillArgs) -> SkillResult:
                 "Merge all workspace market-research content into the delivered report file."
             ),
             "portfolio_linkage": linkage_fragment,
+            "skill_metrics_appendix": (
+                "Embed Appendix: Skill Metrics table from Metrics.csv with at minimum: "
+                "portfolioSymbolCount, periodEndSnapshot, periodEndSnapshotLagDays, "
+                "snapshotLagWarn, snapshotLagNotice, periodEndTotalMV, periodGrossTurnover, "
+                "portfolioTurnoverRatio, exposureQualityValid, exposureNumericSymbolCount, "
+                "exposureParentRowCount, exposureLotDetailRowCount."
+            ),
         },
     )
 

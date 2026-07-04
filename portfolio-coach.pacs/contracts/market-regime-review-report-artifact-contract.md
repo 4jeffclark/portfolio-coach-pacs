@@ -26,6 +26,18 @@ Merge into the delivered file:
 - When `marketDepth: full`: all content formerly written to `MarketResearch.md` (period windows, broad market context, index/factor highlights, sector map, sources, extended symbol context, scenario/outlook detail)
 - When `evaluation: true`: exit-interview and judgment scaffold content
 
+## Report title and period labeling
+
+Use **calendar date range** in the report title and period windows when `analysisPeriodEnd` does not match a standard calendar boundary:
+
+| Analysis end | Preferred title label |
+| --- | --- |
+| `20260630` | H1 2026 (Jan 1 – Jun 30) |
+| `20260701` | Jan 1 – Jul 1, 2026 *(not "H1 2026" alone — includes one extra calendar day)* |
+| `20260930` | Q3 2026 (Jul 1 – Sep 30) |
+
+Macro narrative may still reference "H1" when discussing market history, but **portfolio linkage activity scope** must match resolved `analysisPeriodStart`–`analysisPeriodEnd`.
+
 ## Delivered report — minimum sections
 
 1. **Executive summary** — regime label and portfolio-linked read
@@ -35,7 +47,27 @@ Merge into the delivered file:
 5. **Forward outlook** — when requested or implied by user intent
 6. **Sources** — cited references (embed table formerly in `MarketResearch.md`)
 7. **Appendix: Inputs Resolved** — final resolved playbook inputs and period confirmation
-8. **Evaluation** — when `evaluation: true`; embed exit-interview and coaching judgment
+8. **Appendix: Skill Metrics** — embed key rows from `Metrics.csv` (see below)
+9. **Evaluation** — when `evaluation: true`; embed exit-interview and coaching judgment
+
+### Appendix: Skill Metrics (required subset)
+
+Embed a markdown table sourced from `Metrics.csv`:
+
+| Metric | Value |
+| --- | --- |
+| `portfolioSymbolCount` | |
+| `periodEndSnapshot` | |
+| `periodEndSnapshotLagDays` | |
+| `snapshotLagNotice` | |
+| `snapshotLagWarn` | |
+| `periodEndTotalMV` | |
+| `periodGrossTurnover` | |
+| `portfolioTurnoverRatio` | |
+| `exposureQualityValid` | |
+| `exposureNumericSymbolCount` | |
+| `exposureParentRowCount` | |
+| `exposureLotDetailRowCount` | |
 
 ### Portfolio linkage assembly rules
 
@@ -64,10 +96,19 @@ When `exposureQualityValid` is **false** in `Metrics.csv` (typically `exposureNu
 - Activity tables (gross notional) may still be embedded when order data is valid
 - Attest **`Post-run checklist: failed`** with failed item **`D3`** — do not claim pass
 
-When `snapshotLagWarn` is **true** (`periodEndSnapshotLagDays` > 14):
+When `snapshotLagWarn` is **true** (`periodEndSnapshotLagDays` **≥ 14**):
 
 - Document lag in period windows and Inputs Resolved
 - Recommend setting `analysisPeriodEnd` to the latest positions export date when user wants aligned exposure, or obtain user acknowledgment of stale snapshot
+
+When `snapshotLagNotice` is **true** (`periodEndSnapshotLagDays` between **1** and **13**):
+
+- Document lag in period windows (exposure valid but stale)
+- Note whether user accepts lag or prefers aligned `analysisPeriodEnd`
+
+### Paired runs (#4 + #6)
+
+When running full memo and coaching for the same analysis window, use the **same** `analysisPeriodStart` and `analysisPeriodEnd` on both runs. Prefer the **latest positions export date** for `analysisPeriodEnd` when aligned exposure matters (e.g. `#4` at `20260701` then `#6` at `20260701`).
 
 ## Summary depth delivery
 

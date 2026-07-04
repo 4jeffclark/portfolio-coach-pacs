@@ -41,4 +41,6 @@ Member playbooks and overlays are defined in the [repository README](../README.m
 
 Portfolio linkage ranks **exposure** by period-end weight % and **activity** by period gross notional from `market-environment` skill output. Do not use filled-order count as a conviction proxy. When `exposureQualityValid` is false, do not deliver exposure tables — rebuild canonical positions via `datastore-ingest` first.
 
-**Period-end alignment:** For aligned exposure, set `analysisPeriodEnd` to the latest positions export date (e.g. `20260701` when Jul 1 export exists). Jun 30 period with Jun 16 snapshot is valid but lagged — see `periodEndSnapshotLagDays` in skill metrics.
+**Period-end alignment:** For aligned exposure, set `analysisPeriodEnd` to the latest positions export date (e.g. `20260701` when Jul 1 export exists). Jun 30 period with Jun 16 snapshot is valid but lagged — see `periodEndSnapshotLagDays`, `snapshotLagNotice` (1–13 days), and `snapshotLagWarn` (≥ 14 days) in skill metrics.
+
+**Paired runs:** Run **#4** and **#6** with the same `analysisPeriodStart` / `analysisPeriodEnd`. When Jul 1 export exists, use **`20260701`** on both for aligned coaching and full memo.

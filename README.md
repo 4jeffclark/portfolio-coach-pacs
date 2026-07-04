@@ -2,7 +2,7 @@
 
 Published **PACS distribution repo** for PortfolioCoach.
 
-**Status:** The tables below are the **pack catalog**. Playbook manifests and overlays align to this document as of v4.0.2.
+**Status:** The tables below are the **pack catalog**. Playbook manifests and overlays align to this document as of v4.0.3.
 
 ### Conventions
 
@@ -35,7 +35,7 @@ Analytic playbooks use a lighter validate-only prelude (`datastore-merge-and-val
 | --- | --- | --- | --- |
 | “What’s the market regime for this period?” / “Full market backdrop memo” | `market-regime-review` | — · `marketDepth: full` · `evaluation: false` | `MarketRegimeReview` report: period-scoped regime memo; portfolio linkage includes period-end **weight %** and period **notional** activity (not order-count conviction) |
 | “Brief market context for this period” (standalone abbreviated or embed) | `market-regime-review` | — · `marketDepth: summary` · `evaluation: false` | Abbreviated regime memo — standalone delivered report or workspace fragments for parent embed; same linkage metrics, condensed tables |
-| “What’s the market regime?” (with coaching judgment) | `market-regime-review` | `market-regime-evaluation` · `evaluation: true` | Adds regime interpretation judgment (exposure + notional based), coaching notes, exit interview embedded in delivered report |
+| “What’s the market regime?” (with coaching judgment) | `market-regime-review` | `market-regime-evaluation` · `evaluation: true` | Adds regime interpretation judgment (exposure + notional based), coaching notes, exit interview embedded in delivered report. **Pair with #4 using the same `analysisPeriodEnd`** — prefer latest positions export date (e.g. `20260701`) for aligned exposure |
 
 ---
 
