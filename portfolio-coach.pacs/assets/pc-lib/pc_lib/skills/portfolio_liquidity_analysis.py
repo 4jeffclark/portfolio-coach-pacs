@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from pc_lib.analytics import latest_snapshot_date, positions_at_snapshot
+from pc_lib.analytics import latest_snapshot_date, positions_at_snapshot, resolve_period_start_snapshot
 from pc_lib.canonical import load_canonical, read_csv, write_csv
 from pc_lib.cli import SkillArgs, SkillResult
 from pc_lib.skills._skill_io import skill_out, write_fragments
@@ -17,7 +17,7 @@ def run(args: SkillArgs) -> SkillResult:
 
     from pc_lib.canonical import ymd_to_iso
 
-    start_snap = latest_snapshot_date(positions, ymd_to_iso(args.period_start) or "")
+    start_snap, _ = resolve_period_start_snapshot(positions, ymd_to_iso(args.period_start) or "")
     end_snap = latest_snapshot_date(positions, ymd_to_iso(args.period_end) or "")
     rows = []
     for label, snap in (("period_start", start_snap), ("period_end", end_snap)):

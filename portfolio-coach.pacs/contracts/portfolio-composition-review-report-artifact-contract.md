@@ -35,6 +35,8 @@ Merge into the delivered file:
 
 Embed all quantitative tables from assembly CSVs. Include composition narrative, weights, flows, thesis health, evolution, liquidity, concentration, embedded market context, overlay sections when enabled, and evaluation/interview appendices when `evaluation: true`.
 
+When `periodStartSnapshotFallback` is **true** in skill metrics, document that period-start weights use the earliest available holdings export (not the analysis period start date) and that weight deltas cover the snapshot window only.
+
 ## Post-run verification
 
 Self-verify per [PACS post-run checklist](https://github.com/4jeffclark/pacs-workbench/blob/main/standard/post-run-checklist.md).

@@ -51,12 +51,17 @@ def run(args: SkillArgs) -> SkillResult:
     messages.extend(stage_messages)
 
     positions_before: list[dict[str, str]] = []
+    orders_before: list[dict[str, str]] = []
     try:
         positions_before = load_canonical(args.datastore, "positions_lot_level.csv")
     except FileNotFoundError:
         positions_before = []
+    try:
+        orders_before = load_canonical(args.datastore, "orders.csv")
+    except FileNotFoundError:
+        orders_before = []
     position_rows_before = len(positions_before)
-    symbol_count_before = len(mapping_universe(positions_before, [], None, None))
+    symbol_count_before = len(mapping_universe(positions_before, orders_before, None, None))
 
     rebuild_stats = rebuild_canonical(args.datastore, layout)
     messages.append(

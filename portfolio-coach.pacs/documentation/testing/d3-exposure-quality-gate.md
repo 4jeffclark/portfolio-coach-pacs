@@ -12,29 +12,53 @@ When `market-environment` sets `exposureQualityValid: false`:
 4. **No** exposure-based coaching (#6 overlay)
 5. Post-run attestation: **`failed`** with failed item **`D3`**
 
-## Synthetic corrupt rows
+## v4.0.2+ pass path — lot-detail snippet (Session 4)
 
-Append these rows to a **scratch copy** of `positions_lot_level.csv` (do not commit corrupt canonical to production datastores). Use a dedicated test datastore or restore from backup after the test.
+Append these rows to a **scratch copy** of `positions_lot_level.csv`:
 
 ```csv
 testhash,raw/test/lot-bug.csv,2026-07-01 12:00:00,EST,999999999,x9999,Test Account,50  09/07/2018,,50,,09/07/2018,Short term,100,200,,200,,100,,12085,,,,
 testhash,raw/test/lot-bug.csv,2026-07-01 12:00:00,EST,999999999,x9999,Test Account,100  01/15/2020,,100,,01/15/2020,Long term,50,300,,300,,50,,30000,,,,
 ```
 
-With v4.0.2+ ingest, lot-detail rows should **not** appear after `datastore-ingest` rebuild. To exercise D3 on v4.0.3+, either:
+On **v4.0.2+**, ingest skips lot-detail rows and `market-environment` excludes them from exposure aggregation. Expect:
 
-- Temporarily revert `etrade_rebuild.py` lot-detail skip in a **throwaway branch**, rebuild, run #4/#6; or
-- Manually append the rows above **after** rebuild (simulates pre-fix canonical)
+```text
+exposureLotDetailRowCount: > 0 (rows may remain in CSV)
+exposureNumericSymbolCount: 0
+exposureQualityValid: true
+Post-run D3: passed
+```
+
+This validates **fail-closed ingest**, not D3 failure. Session 4 confirmed this pass path.
+
+## D3 failure path — when to use
+
+With v4.0.3+ `symbol_market_values` and `position_symbol` hardening, **numeric tokens cannot enter the exposure MV map** from CSV fixtures alone. To exercise D3 **failure**:
+
+| Approach | Use when |
+| --- | --- |
+| **Historical golden report** | Reference pre-v4.0.2 run `20260704-101835-MarketRegimeReview-20260101-20260701` (numeric symbols, ~$4.09M MV double-count) |
+| **Throwaway branch** | Temporarily revert lot-detail skip in `etrade_rebuild.py` and summary-row filter in `analytics.py`; rebuild scratch datastore; run #4/#6 |
+| **Manual pre-fix canonical** | Restore a canonical backup from before v4.0.2 lot-detail fix |
+
+Do **not** expect D3 failure from the lot-detail snippet alone on v4.0.3+.
 
 ## Verification prompt (execution session)
 
+Manifest inputs only:
+
 ```text
-Run market-regime-review #4 for 20260101–20260701 on <test-datastore>.
-If exposureNumericSymbolCount > 0, banner DATA QUALITY — EXPOSURE TABLE INVALID,
-omit exposure tables, and attest post-run failed (D3).
+Run market-regime-review #4 on <scratch-datastore>.
+analysisPeriodStart: 20260101
+analysisPeriodEnd: 20260701
+marketDepth: full
+evaluation: false
 ```
 
-## Pass path regression
+**Reviewer checklist (not playbook inputs):** if `exposureNumericSymbolCount > 0`, expect D3 banner and post-run failed (D3).
+
+## Pass path regression (production datastore)
 
 On a clean v4.0.3+ datastore after ingest rebuild:
 
@@ -43,4 +67,4 @@ exposureNumericSymbolCount: 0
 exposureQualityValid: true
 ```
 
-See harness `Dev/fixtures/d3-exposure-quality/` for a copy-paste snippet.
+See harness `Dev/fixtures/d3-exposure-quality/` for the lot-detail pass-path snippet.

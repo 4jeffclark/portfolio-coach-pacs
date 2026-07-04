@@ -2,11 +2,12 @@ pacsVersion: '0.1'
 kind: pack
 packId: portfolio-coach
 name: PortfolioCoach
-version: '4.0.3'
+version: '4.0.4'
 description: >-
   E*TRADE portfolio analysis pack — six member playbooks with composable overlays.
-  Scaffold skills; agent-authored narrative per PACS. v4.0.3 adds snapshot lag notice,
-  skill metrics appendix, ingest symbol-universe delta, and D3 test fixture docs.
+  Scaffold skills; agent-authored narrative per PACS. v4.0.4 fixes period-start MV
+  when no holdings on/before analysis start, aligned ingest symbol-universe delta,
+  and D3 fixture docs for v4.0.3+ pass path.
 license: TBD
 compatibility:
   agentSkills: '>=1.0'

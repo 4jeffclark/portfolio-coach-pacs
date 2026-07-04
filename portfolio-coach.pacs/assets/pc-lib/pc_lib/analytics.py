@@ -324,6 +324,11 @@ def _parse_asof(row: dict[str, str]) -> str:
     return (row.get("AsOfLocal") or "")[:10].replace("/", "-")
 
 
+def earliest_snapshot_date(positions: list[dict[str, str]]) -> str:
+    dates = sorted({_parse_asof(r) for r in positions if _parse_asof(r)})
+    return dates[0] if dates else ""
+
+
 def latest_snapshot_date(positions: list[dict[str, str]], boundary_iso: str | None) -> str:
     dates = sorted({_parse_asof(r) for r in positions if _parse_asof(r)})
     if not dates:
@@ -334,9 +339,24 @@ def latest_snapshot_date(positions: list[dict[str, str]], boundary_iso: str | No
     return eligible[-1] if eligible else ""
 
 
+def resolve_period_start_snapshot(
+    positions: list[dict[str, str]], boundary_iso: str
+) -> tuple[str, bool]:
+    """Return (snapshot_date, used_earliest_fallback).
+
+    When no holdings export exists on/before the period start, use the earliest
+    available single snapshot (never all rows across dates).
+    """
+    snap = latest_snapshot_date(positions, boundary_iso)
+    if snap:
+        return snap, False
+    earliest = earliest_snapshot_date(positions)
+    return earliest, bool(earliest)
+
+
 def positions_at_snapshot(positions: list[dict[str, str]], snapshot_date: str) -> list[dict[str, str]]:
     if not snapshot_date:
-        return positions
+        return []
     return [r for r in positions if _parse_asof(r) == snapshot_date]
 
 
