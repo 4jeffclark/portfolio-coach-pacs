@@ -30,7 +30,12 @@ See skill module for additional flags (`--period-start`, `--rollup-lens`, `--sym
 
 ## Outputs
 
-TBD per legacy capability contract.
+Assembly-only under `{agentWorkspace}`:
+
+- `Metrics.csv` — `periodStartSnapshot`, `periodEndSnapshot`, `periodStartSnapshotFallback`, boundary MV and symbol counts
+- `ReportSectionFragments.json` — `holdings_state` fragment
+
+When no holdings export exists on/before `analysisPeriodStart`, start MV uses the **earliest single snapshot** (never all rows across dates).
 
 ## Used by
 

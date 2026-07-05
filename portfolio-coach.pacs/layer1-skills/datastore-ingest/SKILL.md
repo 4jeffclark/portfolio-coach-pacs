@@ -29,7 +29,7 @@ python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WOR
 Assembly-only under `{agentWorkspace}` (embed in delivered report):
 
 - `MergeLog.csv` — staging outcomes for `inputs/` attachments
-- `Metrics.csv` — rebuild and validation summary
+- `Metrics.csv` — rebuild and validation summary, including `portfolioSymbolCountBefore`, `portfolioSymbolCountAfter`, `portfolioSymbolCountDelta`, `positionRowsBefore`, `positionRowsAfter` when rebuild runs (before/after use the same `mapping_universe` inputs)
 - `ReportSectionFragments.json` — scaffold text for ingest report sections
 
 ## Used by

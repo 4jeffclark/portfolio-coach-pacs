@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 
-from pc_lib.analytics import latest_snapshot_date, positions_at_snapshot, symbol_market_values, total_market_value
+from pc_lib.analytics import (
+    latest_snapshot_date,
+    positions_at_snapshot,
+    resolve_period_start_snapshot,
+    symbol_market_values,
+    total_market_value,
+)
 from pc_lib.canonical import load_canonical, write_csv, ymd_to_iso
 from pc_lib.cli import SkillArgs, SkillResult
 from pc_lib.skills._skill_io import skill_out, write_fragments, write_metrics
@@ -13,12 +19,15 @@ def run(args: SkillArgs) -> SkillResult:
     positions = load_canonical(args.datastore, "positions_lot_level.csv")
     start_iso = ymd_to_iso(args.period_start) or ""
     end_iso = ymd_to_iso(args.period_end) or ""
-    start_snap = latest_snapshot_date(positions, start_iso)
+    start_snap, start_fallback = resolve_period_start_snapshot(positions, start_iso)
     end_snap = latest_snapshot_date(positions, end_iso)
-    start_mv = symbol_market_values(positions_at_snapshot(positions, start_snap))
-    end_mv = symbol_market_values(positions_at_snapshot(positions, end_snap))
-    start_total = total_market_value(positions_at_snapshot(positions, start_snap)) or 1
-    end_total = total_market_value(positions_at_snapshot(positions, end_snap)) or 1
+    start_pos = positions_at_snapshot(positions, start_snap)
+    end_pos = positions_at_snapshot(positions, end_snap)
+    start_mv = symbol_market_values(start_pos)
+    end_mv = symbol_market_values(end_pos)
+    start_total = total_market_value(start_pos) or 1
+    end_total = total_market_value(end_pos) or 1
+    start_source = "earliest_available_snapshot" if start_fallback else "observed_snapshot"
     symbols = sorted(set(start_mv) | set(end_mv))
     rows = []
     for sym in symbols:
@@ -31,7 +40,7 @@ def run(args: SkillArgs) -> SkillResult:
                 "PeriodEndMV": f"{emv:.2f}",
                 "PeriodStartWeightPct": f"{smv / start_total * 100:.2f}",
                 "PeriodEndWeightPct": f"{emv / end_total * 100:.2f}",
-                "PeriodStartWeightSource": "observed_snapshot" if smv else "unavailable",
+                "PeriodStartWeightSource": start_source if smv else "unavailable",
                 "PeriodEndWeightSource": "observed_snapshot" if emv else "unavailable",
             }
         )
@@ -47,6 +56,7 @@ def run(args: SkillArgs) -> SkillResult:
     metrics = {
         "periodStartSnapshot": start_snap,
         "periodEndSnapshot": end_snap,
+        "periodStartSnapshotFallback": str(start_fallback),
         "reconstructedSymbolCount": len(rows),
     }
     met_path = write_metrics(out / "Metrics.csv", metrics)

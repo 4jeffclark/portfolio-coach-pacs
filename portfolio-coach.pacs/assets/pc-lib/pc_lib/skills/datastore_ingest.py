@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 
+from pc_lib.analytics import mapping_universe
 from pc_lib.canonical import DatastoreLayoutError, load_canonical, validate_layout, work_dir, write_csv
 from pc_lib.cli import SkillArgs, SkillResult
 from pc_lib.etrade_ingest import stage_inputs
@@ -49,6 +50,19 @@ def run(args: SkillArgs) -> SkillResult:
     staged, stage_messages = stage_inputs(args.datastore, layout)
     messages.extend(stage_messages)
 
+    positions_before: list[dict[str, str]] = []
+    orders_before: list[dict[str, str]] = []
+    try:
+        positions_before = load_canonical(args.datastore, "positions_lot_level.csv")
+    except FileNotFoundError:
+        positions_before = []
+    try:
+        orders_before = load_canonical(args.datastore, "orders.csv")
+    except FileNotFoundError:
+        orders_before = []
+    position_rows_before = len(positions_before)
+    symbol_count_before = len(mapping_universe(positions_before, orders_before, None, None))
+
     rebuild_stats = rebuild_canonical(args.datastore, layout)
     messages.append(
         f"Rebuilt canonical tables at {rebuild_stats['rebuiltAtLocal']}: "
@@ -58,6 +72,10 @@ def run(args: SkillArgs) -> SkillResult:
 
     orders = load_canonical(args.datastore, "orders.csv")
     history = load_canonical(args.datastore, "account_history.csv")
+    positions_after = load_canonical(args.datastore, "positions_lot_level.csv")
+    position_rows_after = rebuild_stats.get("positionRows", len(positions_after))
+    symbol_count_after = len(mapping_universe(positions_after, orders, None, None))
+    symbol_count_delta = symbol_count_after - symbol_count_before
     orders_dedup = _dedup_violations(
         orders, ["Symbol", "Status", "Fill", "Description", "Market", "Time", "AccountId"]
     )
@@ -85,6 +103,11 @@ def run(args: SkillArgs) -> SkillResult:
         "cashActivityDailyRows": str(rebuild_stats.get("cashActivityDailyRows", 0)),
         "cashBalanceEstimatedRows": str(rebuild_stats.get("cashBalanceEstimatedRows", 0)),
         "incomeEventRows": str(rebuild_stats.get("incomeEventRows", 0)),
+        "positionRowsBefore": str(position_rows_before),
+        "positionRowsAfter": str(position_rows_after),
+        "portfolioSymbolCountBefore": str(symbol_count_before),
+        "portfolioSymbolCountAfter": str(symbol_count_after),
+        "portfolioSymbolCountDelta": str(symbol_count_delta),
         "ordersDedupViolations": str(orders_dedup),
         "accountHistoryDedupViolations": str(history_dedup),
         "validationPass": str(orders_dedup == 0 and history_dedup == 0),
@@ -104,7 +127,9 @@ def run(args: SkillArgs) -> SkillResult:
             f"Canonical rebuild completed at **{rebuild_stats['rebuiltAtLocal']}**. "
             f"Order dedup violations: **{orders_dedup}**. "
             f"Account history dedup violations: **{history_dedup}**. "
-            f"Validation: **{'Pass' if metrics['validationPass'] == 'True' else 'Fail'}**."
+            f"Validation: **{'Pass' if metrics['validationPass'] == 'True' else 'Fail'}**. "
+            f"Portfolio symbol universe: **{symbol_count_before}** → **{symbol_count_after}** "
+            f"(delta **{symbol_count_delta:+d}**; position rows **{position_rows_before}** → **{position_rows_after}**)."
         ),
         "section4_available_range": (
             f"Available activity range after rebuild: **{range_start}** → **{range_end}** "

@@ -19,8 +19,10 @@ metadata:
 ## Scripts
 
 ```powershell
-python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WORKSPACE
+python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WORKSPACE --rollup-lens theme
 ```
+
+When this skill runs in `portfolio-composition-review`, pass `--rollup-lens` matching the playbook `rollupLens` input. The skill writes `RollupLens.txt` for downstream lens-aware skills.
 
 See skill module for additional flags (`--period-start`, `--rollup-lens`, `--symbol`, etc.).
 

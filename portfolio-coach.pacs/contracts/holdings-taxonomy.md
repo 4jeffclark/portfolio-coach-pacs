@@ -43,6 +43,21 @@ rollupLens: standards | theme | thesis
 
 Default for `portfolio-composition-review`: `theme`.
 
+## RollupLens propagation
+
+`portfolio-weights-table` resolves the playbook `rollupLens` input (or `--rollup-lens` / `--thematic` flags) and writes `RollupLens.txt` to the workspace root and its skill output folder.
+
+Downstream lens-aware skills read `RollupLens.txt` when `--rollup-lens` is omitted:
+
+| Skill | Uses lens for |
+| --- | --- |
+| `portfolio-period-flows` | Bucket aggregation of buy/sell notionals |
+| `portfolio-evolution` | Evolution and rotation matrix CSVs |
+| `portfolio-concentration-resilience` | HHI and concentration metrics |
+| `thesis-health` | Theme vs thesis health scaffold |
+
+Execution agents should pass `--rollup-lens` matching the playbook input to **all** lens-aware skills, or run `portfolio-weights-table` before downstream skills so `RollupLens.txt` is available.
+
 ## File contracts
 
 ### `HoldingsMap.csv`

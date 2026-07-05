@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from pc_lib.canonical import read_csv, write_csv
 from pc_lib.cli import SkillArgs, SkillResult
-from pc_lib.skills._skill_io import skill_out, write_fragments
+from pc_lib.skills._skill_io import resolve_rollup_lens, skill_out, write_fragments
 
 
 def run(args: SkillArgs) -> SkillResult:
     out = skill_out(args, "thesis-health")
-    lens = args.rollup_lens or ("thesis" if args.thematic else "theme")
+    lens = resolve_rollup_lens(args)
     weights_src = args.workspace / "portfolio-weights-table"
     if lens == "thesis":
         exposure = read_csv(weights_src / "ThesisExposure.csv")

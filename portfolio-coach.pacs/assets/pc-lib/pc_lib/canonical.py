@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import re
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
@@ -283,11 +284,46 @@ def input_dir(args) -> Path:
     return args.input_dir if args.input_dir else work_dir(args.workspace, "_inputs")
 
 
+def is_lot_detail_position_raw(raw: str) -> bool:
+    """True for E*TRADE lot sub-rows like ``50  09/07/2018`` (share qty + date, no ticker)."""
+    stripped = raw.strip()
+    return bool(re.match(r"^\d+\s+\d{2}/", stripped))
+
+
+def is_position_summary_row(row: dict[str, str]) -> bool:
+    """True for parent position rows (``TICKER +N Shares``), not lot-detail sub-rows."""
+    raw = (row.get("PositionRaw") or "").strip()
+    if not raw or is_lot_detail_position_raw(raw):
+        return False
+    return "Share" in raw or "Shares" in raw
+
+
+def is_valid_ticker_symbol(sym: str) -> bool:
+    """Reject purely numeric tokens (lot quantities misparsed as tickers)."""
+    s = (sym or "").strip().upper()
+    return bool(s) and not s.isdigit() and any(c.isalpha() for c in s)
+
+
+def position_symbol(row: dict[str, str]) -> str:
+    """Resolve ticker from Symbol column or PositionRaw (E*TRADE lot-level exports)."""
+    sym = (row.get("Symbol") or "").strip().upper()
+    if sym and is_valid_ticker_symbol(sym):
+        return sym
+    raw = (row.get("PositionRaw") or "").strip()
+    if not raw or is_lot_detail_position_raw(raw):
+        return ""
+    match = re.match(r"^([A-Z][A-Z0-9._-]*)", raw)
+    if not match:
+        return ""
+    candidate = match.group(1).upper()
+    return candidate if is_valid_ticker_symbol(candidate) else ""
+
+
 def symbols_from_positions(positions: list[dict[str, str]]) -> list[str]:
     seen: set[str] = set()
     out: list[str] = []
     for row in positions:
-        sym = (row.get("Symbol") or "").strip().upper()
+        sym = position_symbol(row)
         if not sym or sym in seen:
             continue
         if sym in ("PORTFOLIO ANALYSIS", "--"):

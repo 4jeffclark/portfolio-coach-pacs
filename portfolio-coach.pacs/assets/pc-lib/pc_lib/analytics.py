@@ -2,11 +2,20 @@
 
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from datetime import datetime
 from typing import Any
 
-from pc_lib.canonical import in_period, parse_float, symbols_from_positions
+from pc_lib.canonical import (
+    in_period,
+    is_lot_detail_position_raw,
+    is_position_summary_row,
+    is_valid_ticker_symbol,
+    parse_float,
+    position_symbol,
+    symbols_from_positions,
+)
 from pc_lib.reference_data import CASH_LIKE
 from pc_lib.holdings_inference import infer_holdings_map, infer_holdings_row
 from pc_lib.theme_inference import infer_theme_registry, infer_thesis_registry, theme_inference_metrics
@@ -46,7 +55,25 @@ def filled_orders(
 
 
 def order_side(row: dict[str, str]) -> str:
-    return (row.get("Side") or "").strip().lower()
+    """Return buy/sell from Side column or infer from Description."""
+    side = (row.get("Side") or "").strip().lower()
+    if side in ("buy", "sell"):
+        return side
+    desc = (row.get("Description") or "").strip()
+    if not desc:
+        return ""
+    m = re.match(r"^(Buy|Sell)\b", desc, re.I)
+    if m:
+        return m.group(1).lower()
+    return ""
+
+
+def infer_order_side_from_description(desc: str) -> str:
+    """Parse Buy/Sell from E*TRADE order description when Side column is empty."""
+    if not desc:
+        return ""
+    m = re.match(r"^(Buy|Sell)\b", desc.strip(), re.I)
+    return m.group(1).title() if m else ""
 
 
 def fill_notional(row: dict[str, str]) -> float:
@@ -55,6 +82,60 @@ def fill_notional(row: dict[str, str]) -> float:
     if qty and price:
         return qty * price
     return parse_float(row.get("Fill").split("@")[-1]) if "@" in (row.get("Fill") or "") else 0.0
+
+
+def symbol_period_notionals(orders: list[dict[str, str]]) -> dict[str, dict[str, float]]:
+    """Buy, sell, and gross notional per symbol for a pre-filtered filled-order list."""
+    totals: dict[str, dict[str, float]] = defaultdict(lambda: {"buy": 0.0, "sell": 0.0})
+    for row in orders:
+        if not _is_filled(row):
+            continue
+        sym = (row.get("Symbol") or "").upper()
+        if not sym:
+            continue
+        notional = fill_notional(row)
+        side = order_side(row)
+        if side == "buy":
+            totals[sym]["buy"] += notional
+        elif side == "sell":
+            totals[sym]["sell"] += notional
+    return {
+        sym: {
+            "buy_notional": round(vals["buy"], 2),
+            "sell_notional": round(vals["sell"], 2),
+            "gross_notional": round(vals["buy"] + vals["sell"], 2),
+        }
+        for sym, vals in totals.items()
+    }
+
+
+def top_symbols_by_weight(
+    end_mv: dict[str, float],
+    end_total: float,
+    limit: int = 10,
+) -> list[tuple[str, float, float]]:
+    """Return (symbol, market_value, weight_pct) sorted by weight descending."""
+    if not end_total:
+        return []
+    ranked = sorted(
+        ((sym, val, val / end_total * 100) for sym, val in end_mv.items() if val),
+        key=lambda row: row[2],
+        reverse=True,
+    )
+    return ranked[:limit]
+
+
+def top_symbols_by_notional(
+    notionals: dict[str, dict[str, float]],
+    limit: int = 10,
+) -> list[tuple[str, float]]:
+    """Return (symbol, gross_notional) sorted by period gross notional descending."""
+    ranked = sorted(
+        ((sym, vals["gross_notional"]) for sym, vals in notionals.items() if vals["gross_notional"]),
+        key=lambda row: row[1],
+        reverse=True,
+    )
+    return ranked[:limit]
 
 
 def activity_metrics(orders: list[dict[str, str]]) -> dict[str, Any]:
@@ -144,6 +225,15 @@ def _parse_asof(row: dict[str, str]) -> str:
     return (row.get("AsOfLocal") or "")[:10].replace("/", "-")
 
 
+def snapshot_dates(positions: list[dict[str, str]]) -> list[str]:
+    return sorted({_parse_asof(r) for r in positions if _parse_asof(r)})
+
+
+def earliest_snapshot_date(positions: list[dict[str, str]]) -> str:
+    dates = sorted({_parse_asof(r) for r in positions if _parse_asof(r)})
+    return dates[0] if dates else ""
+
+
 def latest_snapshot_date(positions: list[dict[str, str]], boundary_iso: str | None) -> str:
     dates = sorted({_parse_asof(r) for r in positions if _parse_asof(r)})
     if not dates:
@@ -151,20 +241,70 @@ def latest_snapshot_date(positions: list[dict[str, str]], boundary_iso: str | No
     if not boundary_iso:
         return dates[-1]
     eligible = [d for d in dates if d <= boundary_iso[:10]]
-    return eligible[-1] if eligible else dates[-1]
+    return eligible[-1] if eligible else ""
+
+
+def resolve_period_start_snapshot(
+    positions: list[dict[str, str]], boundary_iso: str
+) -> tuple[str, bool]:
+    """Return (snapshot_date, used_earliest_fallback).
+
+    When no holdings export exists on/before the period start, use the earliest
+    available single snapshot (never all rows across dates).
+    """
+    snap = latest_snapshot_date(positions, boundary_iso)
+    if snap:
+        return snap, False
+    earliest = earliest_snapshot_date(positions)
+    return earliest, bool(earliest)
 
 
 def positions_at_snapshot(positions: list[dict[str, str]], snapshot_date: str) -> list[dict[str, str]]:
     if not snapshot_date:
-        return positions
+        return []
     return [r for r in positions if _parse_asof(r) == snapshot_date]
 
 
+def count_position_row_types(positions: list[dict[str, str]]) -> dict[str, int]:
+    counts = {"summary": 0, "lot_detail": 0, "other": 0}
+    for row in positions:
+        raw = (row.get("PositionRaw") or "").strip()
+        if is_position_summary_row(row):
+            counts["summary"] += 1
+        elif raw and is_lot_detail_position_raw(raw):
+            counts["lot_detail"] += 1
+        else:
+            counts["other"] += 1
+    return counts
+
+
+def count_numeric_exposure_symbols(end_mv: dict[str, float]) -> int:
+    return sum(1 for sym in end_mv if sym and not is_valid_ticker_symbol(sym))
+
+
+def snapshot_lag_days(snapshot_iso: str, period_end_ymd: str) -> int:
+    """Days from snapshot date to analysis period end (negative if snapshot is after end)."""
+    if not snapshot_iso or not period_end_ymd or len(period_end_ymd) < 8:
+        return -1
+    try:
+        snap = datetime.strptime(snapshot_iso[:10], "%Y-%m-%d").date()
+        end = datetime.strptime(
+            f"{period_end_ymd[:4]}-{period_end_ymd[4:6]}-{period_end_ymd[6:8]}",
+            "%Y-%m-%d",
+        ).date()
+        return (end - snap).days
+    except ValueError:
+        return -1
+
+
 def symbol_market_values(positions: list[dict[str, str]]) -> dict[str, float]:
+    """Aggregate MV by ticker from parent summary rows only (avoids lot-row double-count)."""
     mv: dict[str, float] = defaultdict(float)
     for row in positions:
-        sym = (row.get("Symbol") or "").upper()
-        if not sym:
+        if not is_position_summary_row(row):
+            continue
+        sym = position_symbol(row)
+        if not sym or not is_valid_ticker_symbol(sym):
             continue
         mv[sym] += parse_float(row.get("MarketValue"))
     return dict(mv)
@@ -209,20 +349,50 @@ def hhi(weight_pcts: list[float]) -> float:
     return round(sum((w / 100) ** 2 for w in weight_pcts), 4)
 
 
-def stale_position_facts(positions: list[dict[str, str]], symbol: str) -> dict[str, Any]:
+def stale_position_facts(
+    positions: list[dict[str, str]],
+    symbol: str,
+    period_end_ymd: str | None = None,
+) -> dict[str, Any]:
+    """Hygiene facts for a symbol at the latest snapshot on/before period end."""
+    from pc_lib.canonical import ymd_to_iso
+
     sym = symbol.upper()
-    rows = [r for r in positions if (r.get("Symbol") or "").upper() == sym]
-    if not rows:
-        return {"symbol": sym, "position_rows": 0}
-    total_mv = sum(parse_float(r.get("MarketValue")) for r in rows)
-    total_cost = sum(parse_float(r.get("CostBasis")) * parse_float(r.get("Quantity")) for r in rows)
-    total_gain = sum(parse_float(r.get("OpenNetGain")) for r in rows)
-    acquired = [r.get("DateAcquired") or "" for r in rows if r.get("DateAcquired")]
+    as_of = ymd_to_iso(period_end_ymd) if period_end_ymd else None
+    snap = latest_snapshot_date(positions, as_of) if as_of else latest_snapshot_date(positions, None)
+    if not snap:
+        return {"symbol": sym, "position_rows": 0, "snapshot_date": ""}
+    snap_rows = positions_at_snapshot(positions, snap)
+    summary_rows = [
+        r for r in snap_rows
+        if is_position_summary_row(r) and (r.get("Symbol") or position_symbol(r)).upper() == sym
+    ]
+    if not summary_rows:
+        summary_rows = [r for r in snap_rows if (r.get("Symbol") or "").upper() == sym and is_position_summary_row(r)]
+    mv_map = symbol_market_values(snap_rows)
+    total_mv = mv_map.get(sym, 0.0)
+    total_cost = sum(parse_float(r.get("CostBasis")) * parse_float(r.get("Quantity")) for r in summary_rows)
+    total_gain = sum(parse_float(r.get("OpenNetGain")) for r in summary_rows)
+    acquired = [r.get("DateAcquired") or "" for r in summary_rows if r.get("DateAcquired")]
+    earliest = min(acquired) if acquired else ""
+    days_held = -1
+    stale_flag = False
+    if earliest and snap:
+        try:
+            acq = datetime.strptime(earliest.replace("/", "-")[:10], "%m-%d-%Y")
+            snap_d = datetime.strptime(snap[:10], "%Y-%m-%d")
+            days_held = (snap_d - acq).days
+            stale_flag = days_held >= 90
+        except ValueError:
+            pass
     return {
         "symbol": sym,
-        "position_rows": len(rows),
+        "snapshot_date": snap,
+        "position_rows": len(summary_rows),
         "total_market_value": round(total_mv, 2),
         "aggregate_open_gain": round(total_gain, 2),
-        "earliest_acquired": min(acquired) if acquired else "",
+        "earliest_acquired": earliest,
+        "days_held_at_snapshot": days_held,
+        "stalePositionFlag": stale_flag,
         "return_vs_cost_pct": round((total_mv - total_cost) / total_cost * 100, 2) if total_cost else 0,
     }

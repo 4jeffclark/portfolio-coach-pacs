@@ -5,22 +5,25 @@ from __future__ import annotations
 from pc_lib.analytics import weights_table
 from pc_lib.canonical import read_csv, write_csv
 from pc_lib.cli import SkillArgs, SkillResult
-from pc_lib.skills._skill_io import skill_out, write_fragments
+from pc_lib.skills._skill_io import skill_out, write_fragments, write_rollup_lens
 
 
 def _lens(args: SkillArgs) -> str:
+    from pc_lib.skills._skill_io import resolve_rollup_lens
+
     if args.rollup_lens:
-        return args.rollup_lens
+        return args.rollup_lens.strip()
     if args.thematic is True:
         return "theme"
     if args.thematic is False:
         return "standards"
-    return "theme"
+    return resolve_rollup_lens(args)
 
 
 def run(args: SkillArgs) -> SkillResult:
     out = skill_out(args, "portfolio-weights-table")
     lens = _lens(args)
+    write_rollup_lens(args.workspace, lens)
     weights_src = args.input_dir or (args.workspace / "period-weight-reconstruction")
     sym_weights = read_csv(weights_src / "SymbolWeights.csv")
 
