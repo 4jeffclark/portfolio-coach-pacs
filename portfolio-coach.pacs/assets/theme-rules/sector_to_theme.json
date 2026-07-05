@@ -1,0 +1,17 @@
+{
+  "Fixed Income": "THEME_DEFENSIVE_FIXED_INCOME",
+  "Materials": "THEME_PRECIOUS_METALS",
+  "Real Estate": "THEME_REITS",
+  "Information Technology": "THEME_TECH_AI",
+  "Broad Market": "THEME_FACTOR_BETA",
+  "Energy": "THEME_ENERGY_COMMODITY",
+  "International": "THEME_INTERNATIONAL",
+  "Health Care": "THEME_HEALTH_DEFENSIVE",
+  "Consumer Staples": "THEME_HEALTH_DEFENSIVE",
+  "Digital Assets": "THEME_TACTICAL",
+  "Speculative": "THEME_TACTICAL",
+  "Industrials": "THEME_QUALITY_COMPOUNDERS",
+  "Financials": "THEME_QUALITY_COMPOUNDERS",
+  "Consumer Discretionary": "THEME_QUALITY_COMPOUNDERS",
+  "Communication Services": "THEME_TECH_AI"
+}

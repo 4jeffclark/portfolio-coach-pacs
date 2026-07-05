@@ -35,6 +35,8 @@ Merge into the delivered file:
 
 Embed all quantitative tables from assembly CSVs. Include composition narrative, weights, flows, thesis health, evolution, liquidity, concentration, embedded market context, overlay sections when enabled, and evaluation/interview appendices when `evaluation: true`.
 
+When `rollupLens` is `theme` or `thesis`, embed `ThemeCoverage.csv` summary and banner when `unassignedWeightPct` from skill metrics exceeds **25%**.
+
 ## Post-run verification
 
 Self-verify per [PACS post-run checklist](https://github.com/4jeffclark/pacs-workbench/blob/main/standard/post-run-checklist.md).

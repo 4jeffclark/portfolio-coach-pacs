@@ -59,6 +59,14 @@ Durable promotion target: `{userDatastore}/knowledge/holdings/HoldingsMapCurrent
 
 Required when `rollupLens` is `theme` or `thesis`. Durable targets under `{userDatastore}/knowledge/themes/`.
 
+**Inference precedence** (when durable files are absent):
+
+1. `knowledge/themes/ThemeMapCurrent.csv` — user-confirmed assignments win (`MappingSource: knowledge`)
+2. Deterministic rules in `pc-lib` — holdings layer (subclass, GICS sector), pack `assets/theme-rules/`, position-weighted coverage
+3. `THEME_UNASSIGNED` — residual bucket; target < 40% period-end MV on first inference
+
+`theme-map-inference` emits `ThemeCoverage.csv` and `InferenceLog.csv` (workspace assembly) with rule provenance per symbol.
+
 ### `ThesisRegistry.csv` / `ThesisAssignment.csv`
 
 Required when `rollupLens` is `thesis`. Durable targets under `{userDatastore}/knowledge/theses/`.

@@ -1,0 +1,5 @@
+{
+  "SPCX": {"themeId": "THEME_TACTICAL", "ruleId": "symbol_override", "confidence": "medium"},
+  "CNSWF": {"themeId": "THEME_QUALITY_COMPOUNDERS", "ruleId": "symbol_override", "confidence": "medium"},
+  "SHLD": {"themeId": "THEME_FACTOR_BETA", "ruleId": "symbol_override", "confidence": "low"}
+}

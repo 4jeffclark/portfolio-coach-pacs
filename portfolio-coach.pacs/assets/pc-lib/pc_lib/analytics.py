@@ -7,6 +7,11 @@ from datetime import datetime
 from typing import Any
 
 from pc_lib.canonical import in_period, parse_float, symbols_from_positions
+from pc_lib.reference_data import CASH_LIKE
+from pc_lib.holdings_inference import infer_holdings_map, infer_holdings_row
+from pc_lib.theme_inference import infer_theme_registry, infer_thesis_registry, theme_inference_metrics
+
+_CASH_LIKE = CASH_LIKE  # re-export for analytics consumers
 
 
 def _order_date(row: dict[str, str]) -> str:
@@ -133,129 +138,6 @@ def mapping_universe(
         if r.get("Symbol")
     }
     return sorted(pos_syms | order_syms)
-
-
-_CASH_LIKE = {"SGOV", "BIL", "SHV", "VMFXX", "SPAXX", "FDRXX", "SPRXX", "VMMXX"}
-_ETF_HINTS = {
-    "VOO": ("Equity", "US Equity", "Broad Market ETF", "IndexFactor", "invested"),
-    "SPY": ("Equity", "US Equity", "Broad Market ETF", "IndexFactor", "invested"),
-    "QQQ": ("Equity", "US Equity", "Factor ETF", "Growth", "invested"),
-    "MSFT": ("Equity", "US Equity", "Information Technology", "Growth", "invested"),
-    "AAPL": ("Equity", "US Equity", "Information Technology", "Growth", "invested"),
-    "GLD": ("Commodity", "Physical Precious Metal Trust", "Materials", "Defensive", "invested"),
-    "SGOV": ("FixedIncome", "Treasury ETF", "Utilities", "Defensive", "cash_equivalent"),
-}
-
-
-def infer_holdings_row(symbol: str, knowledge: dict[str, str] | None = None) -> dict[str, str]:
-    if knowledge:
-        return {**knowledge, "Symbol": symbol}
-    hint = _ETF_HINTS.get(symbol)
-    if hint:
-        ac, sub, sector, style, liq = hint
-        return {
-            "Symbol": symbol,
-            "AssetClass": ac,
-            "AssetSubclass": sub,
-            "GICSSector": sector,
-            "GICSIndustry": "",
-            "StyleBucket": style,
-            "LiquidityRole": liq,
-            "MappingConfidence": "medium",
-            "MappingSource": "heuristic",
-            "Notes": "",
-        }
-    return {
-        "Symbol": symbol,
-        "AssetClass": "Equity",
-        "AssetSubclass": "US Equity",
-        "GICSSector": "",
-        "GICSIndustry": "",
-        "StyleBucket": "Other",
-        "LiquidityRole": "invested",
-        "MappingConfidence": "low",
-        "MappingSource": "inferred",
-        "Notes": "requires confirmation",
-    }
-
-
-def infer_holdings_map(
-    symbols: list[str],
-    knowledge_rows: list[dict[str, str]] | None = None,
-) -> list[dict[str, str]]:
-    by_sym = {(r.get("Symbol") or "").upper(): r for r in (knowledge_rows or [])}
-    return [infer_holdings_row(s, by_sym.get(s)) for s in symbols]
-
-
-def infer_theme_registry(symbols: list[str]) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
-    themes = [
-        ("THEME_TECH", "Technology & AI", "CUSTOM", "Structural technology exposure"),
-        ("THEME_INCOME", "Income & Dividend", "CUSTOM", "Income-oriented holdings"),
-        ("THEME_LIQUIDITY", "Liquidity & Cash", "CUSTOM", "Cash and cash-equivalent sleeve"),
-        ("THEME_OTHER", "Residual / Other", "CUSTOM", "Unassigned or residual symbols"),
-    ]
-    registry = [
-        {
-            "ThemeId": tid,
-            "ThemeLabel": label,
-            "ThemeNamespace": ns,
-            "ExternalThemeCode": "",
-            "ParentThemeGroup": "",
-            "Description": desc,
-            "Status": "active",
-        }
-        for tid, label, ns, desc in themes
-    ]
-    theme_map: list[dict[str, str]] = []
-    for sym in symbols:
-        if sym in _CASH_LIKE:
-            tid = "THEME_LIQUIDITY"
-        elif sym in {"MSFT", "AAPL", "NVDA", "AMZN", "META", "GOOGL"}:
-            tid = "THEME_TECH"
-        elif sym in {"JEPQ", "JEPI", "VOO", "SPY"}:
-            tid = "THEME_INCOME"
-        else:
-            tid = "THEME_OTHER"
-        theme_map.append(
-            {
-                "Symbol": sym,
-                "ThemeId": tid,
-                "MappingConfidence": "low",
-                "PrimaryFlag": "true",
-                "Notes": "inferred — confirm",
-            }
-        )
-    return registry, theme_map
-
-
-def infer_thesis_registry(
-    symbols: list[str], theme_map: list[dict[str, str]]
-) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
-    theme_by_sym = {(r.get("Symbol") or "").upper(): r.get("ThemeId", "") for r in theme_map}
-    registry = [
-        {
-            "ThesisId": "THESIS_ACTIVE_BOOK",
-            "ThesisStatement": "Active portfolio positions under current construction thesis",
-            "ParentThemeId": "THEME_OTHER",
-            "HorizonStart": "",
-            "HorizonEnd": "",
-            "PrimaryCatalyst": "",
-            "Status": "active",
-            "Notes": "inferred placeholder",
-        }
-    ]
-    assignments = [
-        {
-            "Symbol": sym,
-            "ThesisId": "THESIS_ACTIVE_BOOK" if sym not in _CASH_LIKE else "",
-            "AssignmentConfidence": "low",
-            "PrimaryFlag": "true",
-            "Notes": "" if sym not in _CASH_LIKE else "liquidity residual",
-        }
-        for sym in symbols
-        if sym not in _CASH_LIKE
-    ]
-    return registry, assignments
 
 
 def _parse_asof(row: dict[str, str]) -> str:

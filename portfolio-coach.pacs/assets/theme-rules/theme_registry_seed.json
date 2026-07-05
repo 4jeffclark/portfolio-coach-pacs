@@ -1,0 +1,14 @@
+[
+  {"themeId": "THEME_DEFENSIVE_FIXED_INCOME", "themeLabel": "Defensive fixed income", "description": "Short-duration treasuries, TIPS, and bond ETFs"},
+  {"themeId": "THEME_PRECIOUS_METALS", "themeLabel": "Precious metals & miners", "description": "Gold, silver, platinum exposure and mining equities"},
+  {"themeId": "THEME_REITS", "themeLabel": "REITs & real assets", "description": "Real estate investment trusts and property-linked equities"},
+  {"themeId": "THEME_TECH_AI", "themeLabel": "Technology & AI", "description": "Mega-cap tech, semiconductors, software, and AI-adjacent names"},
+  {"themeId": "THEME_FACTOR_BETA", "themeLabel": "Factor & index beta", "description": "Broad market, momentum, value, and factor ETFs"},
+  {"themeId": "THEME_ENERGY_COMMODITY", "themeLabel": "Energy & commodities", "description": "Energy producers, midstream, oil, uranium, and commodity cyclicals"},
+  {"themeId": "THEME_INTERNATIONAL", "themeLabel": "International equity", "description": "Non-US and emerging market equity exposure"},
+  {"themeId": "THEME_HEALTH_DEFENSIVE", "themeLabel": "Health & defensive staples", "description": "Health care and consumer defensive names"},
+  {"themeId": "THEME_TACTICAL", "themeLabel": "Tactical & speculative", "description": "SPACs, event-driven, crypto, and high-churn tactical positions"},
+  {"themeId": "THEME_QUALITY_COMPOUNDERS", "themeLabel": "Quality compounders", "description": "Diversified quality and industrial compounders"},
+  {"themeId": "THEME_LIQUIDITY", "themeLabel": "Liquidity & cash", "description": "Cash equivalents and money-market sleeves"},
+  {"themeId": "THEME_UNASSIGNED", "themeLabel": "Needs classification", "description": "Residual symbols requiring user theme assignment"}
+]

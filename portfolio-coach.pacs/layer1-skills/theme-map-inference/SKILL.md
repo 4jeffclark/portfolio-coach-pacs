@@ -2,7 +2,7 @@
 name: theme-map-inference
 compatibility: Requires Python 3.11+ when scripts are shipped
 outputCompleteness: scaffold
-description: "Theme registry and map inference when rollupLens is theme or thesis."
+description: "Position-aware theme registry and map inference when rollupLens is theme or thesis."
 metadata:
   packId: portfolio-coach
   layer: '1'
@@ -12,26 +12,32 @@ metadata:
 
 ## Procedure
 
-1. Run `scripts/run.py` with `--datastore` and `--workspace` (plus playbook-specific flags)
-2. Read skill output CSVs and `ReportSectionFragments.json`
-3. Merge all scaffold output into the delivered report file per `contracts/report-delivery-contract.md` and the playbook output contract; extend narrative where scaffold
+1. Run `scripts/run.py` with `--datastore` and `--workspace` after `holdings-map-confirmation`
+2. Skill loads `HoldingsMap.csv`, period-end positions for MV weighting, and optional `knowledge/themes/ThemeMapCurrent.csv`
+3. Read `ThemeRegistry.csv`, `ThemeMap.csv`, `ThemeCoverage.csv`, `InferenceLog.csv`, and `Metrics.csv`
+4. Merge scaffold output into the delivered report file per output contract
 
 ## Scripts
 
 ```powershell
-python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WORKSPACE
+python scripts/run.py --datastore $env:USER_DATASTORE --workspace $env:AGENT_WORKSPACE --period-start $PERIOD_START --period-end $PERIOD_END
 ```
-
-See skill module for additional flags (`--period-start`, `--rollup-lens`, `--symbol`, etc.).
 
 ## References
 
-- `contracts/holdings-taxonomy.md` (when applicable)
+- `contracts/holdings-taxonomy.md`
+- `assets/theme-rules/` — sector and symbol override tables
+- `assets/reference/` — ETF and equity GICS seed catalogs
 
 ## Outputs
 
-TBD per legacy capability contract.
+Assembly-only under `{agentWorkspace}`:
+
+- `ThemeRegistry.csv`, `ThemeMap.csv`
+- `ThemeCoverage.csv` — theme-level MV weights
+- `InferenceLog.csv` — per-symbol rule provenance
+- `Metrics.csv` — `themeCount`, `unassignedWeightPct`, `inferenceCoveragePct`
 
 ## Used by
 
-See `layer3-playbooks/` manifests referencing this skill.
+`portfolio-composition-review` when `rollupLens` in `[theme, thesis]`
