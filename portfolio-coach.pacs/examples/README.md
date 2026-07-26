@@ -17,6 +17,7 @@
 - Account ids / masks / labels remapped to synthetic values (`900001001` / `x1001`, …)
 - Person names replaced with `DEMO` / `USER`
 - Dollar amounts and per-share prices scaled by **0.1**; share quantities unchanged
+- The `Fill` column (`qty @ price`) is scaled with the same factor as the price text inside `Description`, so `FillPrice` and Description limit prices agree (earlier demo builds scaled only `Description`, leaving `FillPrice` 10x too high)
 - Real tickers and calendar dates retained so theme/regime behavior stays realistic
 - This is **demo data**, not a real account and not financial advice
 

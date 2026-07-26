@@ -68,7 +68,10 @@ NAME_MAP = {
 }
 
 # Raw column headers whose numeric cells are money/prices (not share counts).
+# "fill" cells are "qty @ price"; _scale_money_cell scales only the price part
+# so FillPrice stays consistent with the scaled price inside Description.
 MONEY_HEADERS = {
+    "fill",
     "live account value",
     "cash avail to w/d",
     "cash bp",
@@ -218,11 +221,11 @@ def _transform_csv_text(raw_text: str) -> str:
         for i, h in enumerate(header)
         if (h or "").strip().lower() in MONEY_HEADERS
     }
-    # Description / Fill / Position free-text columns.
+    # Description / Position free-text columns (Fill is handled as money).
     text_idx = {
         i
         for i, h in enumerate(header)
-        if (h or "").strip().lower() in {"description", "fill", "position"}
+        if (h or "").strip().lower() in {"description", "position"}
     }
 
     for row in rows[2:]:

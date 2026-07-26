@@ -5,7 +5,15 @@ from __future__ import annotations
 import json
 
 from pc_lib.analytics import mapping_universe
-from pc_lib.canonical import DatastoreLayoutError, load_canonical, validate_layout, work_dir, write_csv
+from pc_lib.canonical import (
+    ACCOUNT_HISTORY_DEDUP_KEYS,
+    ORDER_DEDUP_KEYS,
+    DatastoreLayoutError,
+    load_canonical,
+    validate_layout,
+    work_dir,
+    write_csv,
+)
 from pc_lib.cli import SkillArgs, SkillResult
 from pc_lib.etrade_ingest import stage_inputs
 from pc_lib.etrade_rebuild import rebuild_canonical
@@ -76,13 +84,8 @@ def run(args: SkillArgs) -> SkillResult:
     position_rows_after = rebuild_stats.get("positionRows", len(positions_after))
     symbol_count_after = len(mapping_universe(positions_after, orders, None, None))
     symbol_count_delta = symbol_count_after - symbol_count_before
-    orders_dedup = _dedup_violations(
-        orders, ["Symbol", "Status", "Fill", "Description", "Market", "Time", "AccountId"]
-    )
-    history_dedup = _dedup_violations(
-        history,
-        ["AccountId", "ActivityDateTime", "ActivityType", "Description", "Amount", "Fee", "Commission"],
-    )
+    orders_dedup = _dedup_violations(orders, list(ORDER_DEDUP_KEYS))
+    history_dedup = _dedup_violations(history, list(ACCOUNT_HISTORY_DEDUP_KEYS))
     range_start, range_end = _available_range(args.datastore)
 
     merge_rows = staged or [{"OriginalFileName": "", "Action": "none", "Subfolder": "", "SourceHash": "", "StoredFileName": ""}]

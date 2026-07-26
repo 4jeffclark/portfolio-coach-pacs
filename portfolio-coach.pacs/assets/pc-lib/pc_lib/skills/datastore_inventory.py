@@ -7,7 +7,9 @@ from pathlib import Path
 
 from pc_lib.analytics import snapshot_dates
 from pc_lib.canonical import (
+    ACCOUNT_HISTORY_DEDUP_KEYS,
     DERIVED_CANONICAL_TABLES,
+    ORDER_DEDUP_KEYS,
     DatastoreLayoutError,
     canonical_dir,
     date_range_for_table,
@@ -330,13 +332,8 @@ def run(args: SkillArgs) -> SkillResult:
             }
         )
 
-    orders_dedup = _dedup_key_violations(
-        orders, ["Symbol", "Status", "Fill", "Description", "Market", "Time", "AccountId"]
-    )
-    history_dedup = _dedup_key_violations(
-        history,
-        ["AccountId", "ActivityDateTime", "ActivityType", "Description", "Amount", "Fee", "Commission"],
-    )
+    orders_dedup = _dedup_key_violations(orders, list(ORDER_DEDUP_KEYS))
+    history_dedup = _dedup_key_violations(history, list(ACCOUNT_HISTORY_DEDUP_KEYS))
     cash_path = canon / "cash.csv"
     manifest_rows = load_canonical(args.datastore, "ingestion_manifest.csv")
     drift_rows, drift_messages = _detect_manifest_drift(args.datastore, raw, manifest_rows)

@@ -38,6 +38,16 @@ DERIVED_CANONICAL_TABLES = (
     "income_events.csv",
 )
 
+# Fill-level identity for canonical order rows (merge dedup + validation).
+# Excludes Market: overlapping exports carry different quote snapshots ("--" vs
+# a price) for the same fill, which previously produced duplicate rows that
+# FIFO double-counted.
+ORDER_DEDUP_KEYS = ("Symbol", "Status", "Fill", "Description", "Time", "AccountId")
+
+ACCOUNT_HISTORY_DEDUP_KEYS = (
+    "AccountId", "ActivityDateTime", "ActivityType", "Description", "Amount", "Fee", "Commission",
+)
+
 
 class DatastoreLayoutError(Exception):
     """Raised when the bound userDatastore cannot be resolved to a usable layout."""

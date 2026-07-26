@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from pc_lib.canonical import (
+    ORDER_DEDUP_KEYS,
     ResolvedLayout,
     is_lot_detail_position_raw,
     is_position_summary_row,
@@ -158,15 +159,7 @@ def _parse_orders_file(path: Path, source_hash: str, stored_path: str) -> list[d
 def _merge_orders(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     keyed: dict[tuple[str, ...], dict[str, str]] = {}
     for row in rows:
-        key = (
-            row.get("Symbol", ""),
-            row.get("Status", ""),
-            row.get("Fill", ""),
-            row.get("Description", ""),
-            row.get("Market", ""),
-            row.get("Time", ""),
-            row.get("AccountId", ""),
-        )
+        key = tuple(row.get(k, "") for k in ORDER_DEDUP_KEYS)
         existing = keyed.get(key)
         if not existing or row.get("ExportedAtLocal", "") >= existing.get("ExportedAtLocal", ""):
             keyed[key] = row

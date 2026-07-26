@@ -8,6 +8,7 @@ from datetime import datetime
 from typing import Any
 
 from pc_lib.canonical import (
+    ORDER_DEDUP_KEYS,
     in_period,
     is_lot_detail_position_raw,
     is_position_summary_row,
@@ -41,6 +42,9 @@ def filled_orders(
 ) -> list[dict[str, str]]:
     sym = symbol.upper().strip() if symbol else None
     out: list[dict[str, str]] = []
+    # Defensive fill-level dedupe: canonical stores rebuilt before the merge
+    # key dropped Market may still carry duplicate rows for the same fill.
+    seen: set[tuple[str, ...]] = set()
     for row in orders:
         if not _is_filled(row):
             continue
@@ -50,6 +54,11 @@ def filled_orders(
         if period_start or period_end:
             if not in_period(d, period_start, period_end):
                 continue
+        key = tuple(row.get(k, "") for k in ORDER_DEDUP_KEYS)
+        if any(key):
+            if key in seen:
+                continue
+            seen.add(key)
         out.append(row)
     return out
 
@@ -159,9 +168,8 @@ def activity_metrics(orders: list[dict[str, str]]) -> dict[str, Any]:
     }
 
 
-def symbol_metrics(orders: list[dict[str, str]], symbol: str) -> dict[str, Any]:
-    sym = symbol.upper()
-    filled = filled_orders(orders, symbol=sym)
+def _fill_metrics(filled: list[dict[str, str]]) -> dict[str, Any]:
+    """Trading metrics (including FIFO realized P&L) over a fill list."""
     buys = [r for r in filled if order_side(r) == "buy"]
     sells = [r for r in filled if order_side(r) == "sell"]
     shares_bought = sum(parse_float(r.get("FillQuantity")) for r in buys)
@@ -192,7 +200,7 @@ def symbol_metrics(orders: list[dict[str, str]], symbol: str) -> dict[str, Any]:
     ending = sum(q for q, _ in lots)
     max_shares = max((sum(parse_float(r.get("FillQuantity")) for r in buys[: i + 1]) for i in range(len(buys))), default=0)
     return {
-        f"{sym}_order_records": len(filled),
+        "order_records": len(filled),
         "shares_bought": round(shares_bought, 4),
         "shares_sold": round(shares_sold, 4),
         "ending_shares": round(ending, 4),
@@ -204,6 +212,32 @@ def symbol_metrics(orders: list[dict[str, str]], symbol: str) -> dict[str, Any]:
         "last_fill": times[-1] if times else "",
         "max_shares_bought_cumulative": round(max_shares, 4),
     }
+
+
+def symbol_metrics(
+    orders: list[dict[str, str]],
+    symbol: str,
+    period_start: str | None = None,
+    period_end: str | None = None,
+) -> dict[str, Any]:
+    """Symbol trading metrics with explicit lifetime/period scope.
+
+    Every metric key carries a ``_lifetime`` suffix (full order history) or a
+    ``_period`` suffix (fills inside the analysis window only, emitted when a
+    window is supplied). Period FIFO consumes only in-window fills, so it is
+    the trade-review number; lifetime FIFO spans the whole datastore history.
+    """
+    sym = symbol.upper()
+    lifetime = _fill_metrics(filled_orders(orders, symbol=sym))
+    out: dict[str, Any] = {f"{sym}_order_records": lifetime["order_records"]}
+    for key, val in lifetime.items():
+        if key != "order_records":
+            out[f"{key}_lifetime"] = val
+    if period_start or period_end:
+        period = _fill_metrics(filled_orders(orders, period_start, period_end, symbol=sym))
+        for key, val in period.items():
+            out[f"{key}_period"] = val
+    return out
 
 
 def mapping_universe(

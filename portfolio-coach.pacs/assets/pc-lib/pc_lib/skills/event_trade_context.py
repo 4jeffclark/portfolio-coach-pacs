@@ -16,7 +16,7 @@ def run(args: SkillArgs) -> SkillResult:
     event = args.event_type or "event"
     orders = load_canonical(args.datastore, "orders.csv")
     period_filled = filled_orders(orders, args.period_start, args.period_end, symbol=sym)
-    metrics = symbol_metrics(orders, sym)
+    metrics = symbol_metrics(orders, sym, args.period_start, args.period_end)
     metrics["event_type"] = event
     metrics["analysis_period_start"] = args.period_start or ""
     metrics["analysis_period_end"] = args.period_end or ""

@@ -386,10 +386,14 @@ Symbol
 Status
 Fill
 Description
-Market
 Time
 AccountId
 ```
+
+`Market` is deliberately excluded from the key: it is a quote snapshot taken at
+export time, so overlapping exports carry different values (for example `--`
+versus a price) for the same fill. Including it produces duplicate canonical
+rows that double-count in FIFO P&L and share aggregation.
 
 ### `positions_lot_level.csv`
 
@@ -477,7 +481,7 @@ Canonical rebuild is a full re-derivation, not an in-place patch. Derived tables
 
 | Export type | Merge behavior | Dedup key | Prefer on conflict |
 |---|---|---|---|
-| `orders` | Union all raw order exports | `Symbol`, `Status`, `Fill`, `Description`, `Market`, `Time`, `AccountId` | Row from the export with the later `ExportedAtLocal` |
+| `orders` | Union all raw order exports | `Symbol`, `Status`, `Fill`, `Description`, `Time`, `AccountId` (`Market` excluded — quote snapshot varies across exports) | Row from the export with the later `ExportedAtLocal` |
 | `account_history` | Union all account-specific history exports | `AccountId`, `ActivityDateTime`, `ActivityType`, `Description`, `Amount`, `Fee`, `Commission` | Row from the export with the later `ExportedAtLocal` |
 | `balances` | Keep every snapshot | none — snapshots coexist | n/a |
 | `portfolio_lot_level` | Keep every snapshot | none — snapshots coexist by `AsOfLocal` | n/a |
