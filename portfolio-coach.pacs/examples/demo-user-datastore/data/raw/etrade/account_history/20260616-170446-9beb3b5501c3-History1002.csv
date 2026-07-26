@@ -1,0 +1,23 @@
+"900001002, as of 06/16/26 at 07:59 PM EST"
+Date / Time,Type,Account #,Account Name,Description,Fee,Comm,Amount
+ 06/16/2026 10:32:01 AM,Sold,900001002,Individual Brokerage - x1002,1 of GDE @ $6.569,--,$0,$6.568
+ 06/04/2026 03:00:00 AM,Transfer,900001002,Individual Brokerage - x1002,TRNSFR CASH TO MARGIN,--,$0,$5.127
+ 06/04/2026 03:00:00 AM,Transfer,900001002,Individual Brokerage - x1002,TRNSFR CASH TO MARGIN,--,$0,-$5.127
+ 06/04/2026 03:00:00 AM,Sweep,900001002,Individual Brokerage - x1002,BANK DEPOSIT PROGRAM,--,$0,$5.127
+ 06/03/2026 10:07:32 AM,Bought,900001002,Individual Brokerage - x1002,1 of LITE @ $96.9 (Order # 6156),--,$0,-$96.9
+ 06/03/2026 10:07:17 AM,Sold,900001002,Individual Brokerage - x1002,10 of GDE @ $6.803 (Order # 9742),--,$0.002,$68.028
+ 06/03/2026 10:06:55 AM,Sold,900001002,Individual Brokerage - x1002,3 of GDE @ $6.804 (Order # 4403),--,$0.001,$20.41
+ 06/02/2026 03:00:00 AM,Transfer,900001002,Individual Brokerage - x1002,TRNSFR MARGIN TO CASH,--,$0,-$5.127
+ 06/02/2026 03:00:00 AM,Transfer,900001002,Individual Brokerage - x1002,TRNSFR MARGIN TO CASH,--,$0,$5.127
+ 06/02/2026 03:00:00 AM,Sweep,900001002,Individual Brokerage - x1002,BANK DEPOSIT PROGRAM,--,$0,-$5.127
+ 06/01/2026 04:00:01 PM,Sold,900001002,Individual Brokerage - x1002,1 of AVGO @ $45.997 (Order # 3275),--,$0.001,$45.996
+ 06/01/2026 12:17:28 PM,Bought,900001002,Individual Brokerage - x1002,10 of GDE @ $6.849 (Order # 1523),--,$0,-$68.49
+ 06/01/2026 10:36:41 AM,Sold,900001002,Individual Brokerage - x1002,1 of AVGO @ $45.678 (Order # 9444),--,$0.001,$45.677
+ 05/29/2026 03:00:00 AM,Margin Interest,900001002,Individual Brokerage - x1002,Thru 05/31/26 for 15 days,--,$0,-$0.281
+ 05/22/2026 10:04:03 AM,Sold,900001002,Individual Brokerage - x1002,2 of PLTR @ $13.677 (Order # 9693),--,$0.001,$27.352
+ 05/22/2026 10:03:13 AM,Sold,900001002,Individual Brokerage - x1002,2 of BE @ $31.2 (Order # 4119),--,$0.002,$62.398
+ 05/21/2026 03:00:00 AM,Transfer,900001002,Individual Brokerage - x1002,TRNSFR CASH TO MARGIN,--,$0,$9.629
+ 05/21/2026 03:00:00 AM,Transfer,900001002,Individual Brokerage - x1002,TRNSFR CASH TO MARGIN,--,$0,-$9.629
+ 05/21/2026 03:00:00 AM,Sweep,900001002,Individual Brokerage - x1002,BANK DEPOSIT PROGRAM,--,$0,$9.629
+ 05/20/2026 04:00:02 PM,Sold,900001002,Individual Brokerage - x1002,2 of BE @ $28.231 (Order # 5371),--,$0.002,$56.46
+ 05/20/2026 04:00:01 PM,Bought,900001002,Individual Brokerage - x1002,2 of LITE @ $86.807 (Order # 1322),--,$0,-$173.614

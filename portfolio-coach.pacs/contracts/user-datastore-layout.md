@@ -65,6 +65,10 @@ Domains: `holdings/`, `themes/`, `theses/`, `policies/`, `market/`, `reports/`, 
 
 `{userDatastore}/inputs/` — optional session attachments pending merge.
 
+## Example datastore
+
+An anonymized quickstart tree ships at [`../examples/demo-user-datastore/`](../examples/demo-user-datastore/) (standard layout). See [`../examples/README.md`](../examples/README.md) for bind instructions and regenerate notes.
+
 ## Post-run verification
 
 Self-verify report folders per [PACS post-run checklist](https://github.com/4jeffclark/pacs-workbench/blob/main/standard/post-run-checklist.md).

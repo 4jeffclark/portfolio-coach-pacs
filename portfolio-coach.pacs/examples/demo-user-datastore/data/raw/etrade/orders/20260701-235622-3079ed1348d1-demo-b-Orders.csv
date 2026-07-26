@@ -1,0 +1,598 @@
+"Account 900001004 Orders, as of 07/01/26 at 07:33 PM EST"
+Symbol,Status,Fill,Description,Market,Time,Account
+VGSH,Open,--,Sell 1005 Shares @ 5.827 Limit GTC to Close,5.801,"06/30/2026, 11:58:36 AM",900001004
+SPCX,Open,--,Sell 25 Shares @ 21.399 Limit GTC to Close,15.766,"06/17/2026, 10:22:50 AM",900001004
+AMZN,Open,--,Sell 25 Shares @ 26.999 Limit GTC to Close,24.213,"06/03/2026, 6:30:14 AM",900001004
+GDE,Open,--,Sell 25 Shares @ 7.123 Limit GTC to Close,5.948,"05/11/2026, 6:37:34 AM",900001004
+GRNY,Open,--,Sell 100 Shares @ 2.789 Limit GTC to Close,2.765,"05/11/2026, 6:37:33 AM",900001004
+GM,Filled,40 @ 76.30,Buy 40 Shares @ Market to Open,7.576,"06/30/2026, 11:59:39 AM",900001004
+VTI,Filled,7 @ 369.35,Sell 7 Shares @ Market to Close,36.901,"06/30/2026, 11:53:59 AM",900001004
+MSFT,Filled,15 @ 368.50,Buy 15 Shares @ Market to Open,38.39,"06/29/2026, 3:56:06 PM",900001004
+AMZN,Filled,25 @ 240.18,Sell 25 Shares @ Market to Close,24.213,"06/29/2026, 3:53:57 PM",900001004
+VGSH,Filled,120 @ 58.26,Buy 120 Shares @ Market to Open,5.804,"06/26/2026, 1:24:44 PM",900001004
+IBIT,Filled,200 @ 33.99,Sell 200 Shares @ Market to Close,3.411,"06/26/2026, 1:23:44 PM",900001004
+SPMO,Filled,15 @ 156.59,Buy 15 Shares @ Market to Open,15.567,"06/26/2026, 1:22:38 PM",900001004
+EWY,Filled,20 @ 201.16,Buy 20 Shares @ Market to Open,18.638,"06/26/2026, 1:22:05 PM",900001004
+GDE,Filled,35 @ 60.96,Sell 35 Shares @ Market to Close,5.948,"06/26/2026, 1:21:07 PM",900001004
+IBIT,Filled,400 @ 34.43,Buy 400 Shares @ 3.443 Limit GTC to Open,3.415,"06/24/2026, 10:20:32 AM",900001004
+IBIT,Filled,400 @ 34.56,Buy 400 Shares @ 3.456 Limit GTC to Open,3.415,"06/24/2026, 10:13:20 AM",900001004
+GDMN,Filled,150 @ 71.00,Buy 150 Shares @ 7.456 Limit GTC to Open,7.262,"06/24/2026, 9:30:01 AM",900001004
+BE,Filled,3 @ 304.99,Sell 3 Shares @ 30.499 Limit GTC to Close,29.51,"06/18/2026, 9:31:33 AM",900001004
+BE,Filled,10 @ 303.33,Sell 10 Shares @ 30.333 Limit GTC to Close,29.51,"06/18/2026, 9:31:29 AM",900001004
+AMZN,Filled,10 @ 242.29,Buy 10 Shares @ Market to Open,24.23,"06/17/2026, 10:27:57 AM",900001004
+GDE,Filled,25 @ 66.14,Sell 25 Shares @ Market to Close,5.948,"06/17/2026, 10:27:20 AM",900001004
+MSFT,Filled,10 @ 387.65,Buy 10 Shares @ Market to Open,38.39,"06/17/2026, 10:24:56 AM",900001004
+GDMN,Filled,50 @ 90.54,Sell 50 Shares @ Market to Close,6.969,"06/17/2026, 10:23:32 AM",900001004
+SPCX,Filled,50 @ 195.67,Buy 50 Shares @ 19.567 Limit to Open,15.795,"06/17/2026, 10:18:48 AM",900001004
+IFRA,Filled,25 @ 62.32,Sell 25 Shares @ Market to Close,6.15,"06/17/2026, 10:13:35 AM",900001004
+SPMO,Filled,23 @ 156.61,Sell 23 Shares @ Market to Close,15.52,"06/17/2026, 10:12:32 AM",900001004
+EMEQ,Filled,25 @ 72.04,Sell 25 Shares @ Market to Close,6.7,"06/17/2026, 10:11:59 AM",900001004
+BE,Filled,7 @ 291.10,Sell 7 Shares @ Market to Close,29.51,"06/17/2026, 10:10:54 AM",900001004
+SPCX,Filled,25 @ 193.81,Buy 25 Shares @ 19.567 Limit to Open,15.795,"06/17/2026, 10:04:40 AM",900001004
+IAUM,Filled,125 @ 43.07,Buy 125 Shares @ Market CLO to Open,4.024,"06/15/2026, 4:00:00 PM",900001004
+GDMN,Filled,50 @ 88.22,Sell 50 Shares @ 8.822 Limit to Close,6.969,"06/15/2026, 10:02:01 AM",900001004
+VGSH,Filled,175 @ 58.23,Buy 175 Shares @ Market to Open,5.804,"06/15/2026, 10:00:43 AM",900001004
+VTI,Expired,--,Buy 10 Shares @ 33.333 Limit GTC to Open,36.928,"06/15/2026, 6:30:17 AM",900001004
+GDMN,Filled,150 @ 80.59,Buy 150 Shares @ Market to Open,7.262,"06/12/2026, 11:27:43 AM",900001004
+SPMO,Filled,127 @ 151.95,Sell 127 Shares @ Market to Close,15.52,"06/12/2026, 10:42:05 AM",900001004
+GDMN,Canceled,--,Sell 35 Shares @ 10.999 Limit GTC to Close,6.969,"06/12/2026, 10:13:46 AM",900001004
+GDMN,Filled,35 @ 79.14,Sell 35 Shares @ Market to Close,6.969,"06/12/2026, 10:13:45 AM",900001004
+GDMN,Filled,30 @ 79.05,Sell 30 Shares @ 7.898 Limit to Close,6.969,"06/12/2026, 10:13:19 AM",900001004
+GDMN,Filled,15 @ 79.24,Sell 15 Shares @ Market to Close,6.969,"06/12/2026, 10:13:05 AM",900001004
+SPMO,Filled,71 @ 152.88,Sell 71 Shares @ Market to Close,15.52,"06/12/2026, 10:10:49 AM",900001004
+GDMN,Filled,250 @ 79.11,Buy 250 Shares @ Market to Open,7.262,"06/12/2026, 9:35:41 AM",900001004
+SPMO,Filled,221 @ 150.29,Buy 221 Shares @ 15.029 Limit to Open,15.567,"06/12/2026, 9:30:35 AM",900001004
+GRNJ,Filled,175 @ 31.12,Sell 175 Shares @ Market CLO to Close,3.077,"06/11/2026, 4:00:04 PM",900001004
+EWY,Filled,10 @ 198.94,Sell 10 Shares @ Market CLO to Close,18.55,"06/11/2026, 4:00:03 PM",900001004
+GM,Filled,35 @ 80.85,Buy 35 Shares @ Market CLO to Open,7.576,"06/11/2026, 4:00:03 PM",900001004
+GDE,Filled,140 @ 63.15,Sell 140 Shares @ Market CLO to Close,5.948,"06/11/2026, 4:00:03 PM",900001004
+EWY,Filled,15 @ 198.94,Sell 15 Shares @ Market CLO to Close,18.55,"06/11/2026, 4:00:03 PM",900001004
+MSFT,Filled,10 @ 390.34,Buy 10 Shares @ Market CLO to Open,38.39,"06/11/2026, 4:00:02 PM",900001004
+COPJ,Filled,25 @ 40.87,Sell 25 Shares @ Market CLO to Close,3.7,"06/11/2026, 4:00:02 PM",900001004
+GDMN,Filled,40 @ 78.45,Sell 40 Shares @ Market CLO to Close,6.969,"06/11/2026, 4:00:02 PM",900001004
+IAUM,Filled,75 @ 41.92,Sell 75 Shares @ Market CLO to Close,--,"06/11/2026, 4:00:01 PM",900001004
+IAUM,Filled,45 @ 41.92,Sell 45 Shares @ Market CLO to Close,--,"06/11/2026, 4:00:01 PM",900001004
+GRNJ,Filled,150 @ 31.12,Sell 150 Shares @ Market CLO to Close,--,"06/11/2026, 4:00:01 PM",900001004
+BRK.B,Filled,20 @ 482.18,Buy 20 Shares @ Market to Open,--,"06/11/2026, 10:29:51 AM",900001004
+EMEQ,Filled,50 @ 64.38,Sell 50 Shares @ Market to Close,--,"06/11/2026, 10:27:41 AM",900001004
+EAT,Filled,15 @ 153.45,Sell 15 Shares @ 15.345 Limit to Close,--,"06/11/2026, 10:09:38 AM",900001004
+EWY,Filled,20 @ 188.15,Buy 20 Shares @ Market to Open,--,"06/11/2026, 10:07:53 AM",900001004
+AMZN,Filled,9 @ 237.88,Buy 9 Shares @ Market to Open,--,"06/11/2026, 10:06:21 AM",900001004
+SHLD,Filled,50 @ 63.77,Sell 50 Shares @ Market to Close,--,"06/11/2026, 10:05:34 AM",900001004
+VGSH,Filled,800 @ 58.11,Buy 800 Shares @ Market to Open,--,"06/11/2026, 10:04:35 AM",900001004
+SHLD,Filled,15 @ 63.73,Sell 15 Shares @ Market to Close,--,"06/11/2026, 10:03:27 AM",900001004
+SPMO,Filled,25 @ 147.33,Sell 25 Shares @ Market to Close,--,"06/11/2026, 10:02:56 AM",900001004
+GRNY,Filled,200 @ 26.66,Sell 200 Shares @ Market to Close,--,"06/11/2026, 10:02:34 AM",900001004
+GRNY,Canceled,--,Sell 300 Shares @ 2.799 Limit GTC to Close,--,"06/11/2026, 10:02:15 AM",900001004
+GRNY,Filled,50 @ 26.66,Sell 50 Shares @ Market to Close,--,"06/11/2026, 10:01:44 AM",900001004
+AMZN,Filled,20 @ 237.87,Sell 20 Shares @ Market to Close,--,"06/11/2026, 10:01:03 AM",900001004
+SHLD,Filled,30 @ 63.84,Sell 30 Shares @ Market to Close,--,"06/11/2026, 9:59:24 AM",900001004
+LITE,Filled,5 @ 877.51,Sell 5 Shares @ Market to Close,--,"06/11/2026, 9:58:06 AM",900001004
+BE,Filled,23 @ 243.66,Sell 23 Shares @ Market to Close,--,"06/11/2026, 9:57:49 AM",900001004
+STRL,Filled,5 @ 817.99,Sell 5 Shares @ 81.799 Limit to Close,--,"06/11/2026, 9:56:57 AM",900001004
+CRDO,Filled,10 @ 258.50,Sell 10 Shares @ Market to Close,--,"06/11/2026, 9:56:20 AM",900001004
+IAUM,Filled,100 @ 40.60,Buy 100 Shares @ Market to Open,--,"06/11/2026, 9:30:10 AM",900001004
+IBIT,Canceled,--,Buy 600 Shares @ 3.443 Limit GTC to Open,--,"06/11/2026, 9:23:46 AM",900001004
+AMZN,Filled,10 @ 238.00,Sell 10 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:03 PM",900001004
+EMEQ,Filled,40 @ 62.15,Sell 40 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:03 PM",900001004
+LITE,Filled,13 @ 853.26,Sell 13 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:03 PM",900001004
+CRDO,Filled,62 @ 237.68,Sell 62 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:03 PM",900001004
+PLTR,Filled,20 @ 130.21,Sell 20 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:02 PM",900001004
+EWY,Filled,15 @ 178.45,Sell 15 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:02 PM",900001004
+GRNJ,Filled,400 @ 29.82,Sell 400 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:02 PM",900001004
+VOOV,Filled,10 @ 217.03,Sell 10 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:01 PM",900001004
+CGDV,Filled,240 @ 47.27,Sell 240 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:01 PM",900001004
+SNDK,Filled,1 @ 1643.23,Sell 1 Share @ Market CLO to Close,--,"06/10/2026, 4:00:01 PM",900001004
+SPMO,Filled,50 @ 143.68,Sell 50 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:01 PM",900001004
+IWM,Filled,25 @ 282.05,Sell 25 Shares @ Market CLO to Close,--,"06/10/2026, 4:00:01 PM",900001004
+SNDK,Canceled,--,Sell 1 Share @ Market CLO to Close,--,"06/10/2026, 10:13:46 AM",900001004
+EMEQ,Canceled,--,Sell 40 Shares @ 7.654 Limit GTC to Close,--,"06/10/2026, 10:12:21 AM",900001004
+VGSH,Filled,150 @ 58.11,Buy 150 Shares @ Market to Open,--,"06/10/2026, 10:10:10 AM",900001004
+BE,Filled,5 @ 287.32,Buy 5 Shares @ Market CLO to Open,--,"06/03/2026, 4:00:06 PM",900001004
+EAT,Filled,25 @ 140.26,Sell 25 Shares @ Market CLO to Close,--,"06/03/2026, 4:00:06 PM",900001004
+VGSH,Filled,30 @ 58.11,Buy 30 Shares @ Market CLO to Open,--,"06/03/2026, 4:00:03 PM",900001004
+CRDO,Filled,12 @ 214.60,Buy 12 Shares @ Market CLO to Open,--,"06/03/2026, 4:00:03 PM",900001004
+LITE,Filled,5 @ 938.00,Buy 5 Shares @ Market CLO to Open,--,"06/03/2026, 4:00:03 PM",900001004
+PLTR,Filled,35 @ 142.20,Buy 35 Shares @ Market CLO to Open,--,"06/03/2026, 4:00:03 PM",900001004
+CRDO,Filled,25 @ 214.60,Buy 25 Shares @ Market CLO to Open,--,"06/03/2026, 4:00:03 PM",900001004
+MU,Filled,5 @ 1079.57,Sell 5 Shares @ Market CLO to Close,--,"06/03/2026, 4:00:03 PM",900001004
+VOOV,Filled,4 @ 219.72,Buy 4 Shares @ Market to Open,--,"06/03/2026, 12:26:13 PM",900001004
+IFRA,Filled,40 @ 61.58,Sell 40 Shares @ Market to Close,--,"06/03/2026, 12:25:04 PM",900001004
+EAT,Filled,10 @ 139.23,Sell 10 Shares @ Market to Close,--,"06/03/2026, 12:23:35 PM",900001004
+SPMO,Filled,25 @ 155.06,Sell 25 Shares @ Market to Close,--,"06/03/2026, 12:22:39 PM",900001004
+BRK.B,Filled,3 @ 473.66,Sell 3 Shares @ Market to Close,--,"06/03/2026, 12:22:04 PM",900001004
+VGSH,Filled,30 @ 58.09,Buy 30 Shares @ Market to Open,--,"06/03/2026, 12:21:18 PM",900001004
+SNDK,Filled,2 @ 1796.58,Sell 2 Shares @ Market to Close,--,"06/03/2026, 12:18:51 PM",900001004
+COPJ,Filled,25 @ 45.40,Buy 25 Shares @ Market to Open,--,"06/03/2026, 12:17:53 PM",900001004
+MU,Filled,5 @ 1067.05,Sell 5 Shares @ Market to Close,--,"06/03/2026, 12:16:58 PM",900001004
+MU,Canceled,--,Sell 5 Shares @ 108.91 Limit GTC to Close,--,"06/03/2026, 12:16:56 PM",900001004
+IAUM,Filled,100 @ 44.23,Buy 100 Shares @ Market to Open,--,"06/03/2026, 12:14:19 PM",900001004
+VT,Filled,25 @ 158.17,Buy 25 Shares @ Market to Open,--,"06/03/2026, 12:13:59 PM",900001004
+VOOV,Filled,15 @ 219.89,Buy 15 Shares @ Market to Open,--,"06/03/2026, 12:13:07 PM",900001004
+TTMI,Filled,20 @ 186.93,Sell 20 Shares @ Market to Close,--,"06/03/2026, 12:11:07 PM",900001004
+TTMI,Filled,10 @ 186.83,Sell 10 Shares @ Market to Close,--,"06/03/2026, 12:10:50 PM",900001004
+SNDK,Filled,2 @ 1792.47,Sell 2 Shares @ Market to Close,--,"06/03/2026, 12:10:30 PM",900001004
+SNDK,Filled,1 @ 1791.03,Sell 1 Share @ Market to Close,--,"06/03/2026, 12:10:12 PM",900001004
+STRL,Filled,5 @ 953.67,Sell 5 Shares @ Market to Close,--,"06/03/2026, 12:09:50 PM",900001004
+MSFT,Filled,25 @ 426.63,Buy 25 Shares @ Market to Open,--,"06/03/2026, 12:09:26 PM",900001004
+AMZN,Filled,25 @ 250.10,Buy 25 Shares @ Market to Open,--,"06/03/2026, 12:08:55 PM",900001004
+LITE,Filled,5 @ 1039.99,Sell 5 Shares @ 103.999 Limit GTC to Close,--,"06/03/2026, 9:30:35 AM",900001004
+STRL,Filled,1 @ 880.00,Sell 1 Share @ Market to Close,--,"06/03/2026, 9:30:24 AM",900001004
+TTMI,Filled,10 @ 181.23,Sell 10 Shares @ 18.123 Limit GTC to Close,--,"06/03/2026, 9:30:24 AM",900001004
+CRDO,Filled,7 @ 231.09,Sell 7 Shares @ 22.678 Limit GTC to Close,--,"06/03/2026, 9:30:23 AM",900001004
+LITE,Filled,5 @ 1033.33,Sell 5 Shares @ 103.333 Limit GTC to Close,--,"06/03/2026, 9:30:07 AM",900001004
+LITE,Filled,4 @ 1032.10,Sell 4 Shares @ 103.21 Limit GTC to Close,--,"06/03/2026, 9:30:07 AM",900001004
+EWY,Filled,5 @ 205.96,Buy 5 Shares @ Market to Open,--,"05/29/2026, 3:43:06 PM",900001004
+AMZN,Filled,15 @ 271.08,Buy 15 Shares @ 27.108 Limit to Open,--,"05/29/2026, 3:42:11 PM",900001004
+LITE,Filled,4 @ 841.56,Buy 4 Shares @ 84.168 Limit to Open,--,"05/29/2026, 3:41:44 PM",900001004
+GRNJ,Filled,200 @ 31.94,Sell 200 Shares @ Market to Close,--,"05/29/2026, 3:40:51 PM",900001004
+VT,Filled,15 @ 158.21,Sell 15 Shares @ Market to Close,--,"05/29/2026, 3:40:18 PM",900001004
+EMEQ,Filled,50 @ 67.77,Buy 50 Shares @ Market to Open,--,"05/29/2026, 3:39:32 PM",900001004
+BRK.B,Filled,3 @ 476.08,Buy 3 Shares @ Market to Open,--,"05/29/2026, 3:39:04 PM",900001004
+AMZN,Filled,7 @ 271.25,Buy 7 Shares @ Market to Open,--,"05/29/2026, 3:38:41 PM",900001004
+GM,Filled,25 @ 83.44,Buy 25 Shares @ Market to Open,--,"05/29/2026, 3:38:14 PM",900001004
+VTI,Filled,15 @ 372.81,Sell 15 Shares @ Market to Close,--,"05/29/2026, 3:37:50 PM",900001004
+BE,Filled,7 @ 278.70,Buy 7 Shares @ Market to Open,--,"05/29/2026, 3:37:20 PM",900001004
+TTMI,Filled,10 @ 175.80,Buy 10 Shares @ Market to Open,--,"05/29/2026, 3:37:00 PM",900001004
+CRDO,Filled,20 @ 231.51,Sell 20 Shares @ Market to Close,--,"05/29/2026, 3:36:05 PM",900001004
+PLTR,Filled,15 @ 156.61,Sell 15 Shares @ Market to Close,--,"05/29/2026, 3:35:43 PM",900001004
+STRL,Filled,1 @ 779.39,Buy 1 Share @ Market to Open,--,"05/27/2026, 10:46:13 AM",900001004
+IAUM,Filled,75 @ 44.27,Buy 75 Shares @ Market to Open,--,"05/27/2026, 10:45:42 AM",900001004
+SPMO,Filled,25 @ 148.80,Buy 25 Shares @ Market to Open,--,"05/27/2026, 10:44:45 AM",900001004
+EWY,Filled,10 @ 197.03,Buy 10 Shares @ Market to Open,--,"05/27/2026, 10:44:25 AM",900001004
+INCY,Filled,30 @ 98.16,Sell 30 Shares @ Market to Close,--,"05/27/2026, 10:43:07 AM",900001004
+BE,Filled,10 @ 291.98,Buy 10 Shares @ Market to Open,--,"05/27/2026, 10:42:27 AM",900001004
+TTMI,Filled,20 @ 181.53,Buy 20 Shares @ Market to Open,--,"05/27/2026, 10:42:00 AM",900001004
+MU,Filled,2 @ 895.88,Sell 2 Shares @ Market CLO to Close,--,"05/26/2026, 4:00:03 PM",900001004
+MU,Filled,5 @ 895.88,Sell 5 Shares @ Market CLO to Close,--,"05/26/2026, 4:00:03 PM",900001004
+COPJ,Filled,50 @ 44.35,Sell 50 Shares @ Market CLO to Close,--,"05/26/2026, 4:00:02 PM",900001004
+SNDK,Filled,3 @ 1589.55,Sell 3 Shares @ Market CLO to Close,--,"05/26/2026, 4:00:01 PM",900001004
+PLTR,Filled,15 @ 136.60,Buy 15 Shares @ Market CLO to Open,--,"05/26/2026, 4:00:01 PM",900001004
+VOOV,Filled,4 @ 219.91,Buy 4 Shares @ 21.992 Limit to Open,--,"05/26/2026, 3:13:50 PM",900001004
+LITE,Filled,3 @ 905.48,Buy 3 Shares @ Market to Open,--,"05/26/2026, 3:13:10 PM",900001004
+AMZN,Filled,15 @ 263.17,Buy 15 Shares @ Market to Open,--,"05/26/2026, 3:12:45 PM",900001004
+GM,Filled,15 @ 79.53,Sell 15 Shares @ Market to Close,--,"05/26/2026, 3:12:03 PM",900001004
+GRNJ,Filled,200 @ 31.29,Sell 200 Shares @ Market to Close,--,"05/26/2026, 3:11:24 PM",900001004
+BE,Filled,7 @ 302.40,Buy 7 Shares @ Market to Open,--,"05/26/2026, 3:08:04 PM",900001004
+EWY,Filled,7 @ 200.15,Sell 7 Shares @ Market to Close,--,"05/26/2026, 3:07:15 PM",900001004
+TTMI,Filled,15 @ 196.93,Sell 15 Shares @ Market to Close,--,"05/26/2026, 3:03:18 PM",900001004
+GDMN,Canceled,--,Sell 40 Shares @ Market CLO to Close,--,"05/26/2026, 2:54:04 PM",900001004
+IAUM,Canceled,--,Sell 45 Shares @ Market CLO to Close,--,"05/26/2026, 2:53:50 PM",900001004
+EAT,Canceled,--,Sell 50 Shares @ Market CLO to Close,--,"05/26/2026, 2:53:35 PM",900001004
+EWY,Filled,7 @ 182.03,Buy 7 Shares @ Market CLO to Open,--,"05/22/2026, 4:00:01 PM",900001004
+BE,Filled,2 @ 303.39,Buy 2 Shares @ Market to Open,--,"05/22/2026, 3:29:29 PM",900001004
+GDE,Filled,35 @ 67.92,Buy 35 Shares @ 6.808 Limit to Open,--,"05/22/2026, 3:28:54 PM",900001004
+SNDK,Filled,3 @ 1493.79,Buy 3 Shares @ Market to Open,--,"05/22/2026, 3:25:37 PM",900001004
+TTMI,Filled,50 @ 173.99,Sell 50 Shares @ 17.399 Limit GTC to Close,--,"05/21/2026, 9:44:46 AM",900001004
+TTMI,Canceled,--,Sell 25 Shares @ Market CLO to Close,--,"05/20/2026, 3:41:56 PM",900001004
+SNDK,Filled,2 @ 1382.34,Buy 2 Shares @ Market to Open,--,"05/20/2026, 10:28:11 AM",900001004
+CRDO,Filled,15 @ 179.24,Sell 15 Shares @ Market to Close,--,"05/20/2026, 10:27:21 AM",900001004
+GRNJ,Filled,50 @ 30.42,Buy 50 Shares @ Market to Open,--,"05/15/2026, 10:51:23 AM",900001004
+GRNY,Filled,50 @ 26.83,Buy 50 Shares @ Market to Open,--,"05/15/2026, 10:50:56 AM",900001004
+EWY,Filled,15 @ 178.91,Buy 15 Shares @ Market to Open,--,"05/15/2026, 10:50:27 AM",900001004
+BE,Filled,7 @ 280.22,Buy 7 Shares @ Market to Open,--,"05/15/2026, 10:49:07 AM",900001004
+EMEQ,Filled,90 @ 62.27,Buy 90 Shares @ Market to Open,--,"05/15/2026, 10:48:22 AM",900001004
+VOOV,Filled,13 @ 216.42,Sell 13 Shares @ Market to Close,--,"05/15/2026, 10:47:43 AM",900001004
+VTIP,Filled,100 @ 50.37,Sell 100 Shares @ Market to Close,--,"05/15/2026, 10:46:52 AM",900001004
+SNDK,Filled,2 @ 1383.37,Sell 2 Shares @ Market to Close,--,"05/15/2026, 10:46:33 AM",900001004
+BRK.B,Filled,7 @ 485.99,Sell 7 Shares @ Market to Close,--,"05/15/2026, 10:45:54 AM",900001004
+BE,Filled,2 @ 280.69,Buy 2 Shares @ Market CLO to Open,--,"05/12/2026, 4:00:06 PM",900001004
+CRDO,Filled,20 @ 198.57,Buy 20 Shares @ Market CLO to Open,--,"05/12/2026, 4:00:04 PM",900001004
+LITE,Filled,5 @ 992.37,Buy 5 Shares @ Market CLO to Open,--,"05/12/2026, 4:00:04 PM",900001004
+SNDK,Filled,1 @ 1452.02,Buy 1 Share @ Market CLO to Open,--,"05/12/2026, 4:00:02 PM",900001004
+GRNJ,Filled,100 @ 30.64,Buy 100 Shares @ Market CLO to Open,--,"05/12/2026, 4:00:01 PM",900001004
+IWM,Filled,7 @ 282.57,Buy 7 Shares @ Market CLO to Open,--,"05/12/2026, 4:00:00 PM",900001004
+VTI,Filled,7 @ 362.79,Buy 7 Shares @ Market CLO to Open,--,"05/12/2026, 4:00:00 PM",900001004
+SPMO,Filled,25 @ 144.45,Buy 25 Shares @ Market CLO to Open,--,"05/12/2026, 4:00:00 PM",900001004
+BE,Canceled,--,Buy 1 Share @ Market CLO to Open,--,"05/12/2026, 12:46:25 PM",900001004
+LITE,Filled,3 @ 998.76,Sell 3 Shares @ 99.876 Limit GTC to Close,--,"05/11/2026, 9:33:06 AM",900001004
+SNDK,Filled,3 @ 1599.99,Sell 3 Shares @ 159.999 Limit GTC to Close,--,"05/11/2026, 9:32:26 AM",900001004
+INCY,Filled,10 @ 99.99,Sell 10 Shares @ 9.999 Limit GTC to Close,--,"05/11/2026, 9:30:31 AM",900001004
+BRK.B,Filled,20 @ 477.77,Sell 20 Shares @ 47.777 Limit GTC to Close,--,"05/11/2026, 9:30:23 AM",900001004
+VTIP,Filled,50 @ 50.41,Sell 50 Shares @ 5.041 Limit GTC to Close,--,"05/11/2026, 9:30:15 AM",900001004
+LITE,Filled,5 @ 894.30,Buy 5 Shares @ Market to Open,--,"05/08/2026, 2:33:05 PM",900001004
+SHLD,Filled,30 @ 65.28,Buy 30 Shares @ Market to Open,--,"05/08/2026, 2:32:00 PM",900001004
+IFRA,Filled,50 @ 61.49,Buy 50 Shares @ 6.149 Limit to Open,--,"05/08/2026, 2:31:38 PM",900001004
+CRDO,Filled,20 @ 199.99,Sell 20 Shares @ 19.999 Limit GTC to Close,--,"05/07/2026, 10:28:33 AM",900001004
+GDE,Filled,50 @ 69.98,Sell 50 Shares @ 6.988 Limit GTC to Close,--,"05/07/2026, 9:30:01 AM",900001004
+GDE,Filled,35 @ 69.98,Sell 35 Shares @ 6.988 Limit GTC to Close,--,"05/07/2026, 9:30:01 AM",900001004
+PLTR,Filled,40 @ 135.99,Buy 40 Shares @ 13.599 Limit to Open,--,"05/05/2026, 12:01:44 PM",900001004
+PLTR,Canceled,--,Buy 40 Shares @ 13.625 Limit to Open,--,"05/05/2026, 11:57:11 AM",900001004
+VTI,Filled,15 @ 354.32,Sell 15 Shares @ 35.432 Limit GTC to Close,--,"04/30/2026, 3:06:42 PM",900001004
+BE,Filled,3 @ 276.12,Buy 3 Shares @ Market to Open,--,"04/30/2026, 10:59:04 AM",900001004
+BRK.B,Filled,7 @ 475.69,Buy 7 Shares @ Market to Open,--,"04/30/2026, 10:58:38 AM",900001004
+CRDO,Filled,20 @ 172.11,Buy 20 Shares @ Market to Open,--,"04/30/2026, 10:57:37 AM",900001004
+MU,Filled,7 @ 511.21,Buy 7 Shares @ Market to Open,--,"04/30/2026, 10:57:17 AM",900001004
+AMZN,Filled,15 @ 259.70,Buy 15 Shares @ Market to Open,--,"04/30/2026, 10:56:58 AM",900001004
+IFRA,Filled,54 @ 61.99,Sell 54 Shares @ 6.199 Limit GTC to Close,--,"04/30/2026, 10:15:56 AM",900001004
+TTMI,Filled,20 @ 180.00,Sell 20 Shares @ 15.555 Limit GTC to Close,--,"04/30/2026, 9:30:25 AM",900001004
+AMZN,Filled,10 @ 273.02,Sell 10 Shares @ 26.999 Limit GTC to Close,--,"04/30/2026, 9:30:25 AM",900001004
+EAT,Filled,15 @ 149.99,Sell 15 Shares @ 14.999 Limit GTC to Close,--,"04/29/2026, 2:46:08 PM",900001004
+INCY,Filled,30 @ 99.99,Sell 30 Shares @ 9.999 Limit GTC to Close,--,"04/29/2026, 9:32:39 AM",900001004
+CRDO,Filled,7 @ 177.74,Buy 7 Shares @ Market to Open,--,"04/27/2026, 12:46:01 PM",900001004
+VTIP,Filled,40 @ 50.37,Buy 40 Shares @ Market to Open,--,"04/27/2026, 12:44:10 PM",900001004
+INCY,Canceled,--,Sell 35 Shares @ 9.999 Limit GTC to Close,--,"04/27/2026, 12:43:19 PM",900001004
+INCY,Filled,35 @ 96.30,Sell 35 Shares @ Market to Close,--,"04/27/2026, 12:43:17 PM",900001004
+AMZN,Filled,3 @ 262.84,Buy 3 Shares @ Market to Open,--,"04/27/2026, 12:42:25 PM",900001004
+GDMN,Filled,15 @ 101.58,Buy 15 Shares @ Market to Open,--,"04/27/2026, 12:35:53 PM",900001004
+LITE,Filled,3 @ 844.27,Buy 3 Shares @ Market to Open,--,"04/27/2026, 12:35:24 PM",900001004
+CRDO,Filled,15 @ 177.35,Buy 15 Shares @ Market to Open,--,"04/27/2026, 12:34:42 PM",900001004
+STRL,Filled,10 @ 505.55,Sell 10 Shares @ 50.555 Limit GTC to Close,--,"04/27/2026, 9:35:13 AM",900001004
+MU,Filled,5 @ 511.76,Sell 5 Shares @ 49.999 Limit GTC to Close,--,"04/27/2026, 9:30:40 AM",900001004
+IWM,Filled,6 @ 276.84,Buy 6 Shares @ Market to Open,--,"04/27/2026, 9:30:01 AM",900001004
+IFRA,Filled,1 @ 61.28,Sell 1 Share @ Market to Close,--,"04/27/2026, 9:30:01 AM",900001004
+SHLD,Filled,25 @ 72.88,Buy 25 Shares @ Market to Open,--,"04/20/2026, 3:37:28 PM",900001004
+GDMN,Filled,30 @ 110.66,Buy 30 Shares @ Market to Open,--,"04/20/2026, 3:36:20 PM",900001004
+CRDO,Filled,40 @ 171.08,Sell 40 Shares @ Market to Close,--,"04/20/2026, 3:35:33 PM",900001004
+VTIP,Filled,65 @ 50.17,Buy 65 Shares @ Market to Open,--,"04/20/2026, 3:34:53 PM",900001004
+TTMI,Filled,20 @ 125.70,Sell 20 Shares @ Market to Close,--,"04/20/2026, 3:33:58 PM",900001004
+IWM,Filled,25 @ 277.31,Buy 25 Shares @ Market to Open,--,"04/20/2026, 3:33:23 PM",900001004
+ETH,Filled,100 @ 22.09,Buy 100 Shares @ Market to Open,--,"04/20/2026, 3:31:15 PM",900001004
+MU,Filled,10 @ 447.86,Buy 10 Shares @ Market to Open,--,"04/20/2026, 3:29:46 PM",900001004
+LITE,Filled,7 @ 896.78,Sell 7 Shares @ Market to Close,--,"04/20/2026, 3:28:50 PM",900001004
+CRDO,Filled,20 @ 170.60,Sell 20 Shares @ Market to Close,--,"04/20/2026, 3:28:26 PM",900001004
+CRDO,Filled,25 @ 170.57,Sell 25 Shares @ Market to Close,--,"04/20/2026, 3:27:39 PM",900001004
+CRDO,Filled,15 @ 158.81,Buy 15 Shares @ Market to Open,--,"04/16/2026, 1:48:44 PM",900001004
+SHLD,Filled,50 @ 73.64,Buy 50 Shares @ Market to Open,--,"04/16/2026, 1:47:56 PM",900001004
+IFRA,Filled,35 @ 58.89,Sell 35 Shares @ Market to Close,--,"04/16/2026, 1:47:02 PM",900001004
+EAT,Filled,15 @ 152.07,Buy 15 Shares @ Market to Open,--,"04/16/2026, 1:45:58 PM",900001004
+IVLU,Filled,125 @ 41.67,Sell 125 Shares @ Market to Close,--,"04/16/2026, 1:45:30 PM",900001004
+SCHP,Filled,300 @ 26.77,Buy 300 Shares @ Market to Open,--,"04/16/2026, 1:44:24 PM",900001004
+GDE,Filled,100 @ 68.19,Sell 100 Shares @ Market to Close,--,"04/16/2026, 1:43:42 PM",900001004
+CRDO,Filled,20 @ 157.98,Buy 20 Shares @ Market to Open,--,"04/16/2026, 1:42:59 PM",900001004
+VTIP,Filled,150 @ 50.14,Buy 150 Shares @ Market to Open,--,"04/16/2026, 1:42:13 PM",900001004
+VGSH,Filled,40 @ 58.48,Sell 40 Shares @ Market to Close,--,"04/16/2026, 1:40:42 PM",900001004
+VTI,Filled,5 @ 343.99,Sell 5 Shares @ 34.399 Limit GTC to Close,--,"04/15/2026, 11:12:23 AM",900001004
+CRDO,Filled,50 @ 165.43,Sell 50 Shares @ 16.543 Limit GTC to Close,--,"04/15/2026, 9:32:06 AM",900001004
+GDE,Filled,15 @ 68.42,Buy 15 Shares @ Market to Open,--,"04/14/2026, 1:41:24 PM",900001004
+SHLD,Filled,40 @ 74.29,Buy 40 Shares @ Market to Open,--,"04/14/2026, 1:41:04 PM",900001004
+SNDK,Filled,5 @ 940.90,Buy 5 Shares @ Market to Open,--,"04/14/2026, 1:34:33 PM",900001004
+ETH,Filled,30 @ 22.13,Sell 30 Shares @ Market to Close,--,"04/14/2026, 1:34:10 PM",900001004
+ETH,Filled,80 @ 22.14,Sell 80 Shares @ Market to Close,--,"04/14/2026, 1:33:49 PM",900001004
+VGSH,Filled,75 @ 58.49,Sell 75 Shares @ Market to Close,--,"04/14/2026, 1:31:57 PM",900001004
+VGSH,Filled,50 @ 58.49,Sell 50 Shares @ Market to Close,--,"04/14/2026, 1:31:37 PM",900001004
+COPJ,Filled,25 @ 43.76,Buy 25 Shares @ Market to Open,--,"04/14/2026, 1:31:10 PM",900001004
+SNDK,Filled,3 @ 937.47,Buy 3 Shares @ Market to Open,--,"04/14/2026, 1:30:42 PM",900001004
+IVLU,Filled,75 @ 42.03,Buy 75 Shares @ Market to Open,--,"04/14/2026, 1:30:04 PM",900001004
+VTI,Canceled,--,Sell 15 Shares @ 34.321 Limit GTC to Close,--,"04/14/2026, 1:29:26 PM",900001004
+GDMN,Canceled,--,Buy 45 Shares @ 8.999 Limit GTC to Open,--,"04/14/2026, 1:28:40 PM",900001004
+ETH,Filled,100 @ 22.20,Sell 100 Shares @ Market to Close,--,"04/14/2026, 1:28:03 PM",900001004
+SPMO,Filled,100 @ 126.22,Buy 100 Shares @ Market to Open,--,"04/14/2026, 1:26:01 PM",900001004
+LITE,Filled,7 @ 867.63,Buy 7 Shares @ Market to Open,--,"04/14/2026, 1:25:02 PM",900001004
+BRK.B,Filled,20 @ 476.83,Buy 20 Shares @ Market to Open,--,"04/14/2026, 1:24:41 PM",900001004
+TTMI,Filled,75 @ 121.74,Buy 75 Shares @ Market to Open,--,"04/14/2026, 1:24:18 PM",900001004
+AUGO,Canceled,--,Buy 75 Shares @ 9.001 Limit GTC to Open,--,"04/14/2026, 1:23:42 PM",900001004
+VTI,Canceled,--,Buy 10 Shares @ 31.7 Limit GTC to Open,--,"04/14/2026, 1:23:20 PM",900001004
+CRDO,Canceled,--,Buy 40 Shares @ 8.999 Limit GTC to Open,--,"04/14/2026, 1:22:38 PM",900001004
+GDMN,Canceled,--,Buy 100 Shares @ 10.001 Limit GTC to Open,--,"04/14/2026, 1:22:17 PM",900001004
+GDE,Canceled,--,Buy 50 Shares @ 6.012 Limit GTC to Open,--,"04/14/2026, 1:21:52 PM",900001004
+MU,Canceled,--,Buy 5 Shares @ 31.9 Limit GTC to Open,--,"04/14/2026, 1:21:27 PM",900001004
+IVLU,Filled,100 @ 41.99,Sell 100 Shares @ 4.199 Limit GTC to Close,--,"04/14/2026, 10:17:13 AM",900001004
+COPJ,Filled,70 @ 43.04,Sell 70 Shares @ 4.299 Limit GTC to Close,--,"04/14/2026, 9:30:30 AM",900001004
+GM,Expired,--,Sell 15 Shares @ 8.399 Limit GTC to Close,--,"04/14/2026, 6:31:13 AM",900001004
+INCY,Expired,--,Sell 30 Shares @ 10.895 Limit GTC to Close,--,"04/14/2026, 6:31:10 AM",900001004
+TIMB,Filled,75 @ 27.89,Sell 75 Shares @ 2.789 Limit GTC to Close,--,"04/10/2026, 9:36:45 AM",900001004
+BRK.B,Filled,15 @ 484.00,Buy 15 Shares @ 48.432 Limit GTC to Open,--,"04/10/2026, 9:33:09 AM",900001004
+INCY,Expired,--,Sell 25 Shares @ 11.111 Limit GTC to Close,--,"04/10/2026, 6:30:54 AM",900001004
+LITE,Filled,10 @ 886.10,Buy 10 Shares @ Market to Open,--,"04/09/2026, 3:22:04 PM",900001004
+IAUM,Filled,75 @ 47.56,Buy 75 Shares @ Market to Open,--,"04/09/2026, 3:20:15 PM",900001004
+SHLD,Filled,50 @ 74.37,Buy 50 Shares @ Market to Open,--,"04/09/2026, 3:19:37 PM",900001004
+VGSH,Filled,50 @ 58.43,Sell 50 Shares @ Market to Close,--,"04/09/2026, 3:18:50 PM",900001004
+IBIT,Filled,50 @ 40.80,Sell 50 Shares @ Market to Close,--,"04/09/2026, 3:18:10 PM",900001004
+IBIT,Filled,50 @ 40.81,Sell 50 Shares @ Market to Close,--,"04/09/2026, 3:17:46 PM",900001004
+CRDO,Filled,75 @ 107.96,Buy 75 Shares @ Market to Open,--,"04/09/2026, 3:16:54 PM",900001004
+BRK.B,Filled,5 @ 484.00,Sell 5 Shares @ 48.4 Limit GTC to Close,--,"04/09/2026, 10:18:18 AM",900001004
+IFRA,Filled,60 @ 59.99,Sell 60 Shares @ 5.999 Limit GTC to Close,--,"04/09/2026, 9:57:06 AM",900001004
+TMUSI,Filled,300 @ 22.34,Sell 300 Shares @ 2.234 Limit GTC to Close,--,"04/08/2026, 12:55:16 PM",900001004
+BRK.B,Filled,5 @ 481.81,Sell 5 Shares @ 47.999 Limit GTC to Close,--,"04/08/2026, 9:35:49 AM",900001004
+FLLA,Filled,75 @ 29.66,Sell 75 Shares @ 2.955 Limit GTC to Close,--,"04/08/2026, 9:30:23 AM",900001004
+IBIT,Filled,172 @ 41.09,Sell 172 Shares @ 4.038 Limit GTC to Close,--,"04/08/2026, 9:30:06 AM",900001004
+OPPJ,Filled,40 @ 57.97,Sell 40 Shares @ 5.789 Limit GTC to Close,--,"04/08/2026, 9:30:05 AM",900001004
+TMUSI,Filled,200 @ 21.99,Sell 200 Shares @ 2.199 Limit GTC to Close,--,"04/07/2026, 3:49:26 PM",900001004
+TMUSI,Filled,150 @ 21.88,Sell 150 Shares @ 2.188 Limit GTC to Close,--,"04/07/2026, 3:45:54 PM",900001004
+TMUSI,Filled,50 @ 21.59,Sell 50 Shares @ 2.159 Limit GTC to Close,--,"04/07/2026, 3:38:09 PM",900001004
+TMUSI,Filled,140 @ 21.60,Sell 140 Shares @ 2.16 Limit GTC to Close,--,"04/07/2026, 3:38:09 PM",900001004
+TMUSI,Filled,150 @ 21.55,Sell 150 Shares @ 2.155 Limit GTC to Close,--,"04/07/2026, 3:35:25 PM",900001004
+TMUSI,Filled,100 @ 21.55,Sell 100 Shares @ 2.155 Limit GTC to Close,--,"04/07/2026, 3:35:18 PM",900001004
+STRL,Filled,20 @ 377.77,Buy 20 Shares @ 37.777 Limit GTC to Open,--,"04/07/2026, 9:30:31 AM",900001004
+VT,Expired,--,Sell 25 Shares @ 14.999 Limit GTC to Close,--,"04/07/2026, 6:30:55 AM",900001004
+EAT,Expired,--,Sell 50 Shares @ 18.765 Limit GTC to Close,--,"04/07/2026, 6:30:55 AM",900001004
+TMUSI,Filled,50 @ 21.49,Sell 50 Shares @ 2.149 Limit GTC to Close,--,"04/06/2026, 1:20:32 PM",900001004
+VGSH,Filled,50 @ 58.34,Buy 50 Shares @ Market to Open,--,"04/06/2026, 12:45:54 PM",900001004
+MU,Filled,5 @ 381.57,Sell 5 Shares @ Market to Close,--,"04/06/2026, 12:44:07 PM",900001004
+IBIT,Canceled,--,Sell 272 Shares @ 4.099 Limit GTC to Close,--,"04/06/2026, 12:43:34 PM",900001004
+TTMI,Filled,20 @ 96.08,Buy 20 Shares @ Market to Open,--,"04/06/2026, 12:38:09 PM",900001004
+COPJ,Filled,50 @ 39.39,Buy 50 Shares @ Market to Open,--,"04/06/2026, 12:37:32 PM",900001004
+GDE,Filled,35 @ 61.60,Buy 35 Shares @ 6.299 Limit GTC to Open,--,"04/02/2026, 9:30:01 AM",900001004
+IBIT,Canceled,--,Sell 272 Shares @ 4 Limit GTC to Close,--,"04/01/2026, 1:51:26 PM",900001004
+TIMB,Filled,85 @ 26.85,Sell 85 Shares @ Market to Close,--,"04/01/2026, 1:47:41 PM",900001004
+ETH,Filled,150 @ 20.26,Sell 150 Shares @ Market to Close,--,"04/01/2026, 1:47:12 PM",900001004
+VGSH,Filled,20 @ 58.34,Sell 20 Shares @ Market to Close,--,"04/01/2026, 1:45:16 PM",900001004
+BRK.B,Filled,5 @ 477.36,Sell 5 Shares @ Market to Close,--,"03/31/2026, 1:41:44 PM",900001004
+VGSH,Filled,100 @ 58.55,Sell 100 Shares @ Market to Close,--,"03/31/2026, 1:40:44 PM",900001004
+BRK.B,Filled,15 @ 477.40,Sell 15 Shares @ 47.74 Limit GTC to Close,--,"03/31/2026, 1:40:34 PM",900001004
+GRNJ,Filled,400 @ 24.78,Buy 400 Shares @ Market to Open,--,"03/31/2026, 1:39:33 PM",900001004
+BRK.B,Canceled,--,Sell 15 Shares @ 51.234 Limit GTC to Close,--,"03/31/2026, 1:39:00 PM",900001004
+UNFI,Filled,125 @ 44.29,Sell 125 Shares @ Market to Close,--,"03/31/2026, 1:37:56 PM",900001004
+MLPA,Filled,120 @ 53.66,Sell 120 Shares @ Market to Close,--,"03/31/2026, 1:37:23 PM",900001004
+AMZN,Expired,--,Sell 20 Shares @ 24.799 Limit GTC to Close,--,"03/30/2026, 6:33:55 AM",900001004
+MLPA,Filled,100 @ 55.67,Sell 100 Shares @ 5.567 Limit GTC to Close,--,"03/27/2026, 10:58:25 AM",900001004
+GDMN,Filled,35 @ 87.65,Buy 35 Shares @ 8.765 Limit GTC to Open,--,"03/26/2026, 12:37:56 PM",900001004
+GRNJ,Filled,400 @ 25.81,Buy 400 Shares @ 2.599 Limit GTC to Open,--,"03/26/2026, 9:30:14 AM",900001004
+MU,Filled,10 @ 378.57,Buy 10 Shares @ Market to Open,--,"03/25/2026, 3:10:33 PM",900001004
+VGSH,Filled,20 @ 58.43,Buy 20 Shares @ Market to Open,--,"03/25/2026, 3:02:52 PM",900001004
+COPJ,Filled,25 @ 37.48,Sell 25 Shares @ Market to Close,--,"03/25/2026, 2:58:18 PM",900001004
+VTI,Filled,20 @ 324.77,Sell 20 Shares @ 32.467 Limit to Close,--,"03/25/2026, 2:56:12 PM",900001004
+VTI,Filled,25 @ 324.60,Sell 25 Shares @ Market to Close,--,"03/25/2026, 2:55:58 PM",900001004
+UNFI,Filled,75 @ 44.44,Sell 75 Shares @ 4.444 Limit GTC to Close,--,"03/25/2026, 2:03:03 PM",900001004
+CRDO,Expired,--,Sell 15 Shares @ 17.999 Limit GTC to Close,--,"03/23/2026, 6:31:03 AM",900001004
+IAUM,Filled,75 @ 48.31,Buy 75 Shares @ 4.831 Limit GTC to Open,--,"03/18/2026, 3:00:22 PM",900001004
+GRNY,Filled,400 @ 24.47,Buy 400 Shares @ Market to Open,--,"03/16/2026, 9:30:23 AM",900001004
+IAUM,Filled,50 @ 50.05,Buy 50 Shares @ Market to Open,--,"03/16/2026, 9:30:10 AM",900001004
+ETH,Canceled,--,Buy 128 Shares @ 1.765 Limit GTC to Open,--,"03/16/2026, 6:57:25 AM",900001004
+ETH,Canceled,--,Buy 75 Shares @ 1.799 Limit GTC to Open,--,"03/16/2026, 6:33:27 AM",900001004
+VGSH,Filled,50 @ 58.55,Buy 50 Shares @ 5.855 Limit GTC to Open,--,"03/12/2026, 11:02:14 AM",900001004
+TMUSI,Filled,50 @ 22.49,Buy 50 Shares @ 2.249 Limit GTC to Open,--,"03/09/2026, 12:26:37 PM",900001004
+IFRA,Filled,35 @ 58.44,Buy 35 Shares @ 5.844 Limit GTC to Open,--,"03/06/2026, 9:30:29 AM",900001004
+GDE,Filled,75 @ 69.99,Buy 75 Shares @ 6.999 Limit GTC to Open,--,"03/03/2026, 9:35:42 AM",900001004
+IFRA,Filled,55 @ 59.50,Buy 55 Shares @ 5.95 Limit GTC to Open,--,"03/03/2026, 9:30:46 AM",900001004
+SHLD,Filled,70 @ 77.77,Sell 70 Shares @ 7.777 Limit GTC to Close,--,"03/02/2026, 10:12:47 AM",900001004
+SHLD,Filled,7 @ 77.77,Sell 7 Shares @ 7.777 Limit GTC to Close,--,"03/02/2026, 10:11:59 AM",900001004
+GDE,Filled,30 @ 73.55,Sell 30 Shares @ 7.345 Limit GTC to Close,--,"03/02/2026, 9:30:03 AM",900001004
+GRNJ,Filled,150 @ 26.78,Buy 150 Shares @ 2.678 Limit GTC to Open,--,"02/27/2026, 1:25:19 PM",900001004
+ETH,Filled,150 @ 18.05,Buy 150 Shares @ 1.805 Limit GTC to Open,--,"02/27/2026, 12:31:36 PM",900001004
+TIMB,Filled,75 @ 27.41,Buy 75 Shares @ Market to Open,--,"02/25/2026, 1:03:05 PM",900001004
+ETH,Canceled,--,Buy 150 Shares @ 1.799 Limit GTC to Open,--,"02/25/2026, 1:02:16 PM",900001004
+ETH,Canceled,--,Buy 150 Shares @ 1.567 Limit GTC to Open,--,"02/25/2026, 1:02:00 PM",900001004
+TTMI,Canceled,--,Buy 40 Shares @ 8.875 Limit GTC to Open,--,"02/25/2026, 12:59:02 PM",900001004
+ETH,Canceled,--,Sell 118 Shares @ 3.099 Limit GTC to Close,--,"02/25/2026, 12:56:28 PM",900001004
+IBIT,Canceled,--,Sell 50 Shares @ 4.299 Limit GTC to Close,--,"02/25/2026, 12:55:14 PM",900001004
+GRNJ,Canceled,--,Buy 150 Shares @ 2.567 Limit GTC to Open,--,"02/25/2026, 12:54:43 PM",900001004
+GDE,Canceled,--,Buy 100 Shares @ 6.699 Limit GTC to Open,--,"02/25/2026, 12:53:29 PM",900001004
+SHLD,Filled,15 @ 74.10,Buy 15 Shares @ Market to Open,--,"02/25/2026, 12:45:33 PM",900001004
+MLPA,Filled,75 @ 52.78,Buy 75 Shares @ Market to Open,--,"02/25/2026, 12:44:17 PM",900001004
+CRDO,Filled,20 @ 121.34,Buy 20 Shares @ Market to Open,--,"02/25/2026, 12:41:19 PM",900001004
+TTMI,Filled,15 @ 112.85,Sell 15 Shares @ Market to Close,--,"02/25/2026, 12:36:52 PM",900001004
+ETH,Filled,120 @ 19.55,Sell 120 Shares @ Market to Close,--,"02/25/2026, 12:36:13 PM",900001004
+NUKZ,Filled,50 @ 73.64,Sell 50 Shares @ 7.345 Limit GTC to Close,--,"02/25/2026, 9:30:22 AM",900001004
+ETH,Filled,120 @ 17.77,Buy 120 Shares @ 1.777 Limit GTC to Open,--,"02/23/2026, 12:14:21 PM",900001004
+NUKZ,Filled,50 @ 72.34,Sell 50 Shares @ 7.234 Limit GTC to Close,--,"02/20/2026, 10:00:18 AM",900001004
+TTMI,Filled,15 @ 103.45,Sell 15 Shares @ 10.345 Limit GTC to Close,--,"02/20/2026, 9:42:36 AM",900001004
+CGDV,Filled,115 @ 45.50,Buy 115 Shares @ Market to Open,--,"02/18/2026, 9:40:02 AM",900001004
+VGSH,Filled,30 @ 58.85,Sell 30 Shares @ Market to Close,--,"02/18/2026, 9:39:23 AM",900001004
+VGSH,Filled,18 @ 58.85,Sell 18 Shares @ Market to Close,--,"02/18/2026, 9:39:01 AM",900001004
+VGSH,Filled,35 @ 58.85,Sell 35 Shares @ Market to Close,--,"02/18/2026, 9:38:43 AM",900001004
+IFRA,Filled,40 @ 60.08,Buy 40 Shares @ Market to Open,--,"02/18/2026, 9:34:36 AM",900001004
+CGDV,Filled,25 @ 45.49,Buy 25 Shares @ Market to Open,--,"02/18/2026, 9:33:31 AM",900001004
+ET,Filled,500 @ 18.99,Sell 500 Shares @ 1.899 Limit GTC to Close,--,"02/18/2026, 9:31:08 AM",900001004
+VGSH,Filled,10 @ 58.89,Sell 10 Shares @ 5.889 Limit GTC to Close,--,"02/13/2026, 2:59:27 PM",900001004
+OPPJ,Filled,40 @ 57.51,Buy 40 Shares @ Market to Open,--,"02/13/2026, 12:47:36 PM",900001004
+FLLA,Filled,75 @ 28.64,Buy 75 Shares @ Market to Open,--,"02/13/2026, 12:47:04 PM",900001004
+IVLU,Filled,50 @ 42.48,Buy 50 Shares @ Market to Open,--,"02/13/2026, 12:45:11 PM",900001004
+TIMB,Filled,85 @ 26.16,Buy 85 Shares @ Market to Open,--,"02/13/2026, 12:44:42 PM",900001004
+GDE,Filled,50 @ 70.09,Sell 50 Shares @ Market to Close,--,"02/13/2026, 12:43:39 PM",900001004
+VGSH,Filled,40 @ 58.89,Sell 40 Shares @ 5.889 Limit GTC to Close,--,"02/13/2026, 12:40:12 PM",900001004
+CGDV,Filled,100 @ 45.66,Buy 100 Shares @ Market to Open,--,"02/13/2026, 12:40:04 PM",900001004
+IBIT,Filled,30 @ 38.13,Sell 30 Shares @ Market to Close,--,"02/13/2026, 9:44:32 AM",900001004
+IBIT,Filled,19 @ 38.05,Sell 19 Shares @ Market to Close,--,"02/13/2026, 9:44:09 AM",900001004
+ETH,Filled,75 @ 18.70,Sell 75 Shares @ Market to Close,--,"02/13/2026, 9:43:52 AM",900001004
+VGSH,Filled,75 @ 58.89,Sell 75 Shares @ 5.888 Limit GTC to Close,--,"02/13/2026, 9:30:00 AM",900001004
+TMUSI,Filled,140 @ 22.68,Buy 140 Shares @ 2.268 Limit GTC to Open,--,"02/09/2026, 11:13:56 AM",900001004
+MLPA,Filled,25 @ 51.02,Buy 25 Shares @ Market to Open,--,"02/09/2026, 10:29:49 AM",900001004
+VTI,Filled,15 @ 341.49,Sell 15 Shares @ Market to Close,--,"02/09/2026, 10:28:20 AM",900001004
+IVLU,Filled,100 @ 42.16,Buy 100 Shares @ Market to Open,--,"02/09/2026, 10:27:50 AM",900001004
+GDE,Filled,50 @ 70.79,Sell 50 Shares @ Market to Close,--,"02/09/2026, 10:27:00 AM",900001004
+VOOV,Filled,23 @ 213.69,Buy 23 Shares @ Market to Open,--,"02/09/2026, 10:25:35 AM",900001004
+VOO,Filled,5 @ 636.73,Sell 5 Shares @ Market to Close,--,"02/09/2026, 10:24:50 AM",900001004
+VOO,Canceled,--,Sell 5 Shares @ Market CLO to Close,--,"02/09/2026, 10:24:12 AM",900001004
+CRDO,Filled,15 @ 120.13,Sell 15 Shares @ 11.999 Limit GTC to Close,--,"02/09/2026, 10:23:13 AM",900001004
+IBIT,Filled,30 @ 39.28,Buy 30 Shares @ Market to Open,--,"02/09/2026, 10:21:33 AM",900001004
+AMZN,Filled,10 @ 206.93,Buy 10 Shares @ Market to Open,--,"02/09/2026, 10:21:06 AM",900001004
+MLPA,Filled,20 @ 51.02,Buy 20 Shares @ Market to Open,--,"02/09/2026, 10:19:52 AM",900001004
+GM,Filled,15 @ 81.53,Buy 15 Shares @ Market to Open,--,"02/09/2026, 10:19:31 AM",900001004
+VT,Filled,70 @ 146.99,Sell 70 Shares @ 14.699 Limit GTC to Close,--,"02/09/2026, 10:04:58 AM",900001004
+IBIT,Filled,19 @ 39.12,Buy 19 Shares @ Market to Open,--,"02/09/2026, 9:30:15 AM",900001004
+IAUM,Filled,50 @ 49.26,Buy 50 Shares @ Market to Open,--,"02/06/2026, 10:38:23 AM",900001004
+GM,Filled,75 @ 83.26,Buy 75 Shares @ Market to Open,--,"02/06/2026, 10:37:37 AM",900001004
+INCY,Filled,40 @ 106.54,Sell 40 Shares @ 10.654 Limit GTC to Close,--,"02/06/2026, 10:30:27 AM",900001004
+AMZN,Filled,10 @ 204.81,Buy 10 Shares @ Market to Open,--,"02/06/2026, 10:29:39 AM",900001004
+SLV,Filled,25 @ 68.81,Sell 25 Shares @ Market to Close,--,"02/06/2026, 9:41:18 AM",900001004
+TTMI,Filled,30 @ 87.05,Buy 30 Shares @ 9.345 Limit GTC to Open,--,"02/05/2026, 9:30:18 AM",900001004
+ALL,Filled,30 @ 214.83,Sell 30 Shares @ 21.432 Limit GTC to Close,--,"02/05/2026, 9:30:18 AM",900001004
+SHLD,Filled,7 @ 73.45,Buy 7 Shares @ 7.345 Limit GTC to Open,--,"02/04/2026, 10:36:36 AM",900001004
+EAT,Filled,30 @ 165.67,Sell 30 Shares @ 16.567 Limit GTC to Close,--,"02/04/2026, 9:54:51 AM",900001004
+BRK.B,Filled,15 @ 499.99,Sell 15 Shares @ 49.999 Limit GTC to Close,--,"02/04/2026, 9:53:40 AM",900001004
+VGSH,Filled,10 @ 58.63,Buy 10 Shares @ Market to Open,--,"02/04/2026, 9:42:56 AM",900001004
+EAT,Filled,3 @ 163.98,Sell 3 Shares @ Market to Close,--,"02/04/2026, 9:40:17 AM",900001004
+ETH,Filled,75 @ 20.91,Buy 75 Shares @ Market to Open,--,"02/04/2026, 9:38:24 AM",900001004
+GDE,Filled,40 @ 70.22,Buy 40 Shares @ 7.022 Limit GTC to Open,--,"02/04/2026, 9:38:18 AM",900001004
+GRNJ,Filled,175 @ 27.21,Buy 175 Shares @ Market to Open,--,"02/04/2026, 9:36:41 AM",900001004
+CCL,Filled,250 @ 32.01,Sell 250 Shares @ 3.201 Limit GTC to Close,--,"02/02/2026, 11:15:57 AM",900001004
+ALL,Filled,5 @ 201.02,Sell 5 Shares @ Market to Close,--,"02/02/2026, 10:00:33 AM",900001004
+GDE,Filled,30 @ 66.78,Buy 30 Shares @ 6.678 Limit GTC to Open,--,"02/02/2026, 10:00:03 AM",900001004
+VGSH,Filled,40 @ 58.66,Buy 40 Shares @ Market to Open,--,"02/02/2026, 9:49:33 AM",900001004
+COPJ,Filled,25 @ 46.61,Buy 25 Shares @ Market to Open,--,"02/02/2026, 9:39:41 AM",900001004
+IBIT,Filled,50 @ 44.59,Buy 50 Shares @ Market to Open,--,"02/02/2026, 9:37:52 AM",900001004
+SLV,Filled,15 @ 74.56,Sell 15 Shares @ 7.456 Limit to Close,--,"02/02/2026, 9:35:13 AM",900001004
+GDMN,Filled,15 @ 107.89,Sell 15 Shares @ 10.789 Limit to Close,--,"02/02/2026, 9:31:59 AM",900001004
+TTMI,Filled,40 @ 99.98,Sell 40 Shares @ 9.998 Limit GTC to Close,--,"01/28/2026, 2:37:13 PM",900001004
+TMUSI,Filled,200 @ 23.00,Buy 200 Shares @ 2.3 Limit GTC to Open,--,"01/28/2026, 12:43:03 PM",900001004
+IFRA,Filled,60 @ 56.35,Buy 60 Shares @ Market to Open,--,"01/28/2026, 12:33:51 PM",900001004
+COPJ,Filled,25 @ 50.84,Buy 25 Shares @ Market to Open,--,"01/28/2026, 12:29:43 PM",900001004
+VGSH,Canceled,--,Buy 50 Shares @ 5.871 Limit GTC to Open,--,"01/28/2026, 12:29:04 PM",900001004
+MLPA,Filled,100 @ 51.51,Buy 100 Shares @ Market to Open,--,"01/28/2026, 12:27:22 PM",900001004
+GDE,Filled,75 @ 74.88,Buy 75 Shares @ Market to Open,--,"01/28/2026, 12:25:15 PM",900001004
+TTMI,Filled,45 @ 99.99,Sell 45 Shares @ 9.999 Limit GTC to Close,--,"01/28/2026, 9:32:42 AM",900001004
+EAT,Filled,15 @ 167.89,Sell 15 Shares @ 16.789 Limit GTC to Close,--,"01/28/2026, 9:32:32 AM",900001004
+IAUM,Filled,45 @ 51.62,Buy 45 Shares @ Market CLO to Open,--,"01/27/2026, 4:00:01 PM",900001004
+UNFI,Filled,50 @ 38.99,Sell 50 Shares @ 3.899 Limit GTC to Close,--,"01/27/2026, 3:27:36 PM",900001004
+WLDN,Filled,40 @ 134.99,Sell 40 Shares @ 13.499 Limit GTC to Close,--,"01/27/2026, 3:13:19 PM",900001004
+SHLD,Filled,50 @ 77.77,Sell 50 Shares @ 7.777 Limit GTC to Close,--,"01/27/2026, 2:35:42 PM",900001004
+ALL,Filled,5 @ 193.42,Buy 5 Shares @ Market to Open,--,"01/27/2026, 12:30:04 PM",900001004
+GDE,Filled,50 @ 72.29,Buy 50 Shares @ Market to Open,--,"01/27/2026, 12:28:12 PM",900001004
+SLV,Filled,15 @ 97.40,Buy 15 Shares @ Market to Open,--,"01/27/2026, 12:27:47 PM",900001004
+VT,Canceled,--,Buy 10 Shares @ 14.432 Limit GTC to Open,--,"01/27/2026, 12:25:11 PM",900001004
+ALL,Canceled,--,Buy 20 Shares @ 19 Limit GTC to Open,--,"01/27/2026, 12:24:49 PM",900001004
+GDMN,Filled,15 @ 128.65,Buy 15 Shares @ Market to Open,--,"01/27/2026, 12:20:30 PM",900001004
+COPJ,Filled,25 @ 49.75,Buy 25 Shares @ Market to Open,--,"01/27/2026, 12:19:39 PM",900001004
+CLS,Filled,5 @ 321.98,Sell 5 Shares @ 32.198 Limit GTC to Close,--,"01/27/2026, 9:35:22 AM",900001004
+TMUSI,Expired,--,Buy 150 Shares @ 2.279 Limit to Open,--,"01/26/2026, 4:06:51 PM",900001004
+VOO,Filled,6 @ 638.11,Sell 6 Shares @ 63.811 Limit to Close,--,"01/26/2026, 1:29:27 PM",900001004
+VTI,Filled,5 @ 342.02,Buy 5 Shares @ Market to Open,--,"01/26/2026, 10:32:12 AM",900001004
+ETH,Filled,100 @ 27.84,Buy 100 Shares @ Market to Open,--,"01/26/2026, 10:17:26 AM",900001004
+GDMN,Filled,40 @ 134.56,Sell 40 Shares @ 13.456 Limit GTC to Close,--,"01/26/2026, 10:13:29 AM",900001004
+VGSH,Filled,40 @ 58.76,Buy 40 Shares @ 5.876 Limit to Open,--,"01/26/2026, 10:04:38 AM",900001004
+AMZN,Filled,10 @ 238.74,Buy 10 Shares @ Market to Open,--,"01/26/2026, 9:53:45 AM",900001004
+VGSH,Filled,75 @ 58.76,Buy 75 Shares @ Market to Open,--,"01/26/2026, 9:53:08 AM",900001004
+NUKZ,Filled,20 @ 71.29,Sell 20 Shares @ Market to Close,--,"01/26/2026, 9:41:34 AM",900001004
+IBIT,Filled,40 @ 50.02,Buy 40 Shares @ Market to Open,--,"01/26/2026, 9:40:52 AM",900001004
+VT,Filled,25 @ 145.85,Buy 25 Shares @ Market to Open,--,"01/26/2026, 9:39:07 AM",900001004
+UNFI,Filled,200 @ 36.03,Sell 200 Shares @ 3.602 Limit to Close,--,"01/26/2026, 9:35:50 AM",900001004
+SLV,Filled,125 @ 99.58,Sell 125 Shares @ Market to Close,--,"01/26/2026, 9:34:06 AM",900001004
+TMUSI,Filled,50 @ 22.84,Buy 50 Shares @ 2.284 Limit GTC to Open,--,"01/23/2026, 2:18:33 PM",900001004
+VGSH,Filled,30 @ 58.75,Buy 30 Shares @ Market to Open,--,"01/23/2026, 2:15:44 PM",900001004
+TTMI,Filled,20 @ 94.83,Buy 20 Shares @ Market to Open,--,"01/23/2026, 2:15:10 PM",900001004
+NUKZ,Canceled,--,Sell 165 Shares @ 7.567 Limit GTC to Close,--,"01/23/2026, 2:14:37 PM",900001004
+NUKZ,Filled,45 @ 71.11,Sell 45 Shares @ 7.111 Limit GTC to Close,--,"01/23/2026, 2:14:36 PM",900001004
+INCY,Filled,30 @ 102.03,Buy 30 Shares @ Market to Open,--,"01/23/2026, 2:12:34 PM",900001004
+TMUSI,Filled,100 @ 22.84,Buy 100 Shares @ Market to Open,--,"01/23/2026, 2:11:59 PM",900001004
+SLV,Filled,50 @ 91.94,Sell 50 Shares @ Market to Close,--,"01/23/2026, 2:09:51 PM",900001004
+SLV,Filled,50 @ 90.22,Sell 50 Shares @ 8.765 Limit GTC to Close,--,"01/23/2026, 9:30:07 AM",900001004
+VGSH,Filled,35 @ 58.71,Buy 35 Shares @ 5.871 Limit GTC to Open,--,"01/22/2026, 11:02:36 AM",900001004
+TMUSI,Filled,150 @ 22.87,Buy 150 Shares @ 2.287 Limit GTC to Open,--,"01/22/2026, 10:53:42 AM",900001004
+CCL,Canceled,--,Buy 100 Shares @ 2.678 Limit GTC to Open,--,"01/22/2026, 10:53:05 AM",900001004
+WLDN,Filled,20 @ 131.49,Sell 20 Shares @ Market to Close,--,"01/22/2026, 10:43:09 AM",900001004
+VGSH,Filled,18 @ 58.72,Buy 18 Shares @ 5.872 Limit GTC to Open,--,"01/21/2026, 10:54:52 AM",900001004
+INCY,Canceled,--,Sell 40 Shares @ 10.899 Limit GTC to Close,--,"01/21/2026, 10:48:15 AM",900001004
+COPJ,Filled,70 @ 46.37,Buy 70 Shares @ Market to Open,--,"01/21/2026, 10:47:34 AM",900001004
+TMUSI,Filled,150 @ 22.81,Buy 150 Shares @ Market to Open,--,"01/21/2026, 10:46:30 AM",900001004
+ETH,Filled,80 @ 28.25,Buy 80 Shares @ 2.825 Limit to Open,--,"01/21/2026, 10:46:09 AM",900001004
+CRDO,Filled,40 @ 144.94,Buy 40 Shares @ Market to Open,--,"01/21/2026, 10:44:38 AM",900001004
+AMZN,Filled,25 @ 233.74,Buy 25 Shares @ Market to Open,--,"01/20/2026, 9:31:01 AM",900001004
+VTI,Filled,20 @ 337.06,Buy 20 Shares @ Market to Open,--,"01/20/2026, 9:30:25 AM",900001004
+TMUSI,Filled,300 @ 22.88,Buy 300 Shares @ 2.289 Limit GTC to Open,--,"01/20/2026, 9:30:19 AM",900001004
+VTI,Filled,25 @ 337.06,Buy 25 Shares @ Market to Open,--,"01/20/2026, 9:30:19 AM",900001004
+SLV,Filled,50 @ 86.18,Buy 50 Shares @ Market to Open,--,"01/20/2026, 9:30:19 AM",900001004
+SLV,Filled,200 @ 86.18,Sell 200 Shares @ 8.399 Limit GTC to Close,--,"01/20/2026, 9:30:19 AM",900001004
+VT,Filled,70 @ 143.16,Buy 70 Shares @ Market to Open,--,"01/20/2026, 9:30:06 AM",900001004
+GDMN,Filled,40 @ 116.82,Buy 40 Shares @ Market to Open,--,"01/20/2026, 9:30:04 AM",900001004
+GDE,Filled,75 @ 66.38,Buy 75 Shares @ Market to Open,--,"01/20/2026, 9:30:03 AM",900001004
+MU,Canceled,--,Buy 20 Shares @ 24.555 Limit GTC to Open,--,"01/20/2026, 6:33:37 AM",900001004
+ETH,Canceled,--,Buy 100 Shares @ 2.62 Limit GTC to Open,--,"01/20/2026, 6:33:37 AM",900001004
+CCL,Canceled,--,Sell 250 Shares @ 3.456 Limit GTC to Close,--,"01/20/2026, 6:33:37 AM",900001004
+NUKZ,Expired,--,Sell 65 Shares @ 7.234 Limit GTC to Close,--,"01/16/2026, 6:30:15 AM",900001004
+GRBK,Filled,25 @ 68.17,Sell 25 Shares @ 6.789 Limit GTC to Close,--,"01/09/2026, 9:30:06 AM",900001004
+SHLD,Filled,80 @ 71.97,Sell 80 Shares @ 7.123 Limit GTC to Close,--,"01/07/2026, 9:30:02 AM",900001004
+EAT,Filled,15 @ 154.56,Sell 15 Shares @ 15.456 Limit GTC to Close,--,"01/06/2026, 10:14:06 AM",900001004
+SHLD,Filled,130 @ 69.87,Sell 130 Shares @ 6.987 Limit GTC to Close,--,"01/05/2026, 3:01:19 PM",900001004
+CRDO,Filled,15 @ 134.56,Buy 15 Shares @ 13.456 Limit GTC to Open,--,"01/05/2026, 1:07:12 PM",900001004
+INCY,Filled,40 @ 99.99,Buy 40 Shares @ 9.999 Limit GTC to Open,--,"12/22/2025, 9:51:25 AM",900001004
+GDE,Filled,300 @ 63.45,Sell 300 Shares @ 6.345 Limit GTC to Close,--,"12/22/2025, 9:46:44 AM",900001004
+UNFI,Filled,250 @ 33.50,Buy 250 Shares @ Market to Open,--,"12/22/2025, 9:30:41 AM",900001004
+IBIT,Filled,50 @ 51.01,Buy 50 Shares @ Market to Open,--,"12/22/2025, 9:30:38 AM",900001004
+INCY,Filled,45 @ 101.26,Buy 45 Shares @ 10.199 Limit GTC to Open,--,"12/22/2025, 9:30:34 AM",900001004
+AMZN,Filled,20 @ 228.50,Buy 20 Shares @ Market to Open,--,"12/22/2025, 9:30:23 AM",900001004
+TTMI,Filled,40 @ 72.38,Buy 40 Shares @ Market to Open,--,"12/22/2025, 9:30:21 AM",900001004
+GDMN,Filled,50 @ 100.00,Sell 50 Shares @ 9.599 Limit GTC to Close,--,"12/22/2025, 9:30:13 AM",900001004
+GDE,Filled,110 @ 63.18,Sell 110 Shares @ 6.234 Limit GTC to Close,--,"12/22/2025, 9:30:05 AM",900001004
+POWL,Filled,30 @ 345.67,Sell 30 Shares @ 34.567 Limit GTC to Close,--,"12/04/2025, 11:01:29 AM",900001004
+IAUM,Filled,600 @ 42.34,Sell 600 Shares @ 4.234 Limit GTC to Close,--,"12/01/2025, 9:30:25 AM",900001004
+POWL,Canceled,--,Sell 15 Shares @ 38.906 Limit GTC to Close,--,"11/24/2025, 6:36:20 AM",900001004
+IBIT,Canceled,--,Sell 20 Shares @ 6.789 Limit GTC to Close,--,"11/24/2025, 6:36:20 AM",900001004
+ETH,Canceled,--,Sell 40 Shares @ 3.999 Limit GTC to Close,--,"11/24/2025, 6:36:20 AM",900001004
+IBIT,Canceled,--,Sell 32 Shares @ 7.654 Limit GTC to Close,--,"11/24/2025, 6:36:20 AM",900001004
+UNFI,Canceled,--,Sell 100 Shares @ 4.876 Limit GTC to Close,--,"11/24/2025, 6:36:20 AM",900001004
+IBIT,Canceled,--,Buy 33 Shares @ Market to Open,--,"11/23/2025, 11:57:00 AM",900001004
+WLDN,Filled,15 @ 96.78,Sell 15 Shares @ 9.678 Limit GTC to Close,--,"11/17/2025, 9:41:12 AM",900001004
+TTMI,Filled,45 @ 66.98,Buy 45 Shares @ 6.789 Limit GTC to Open,--,"11/17/2025, 9:30:54 AM",900001004
+ET,Filled,500 @ 17.01,Buy 500 Shares @ Market to Open,--,"11/17/2025, 9:30:27 AM",900001004
+INCY,Filled,30 @ 104.36,Buy 30 Shares @ Market to Open,--,"11/17/2025, 9:30:02 AM",900001004
+VTI,Filled,15 @ 329.09,Buy 15 Shares @ Market to Open,--,"11/17/2025, 9:30:02 AM",900001004
+VOO,Filled,11 @ 627.04,Buy 11 Shares @ 62.704 Limit to Open,--,"11/03/2025, 10:00:55 AM",900001004
+POWL,Filled,50 @ 388.48,Sell 50 Shares @ 38.383 Limit GTC to Close,--,"11/03/2025, 9:30:25 AM",900001004
+POWL,Filled,14 @ 399.99,Sell 14 Shares @ 39.999 Limit GTC to Close,--,"10/29/2025, 9:48:00 AM",900001004
+BRK.B,Filled,20 @ 491.15,Buy 20 Shares @ Market to Open,--,"10/27/2025, 9:34:11 AM",900001004
+ETH,Filled,30 @ 39.23,Buy 30 Shares @ Market to Open,--,"10/27/2025, 9:30:37 AM",900001004
+VGSH,Filled,175 @ 58.92,Buy 175 Shares @ Market to Open,--,"10/27/2025, 9:30:31 AM",900001004
+VTI,Filled,30 @ 336.70,Buy 30 Shares @ Market to Open,--,"10/27/2025, 9:30:04 AM",900001004
+CLS,Canceled,--,Buy 15 Shares @ 22.201 Limit GTC to Open,--,"10/27/2025, 6:37:52 AM",900001004
+WLDN,Canceled,--,Sell 30 Shares @ 12.999 Limit GTC to Close,--,"10/27/2025, 6:37:52 AM",900001004
+SLV,Canceled,--,Sell 200 Shares @ 4.999 Limit GTC to Close,--,"10/26/2025, 7:12:34 PM",900001004
+CLS,Filled,20 @ 267.89,Sell 20 Shares @ 26.789 Limit GTC to Close,--,"10/13/2025, 9:30:51 AM",900001004
+SLV,Filled,175 @ 46.88,Sell 175 Shares @ 4.678 Limit GTC to Close,--,"10/13/2025, 9:30:26 AM",900001004
+WLDN,Filled,35 @ 89.87,Buy 35 Shares @ 8.987 Limit GTC to Open,--,"10/10/2025, 3:33:21 PM",900001004
+CLS,Filled,25 @ 254.56,Sell 25 Shares @ 25.456 Limit GTC to Close,--,"10/08/2025, 3:50:00 PM",900001004
+IAUM,Filled,200 @ 40.27,Sell 200 Shares @ 3.987 Limit GTC to Close,--,"10/08/2025, 9:30:13 AM",900001004
+GDMN,Filled,90 @ 81.85,Buy 90 Shares @ 8.185 Limit GTC to Open,--,"10/07/2025, 12:14:18 PM",900001004
+EAT,Filled,15 @ 126.54,Buy 15 Shares @ 12.654 Limit GTC to Open,--,"10/06/2025, 9:37:53 AM",900001004
+GDE,Filled,131 @ 58.39,Sell 131 Shares @ 5.789 Limit GTC to Close,--,"10/02/2025, 9:30:02 AM",900001004
+IAUM,Filled,200 @ 38.11,Sell 200 Shares @ 3.789 Limit GTC to Close,--,"09/29/2025, 9:30:19 AM",900001004
+WLDN,Filled,40 @ 103.24,Buy 40 Shares @ Market to Open,--,"09/22/2025, 9:31:02 AM",900001004
+EAT,Filled,15 @ 138.56,Buy 15 Shares @ Market to Open,--,"09/22/2025, 9:30:49 AM",900001004
+CCL,Filled,250 @ 30.57,Buy 250 Shares @ Market to Open,--,"09/22/2025, 9:30:39 AM",900001004
+ETH,Filled,100 @ 39.63,Buy 100 Shares @ Market to Open,--,"09/22/2025, 9:30:11 AM",900001004
+IWF,Filled,40 @ 453.60,Sell 40 Shares @ 45.123 Limit GTC to Close,--,"09/05/2025, 9:30:06 AM",900001004
+ETH,Filled,118 @ 40.53,Buy 118 Shares @ Market to Open,--,"09/02/2025, 9:30:29 AM",900001004
+ZETA,Filled,340 @ 12.39,Sell 340 Shares @ Market to Close,--,"06/16/2025, 9:30:29 AM",900001004
+SLV,Filled,575 @ 33.11,Buy 575 Shares @ Market to Open,--,"06/16/2025, 9:30:20 AM",900001004
+SHLD,Filled,330 @ 59.75,Buy 330 Shares @ Market to Open,--,"06/16/2025, 9:30:20 AM",900001004
+GDE,Filled,310 @ 47.27,Buy 310 Shares @ Market to Open,--,"06/16/2025, 9:30:04 AM",900001004
+ZETA,Canceled,--,Sell 140 Shares @ 1.694 Limit GTC to Close,--,"06/16/2025, 6:36:31 AM",900001004
+AMZN,Filled,13 @ 212.34,Sell 13 Shares @ 21.234 Limit GTC to Close,--,"06/05/2025, 11:17:21 AM",900001004
+ALL,Filled,32 @ 208.76,Sell 32 Shares @ 20.876 Limit GTC to Close,--,"05/30/2025, 1:30:32 PM",900001004
+VUG,Filled,52 @ 413.99,Sell 52 Shares @ 41.399 Limit GTC to Close,--,"05/27/2025, 1:48:49 PM",900001004
+IWF,Filled,24 @ 399.87,Sell 24 Shares @ 39.987 Limit GTC to Close,--,"05/27/2025, 12:40:22 PM",900001004
+AMZN,Filled,50 @ 205.67,Sell 50 Shares @ 20.567 Limit GTC to Close,--,"05/27/2025, 11:36:08 AM",900001004
+CLS,Filled,25 @ 123.00,Sell 25 Shares @ 12.234 Limit GTC to Close,--,"05/27/2025, 9:30:36 AM",900001004
+IBIT,Filled,32 @ 62.89,Buy 32 Shares @ Market to Open,--,"05/27/2025, 9:30:26 AM",900001004
+POWL,Canceled,--,Sell 80 Shares @ 31.234 Limit GTD(12/12/2025) to Close,--,"05/27/2025, 8:13:46 AM",900001004
+ALL,Canceled,--,Sell 32 Shares @ 21.393 Limit GTC to Close,--,"05/27/2025, 6:34:53 AM",900001004
+IBIT,Canceled,--,Buy 32 Shares @ 6.109 Limit GTC to Open,--,"05/25/2025, 12:29:56 PM",900001004
+ALL,Canceled,--,Sell 32 Shares @ 21.876 Limit GTC to Close,--,"05/25/2025, 12:24:16 PM",900001004
+IWF,Filled,4 @ 396.06,Sell 4 Shares @ Market to Close,--,"05/19/2025, 9:30:32 AM",900001004
+CLS,Filled,75 @ 110.60,Buy 75 Shares @ Market to Open,--,"05/19/2025, 9:30:31 AM",900001004
+UNFI,Filled,200 @ 31.00,Buy 200 Shares @ Market to Open,--,"05/19/2025, 9:30:24 AM",900001004
+GDE,Filled,431 @ 43.88,Buy 431 Shares @ Market to Open,--,"05/19/2025, 9:30:01 AM",900001004
+IAUM,Canceled,--,Buy 600 Shares @ Market to Open,--,"05/18/2025, 10:23:30 AM",900001004
+IBIT,Filled,100 @ 56.78,Sell 100 Shares @ 5.678 Limit GTC to Close,--,"05/08/2025, 11:20:55 AM",900001004
+IAUM,Filled,200 @ 33.99,Sell 200 Shares @ 3.399 Limit GTC to Close,--,"05/06/2025, 12:45:55 PM",900001004
+AMZN,Filled,13 @ 184.98,Buy 13 Shares @ 18.498 Limit GTC to Open,--,"04/28/2025, 12:27:28 PM",900001004
+BRK.B,Filled,40 @ 534.71,Sell 40 Shares @ 53.471 Limit GTC to Close,--,"04/28/2025, 9:31:50 AM",900001004
+EAT,Filled,3 @ 160.13,Buy 3 Shares @ Market to Open,--,"04/28/2025, 9:30:21 AM",900001004
+EAT,Filled,30 @ 160.13,Buy 30 Shares @ Market to Open,--,"04/28/2025, 9:30:18 AM",900001004
+BABA,Expired,--,Buy 90 Shares @ 8.2 Limit GTC to Open,--,"03/18/2025, 6:31:05 AM",900001004
+NUKZ,Filled,165 @ 48.15,Buy 165 Shares @ Market to Open,--,"02/04/2025, 3:42:39 PM",900001004
+IBIT,Filled,200 @ 56.23,Buy 200 Shares @ Market to Open,--,"02/04/2025, 3:40:56 PM",900001004
+EAT,Filled,50 @ 187.43,Buy 50 Shares @ Market to Open,--,"02/04/2025, 3:39:06 PM",900001004
+IWF,Filled,70 @ 409.28,Sell 70 Shares @ Market to Close,--,"02/04/2025, 3:34:28 PM",900001004
+IWF,Filled,4 @ 400.59,Buy 4 Shares @ 40.109 Limit GTC to Open,--,"01/27/2025, 9:30:47 AM",900001004
+MHO,Filled,64 @ 139.53,Sell 64 Shares @ Market to Close,--,"01/17/2025, 10:06:05 AM",900001004
+ALL,Filled,62 @ 192.16,Buy 62 Shares @ Market to Open,--,"01/17/2025, 10:05:08 AM",900001004
+IAUM,Filled,1000 @ 27.08,Buy 1000 Shares @ Market to Open,--,"01/17/2025, 10:01:49 AM",900001004
+AMZN,Filled,40 @ 223.84,Sell 40 Shares @ Market to Close,--,"01/17/2025, 10:00:04 AM",900001004
+SCHD,Filled,1062 @ 27.94,Sell 1062 Shares @ Market to Close,--,"01/17/2025, 9:59:25 AM",900001004
+IWF,Filled,134 @ 416.19,Buy 134 Shares @ Market to Open,--,"12/26/2024, 2:32:52 PM",900001004
+IAUM,Filled,400 @ 26.26,Sell 400 Shares @ Market to Close,--,"12/26/2024, 2:31:02 PM",900001004
+VBR,Filled,226 @ 200.64,Sell 226 Shares @ Market to Close,--,"12/26/2024, 2:30:14 PM",900001004
+BRK.B,Filled,80 @ 470.60,Buy 80 Shares @ Market to Open,--,"12/09/2024, 9:30:15 AM",900001004
+VBR,Filled,141 @ 213.77,Buy 141 Shares @ Market to Open,--,"12/09/2024, 9:30:03 AM",900001004
+CLS,Canceled,--,Buy 215 Shares @ 6.046 Limit GTC to Open,--,"12/09/2024, 8:11:05 AM",900001004
+MHO,Canceled,--,Sell 64 Shares @ 17.987 Limit GTC to Close,--,"12/09/2024, 6:31:16 AM",900001004
+MFC,Rejected,--,Buy 500 Shares @ 2.901 Limit GTC to Open,--,"11/20/2024, 8:05:58 AM",900001004
+IAUM,Filled,600 @ 25.55,Buy 600 Shares @ 2.556 Limit GTC to Open,--,"11/14/2024, 9:30:12 AM",900001004
+AMZN,Filled,200 @ 199.99,Sell 200 Shares @ 19.999 Limit GTC to Close,--,"11/01/2024, 9:32:18 AM",900001004
+POWL,Filled,80 @ 251.31,Buy 80 Shares @ 25.131 Limit GTC to Open,--,"10/30/2024, 9:43:26 AM",900001004
+GRBK,Filled,25 @ 72.03,Buy 25 Shares @ 7.456 Limit GTC to Open,--,"10/29/2024, 9:30:04 AM",900001004
+APP,Canceled,--,Buy 79 Shares @ 12.567 Limit GTC to Open,--,"10/28/2024, 6:32:43 AM",900001004
+POWL,Canceled,--,Buy 39 Shares @ 25.131 Limit GTC to Open,--,"10/26/2024, 12:11:21 PM",900001004
+MSFT,Filled,93 @ 425.26,Sell 93 Shares @ 42.526 Limit GTC to Close,--,"10/22/2024, 9:55:51 AM",900001004
+POWL,Filled,14 @ 255.69,Buy 14 Shares @ Market to Open,--,"10/15/2024, 10:45:16 AM",900001004
+MSFT,Filled,8 @ 418.26,Sell 8 Shares @ 41.826 Limit GTC to Close,--,"10/14/2024, 9:30:30 AM",900001004
+VBR,Filled,85 @ 200.86,Buy 85 Shares @ Market to Open,--,"10/14/2024, 9:30:01 AM",900001004
+BABA,Filled,144 @ 117.74,Sell 144 Shares @ Market to Close,--,"10/07/2024, 9:32:35 AM",900001004
+ZETA,Filled,340 @ 29.44,Buy 340 Shares @ Market to Open,--,"09/30/2024, 9:30:28 AM",900001004
+POWL,Canceled,--,Buy 96 Shares @ 20.543 Limit GTC to Open,--,"09/30/2024, 6:32:46 AM",900001004
+SCHD,Filled,354 @ 83.39,Buy 354 Shares @ 8.339 Limit GTC to Open,--,"09/25/2024, 1:34:24 PM",900001004
+VUG,Filled,52 @ 379.74,Buy 52 Shares @ 37.974 Limit GTC to Open,--,"09/24/2024, 10:03:05 AM",900001004
+MHO,Filled,64 @ 169.54,Buy 64 Shares @ 16.954 Limit GTC to Open,--,"09/23/2024, 10:49:29 AM",900001004
+VUG,Filled,252 @ 373.57,Sell 252 Shares @ Market to Close,--,"08/19/2024, 9:30:26 AM",900001004

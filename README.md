@@ -15,6 +15,16 @@ Published **PACS distribution repo** for PortfolioCoach.
 
 Pack entry: [`portfolio-coach.pacs/pack.pacs.yaml`](portfolio-coach.pacs/pack.pacs.yaml).
 
+### Quickstart (demo datastore)
+
+Bind `userDatastore` to the anonymized sample tree and run inventory first:
+
+1. Point `userDatastore` at [`portfolio-coach.pacs/examples/demo-user-datastore`](portfolio-coach.pacs/examples/demo-user-datastore) (or a writable copy).
+2. Run `datastore-inventory`.
+3. Run `portfolio-composition-review` (or another analytic playbook) for a snapshot-covered period such as `20260101`–`20260701`.
+
+Details, anonymization notes, and regenerate instructions: [`portfolio-coach.pacs/examples/README.md`](portfolio-coach.pacs/examples/README.md).
+
 ---
 
 ## DataManagement
